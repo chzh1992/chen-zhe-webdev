@@ -6,8 +6,8 @@ Link to my App hosted on Heroku:
 <https://chen-zhe-webdev.herokuapp.com/>
 
 Link to my project:
-<>
+<https://chen-zhe-webdev.herokuapp.com/project/index.html>
 
 Link to my assignment:
-<>
+<https://chen-zhe-webdev.herokuapp.com/assignment/index.html>
 
