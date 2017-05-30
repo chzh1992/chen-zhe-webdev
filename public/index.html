@@ -1,30 +1,110 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title>Web Dev Course Home Page</title>
+    <title>Chen Zhe's Web Dev Course Home Page</title>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-    <h1>Web Dev Course Home Page</h1>
 
-    <p>
-        Customize this home page to your linking.
-    </p>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button"
+                    class="navbar-toggle collapsed"
+                    data-toggle="collapse"
+                    data-target="#index-page-navbar-collapse"
+                    aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-brand">
+                CS5610
+            </div>
+        </div>
+        <div class="collapse navbar-collapse"
+             id="index-page-navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="project/index.html">Project</a></li>
+                <li><a href="assignment/index.html">Assignment</a></li>
+                <li><a href="test/index.html">Test MongoDB</a></li>
+                <li><a href="https://github.com/chzh1992/chen-zhe-webdev">Github repo</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
-    <h2>Required links</h2>
-    <ul>
-        <li>
-            <a href="project/index.html">Project</a>
-        </li>
-        <li>
-            <a href="assignment/index.html">Assignment</a>
-        </li>
-        <li>
-            <a href="test/index.html">Test MongoDB</a>
-        </li>
-        <li>
-            <a href="https://github.com/chzh1992/chen-zhe-webdev">Your public repository at GitHub.com</a>
-        </li>
-    </ul>
+<div class="container theme-showcase"
+     role="main">
+
+    <div class="jumbotron">
+        <h1>Web Dev Course Home Page</h1>
+        <p>
+            This page contains the links to Chen Zhe's coursework for the web dev course.</br>
+            And indeed,</br>
+            this page is also part of the coursework.
+        </p>
+    </div>
+
+    <a class="btn btn-primary center-but" href="#links">
+        Check Them Out
+    </a>
+
+    <div class="row" id="links">
+        <div class="col-md-6">
+            <div class="hover-effect-image-container">
+                <img src="project.png" class="image">
+                <a class="fade-overlay" href="project/index.html">
+                    <div class="overlay-text">My Project</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="hover-effect-image-container">
+                <img src="assignment.png" class="image">
+                <a class="fade-overlay" href="assignment/index.html">
+                    <div class="overlay-text">My Assignment</div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="hover-effect-image-container">
+                <img src="mongodb.png" class="image">
+                <a class="fade-overlay" href="test/index.html">
+                    <div class="overlay-text">Test MongoDB</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="hover-effect-image-container">
+                <img src="github.png" class="image">
+                <a class="fade-overlay" href="https://github.com/chzh1992/chen-zhe-webdev">
+                    <div class="overlay-text">My Github Repo</div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2017 Chen Zhe (<span class="chinese-character">陈喆</span>)
+    </footer>
+</div><!-- /container -->
+
+<bootstraptrap core JavaScript
+        ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--<script src="../../assets/js/docs.min.js"></script>-->
 </body>
 </html>
