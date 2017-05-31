@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Profile</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="css/style.css" rel="stylesheet"/>
+    <!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>-->
+    <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet"/>
 </head>
 <body>
 
@@ -14,12 +15,9 @@
             <a class="navbar-brand" href="#">
                 Profile
             </a>
-            <p class="navbar-text pull-right">
-                <a href="#" class="navbar-link">
-                  <span class="glyphicon glyphicon-ok">
-                  </span>
-                </a>
-            </p>
+            <a href="#" class="navbar-link navbar-text pull-right">
+                <span class="glyphicon glyphicon-ok"></span>
+            </a>
         </div>
     </div>
 </nav>
@@ -54,28 +52,7 @@
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container">
-        <div class="row navbar-text">
-            <div class="col-xs-3 text-center">
-                <a href="#">
-                    <span class="glyphicon glyphicon-ok"></span>
-                </a>
-            </div>
-            <div class="col-xs-3 text-center">
-                <a href="#">
-                    <span class="glyphicon glyphicon-plus"></span>
-                </a>
-            </div>
-            <div class="col-xs-3 text-center">
-                <a href="#">
-                    <span class="glyphicon glyphicon-star"></span>
-                </a>
-            </div>
-            <div class="col-xs-3 text-center">
-                <a href="#">
-                    <span class="glyphicon glyphicon-heart"></span>
-                </a>
-            </div>
-        </div>
+       <span class="glyphicon glyphicon-user pull-right navbar-text"></span>
     </div>
 </nav>
 
