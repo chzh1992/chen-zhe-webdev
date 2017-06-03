@@ -1,0 +1,16 @@
+.navbar-default  {
+    background-color: lightskyblue;
+}
+
+.navbar-default .navbar-text,
+.navbar-default .navbar-brand{
+    color: white;
+}
+
+.navbar-brand{
+    margin-left: -15px;
+}
+
+.navbar-text{
+    margin-right: 15px;
+}

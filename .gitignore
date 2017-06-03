@@ -1,6 +1,8 @@
 node_modules
 .idea
 public/vendor
-
+public/exp.html
+public/index.html
+public/assignment/index.html
 
 
