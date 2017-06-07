@@ -1,7 +1,8 @@
 
 input.form-control,
-textarea.form-control{
-    margin-bottom: 5px;
+textarea.form-control,
+select.form-control{
+    margin-bottom: 10px;
 }
 
 body {
@@ -51,6 +52,35 @@ body {
     }
 }
 
+.wd-widget{
+    position: relative;
+    margin-bottom: 10px;
+}
 
+.wd-widget-toolbar{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    opacity: 0.7;
+    background-color: white;
+    border-bottom-left-radius: 8px;
+}
 
+.image{
+    width: 100%;
+}
 
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+}
+
+.video-wrapper iframe{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.container a {
+    text-decoration: none;
+}

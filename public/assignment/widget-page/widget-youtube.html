@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Youtube Widget</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/navbar-style.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <a href="widget-list.html"
+           class="navbar-link navbar-text pull-left">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <div class="navbar-brand">
+            Widget Edit
+        </div>
+        <a href="widget-list.html">
+            <span class="glyphicon glyphicon-ok pull-right navbar-text"></span>
+        </a>
+    </div>
+</nav>
+
+<div class="container">
+    <label for="name">Name</label>
+    <input id="name"
+           class="form-control">
+    <label for="text">Text</label>
+    <input id="text"
+           class="form-control">
+    <label for="url">URL</label>
+    <input id="url"
+           class="form-control" value="https://www.youtube.com/watch?v=uLWLashCXHE">
+    <label for="width">Width</label>
+    <select id="width"
+            class="form-control">
+        <option>100%</option>
+        <option>90%</option>
+        <option>80%</option>
+        <option>70%</option>
+        <option>60%</option>
+        <option>50%</option>
+    </select>
+    <a class="btn btn-block btn-danger"
+       href="widget-list.html">Delete
+    </a>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container">
+        <a href="../user-page/profile.html">
+            <span class="glyphicon glyphicon-user pull-right navbar-text"></span>
+        </a>
+    </div>
+</nav>
+</body>
+</html>
