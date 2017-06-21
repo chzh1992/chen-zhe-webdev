@@ -60,7 +60,7 @@
         function deleteWidget(widgetId){
             for (var widget in widgets){
                 if (widgets[widget]._id == widgetId){
-                    widgets.slice(widget,1);
+                    widgets.splice(widget,1);
                     break;
                 }
             }

@@ -1,0 +1,23 @@
+<div class="container">
+   <label for="name">Name</label>
+    <input ng-model="model.widget.name"
+           id="name"
+           class="form-control">
+    <label for="text">Text</label>
+    <input ng-model="model.widget.text"
+           id="text"
+           class="form-control">
+    <label for="size">Size</label>
+    <select ng-model="model.widget.size"
+            id="size"
+            class="form-control">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+    </select>
+    <a ng-click="model.deleteWidget()"
+       class="btn btn-block btn-danger">
+        Delete
+    </a>
+</div>

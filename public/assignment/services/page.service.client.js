@@ -28,7 +28,7 @@
             var foundPages = [];
             for (var page in pages){
                 if (pages[page].websiteId == websiteId)
-                    foundpages.push(pages[page]);
+                    foundPages.push(pages[page]);
             }
             return foundPages;
         }
@@ -54,7 +54,7 @@
         function deletePage(pageId){
             for (var page in pages){
                 if (pages[page]._id == pageId){
-                    pages.slice(page,1);
+                    pages.splice(page,1);
                     break;
                 }
             }

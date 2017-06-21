@@ -2,14 +2,14 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-4 col-xs-1">
-                <a href="website-list.view.client.html"
+                <a href="#!/user/{{model.userId}}/website"
                    class="navbar-link navbar-text pull-left">
                     <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
                 <div class="navbar-brand navbar-item-hidden-xs">
                     Websites
                 </div>
-                <a href="website-new.view.client.html"
+                <a href="#!/user/{{model.userId}}/website/new"
                    class="navbar-link navbar-text pull-right navbar-item-hidden-xs">
                     <span class="glyphicon glyphicon-plus"></span>
                 </a>
@@ -18,7 +18,7 @@
                 <div class="navbar-brand">
                     Edit Website
                 </div>
-                <a href="website-list.view.client.html"
+                <a ng-click="model.updateWebsite()"
                    class="navbar-link navbar-text pull-right">
                     <span class="glyphicon glyphicon-ok"></span>
                 </a>
@@ -32,30 +32,11 @@
         <!--scrollable left part of the page-->
         <div class="col-sm-4 hidden-xs scrollable-element-1-3">
             <ul class="list-group">
-                <li class="list-group-item">
-                    <a href="../../page/templates/page-list.view.client.html">Blogging App</a>
-                    <a href="website-edit.view.client.html">
-                        <span class="glyphicon glyphicon-cog pull-right">
-                        </span>
+                <li ng-repeat="website in model.websites" class="list-group-item">
+                    <a href="#!/user/{{model.userId}}/website/{{website._id}}/page">
+                        {{website.name}}
                     </a>
-                </li>
-                <li class="list-group-item">
-                    <a href="../../page/templates/page-list.view.client.html">Address Book App</a>
-                    <a href="website-edit.view.client.html">
-                        <span class="glyphicon glyphicon-cog pull-right">
-                        </span>
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a href="../../page/templates/page-list.view.client.html">Script Testing App</a>
-                    <a href="website-edit.view.client.html">
-                        <span class="glyphicon glyphicon-cog pull-right">
-                        </span>
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a href="../../page/templates/page-list.view.client.html">Blogger</a>
-                    <a href="website-edit.view.client.html">
+                    <a href="#!/user/{{model.userId}}/website/{{website._id}}">
                         <span class="glyphicon glyphicon-cog pull-right">
                         </span>
                     </a>
@@ -66,15 +47,16 @@
         <!--fixed right part of the page-->
         <div class="col-sm-8 col-xs-12 fixed-element-2-3 scrollable-partner-hidden-xs">
             <label for="name">Website Name</label>
-            <input placeholder="name"
+            <input ng-model="model.website.name"
+                   placeholder="name"
                    id="name"
-                   value="Lorem Ipsum"
                    class="form-control">
             <label for="description">Description</label>
-            <textarea class="form-control"
+            <textarea ng-model="model.website.description"
+                      class="form-control"
                       rows="5"
-                      id="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ut ultrices dui. Quisque iaculis nunc et odio ornare commodo. Aenean sollicitudin turpis vitae velit congue, at varius augue consequat. Aenean id leo et neque venenatis consectetur eget a nisl. Integer tempus nisl id purus suscipit, eget feugiat elit facilisis. Quisque in maximus lacus, eu dignissim dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In hac habitasse platea dictumst. Nunc lobortis quam eget sagittis venenatis. Nullam sit amet lorem interdum, faucibus nulla vel, vestibulum lectus. Proin egestas ligula eu interdum convallis. Donec cursus venenatis fringilla. Nullam finibus magna ut velit semper, non venenatis dolor aliquet. Cras risus libero, mattis ac quam ac, laoreet sodales velit. Pellentesque consequat libero tellus, ut gravida nunc vestibulum sit amet. Sed non massa euismod arcu aliquam tincidunt.</textarea>
-            <a href="website-list.view.client.html"
+                      id="description"></textarea>
+            <a ng-click="model.deleteWebsite()"
                class="btn btn-danger btn-block">
                 Delete
             </a>
@@ -85,7 +67,7 @@
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container">
-        <a href="../../user/templates/profile.view.client.html">
+        <a href="#!/user/{{model.userId}}">
             <span class="glyphicon glyphicon-user pull-right navbar-text"></span>
         </a>
     </div>

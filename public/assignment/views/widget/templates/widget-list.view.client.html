@@ -1,13 +1,13 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
-        <a href="../../page/templates/page-list.view.client.html"
+        <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page"
            class="navbar-link navbar-text pull-left">
             <span class="glyphicon glyphicon-chevron-left"></span>
         </a>
         <div class="navbar-brand">
             Widgets
         </div>
-        <a href="widget-choose.view.client.html"
+        <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new"
            class="navbar-link navbar-text pull-right">
             <span class="glyphicon glyphicon-plus"></span>
         </a>
@@ -15,56 +15,15 @@
 </nav>
 
 <div class="container">
-    <div class="wd-widget">
-        <h1>GIZMODO</h1>
-        <div class="wd-widget-toolbar">
-            <a href="widget-heading.view.client.html"><span class="glyphicon glyphicon-cog"></span></a>
-            <span class="glyphicon glyphicon-th"></span>
-        </div>
-    </div>
-    <div class="wd-widget">
-        <h4>US Senate Reaches Compromise on Emergency Zika Funding</h4>
-        <div class="wd-widget-toolbar">
-            <a href="widget-heading.view.client.html"><span class="glyphicon glyphicon-cog"></span></a>
-            <span class="glyphicon glyphicon-th"></span>
-        </div>
-    </div>
-    <div class="wd-widget">
-        <img src="https://i.kinja-img.com/gawker-media/image/upload/s--EZjhWbt8--/c_scale,fl_progressive,q_80,w_800/vn2htyjc2xksalykaghc.jpg"
-             class="image">
-        <div class="wd-widget-toolbar">
-            <a href="widget-image.view.client.html"><span class="glyphicon glyphicon-cog"></span></a>
-            <span class="glyphicon glyphicon-th"></span>
-        </div>
-    </div>
-    <div class="wd-widget">
-        <p>To date, <a href="https://exoplanetarchive.ipac.caltech.edu/" target="_blank" rel="noopener">astronomers have documented thousands of exoplanets</a>, but only six (including KELT-9b) have ever been found to orbit a so-called A-type star—a scorchingly hot brand of stellar object with temperatures between 7,300 and 10,000 Kelvin. By comparison, our Sun is about 5,770 Kelvin. No planets have ever been found around B-type stars, which are the hottest stars in the galaxy. At 10,170 degrees Kelvin, KELT-9 is actually somewhere between an A-type and B-type star. Incredibly KELT-9b is a mere 1,200 Kelvin cooler than our Sun, and as hot as some K-type dwarf stars. The <a href="https://www.nasa.gov/mission_pages/hubble/science/planet-eater.html" target="_blank" rel="noopener">previous hottest giant exoplanet</a> was measured at 3,300 Kelvin, orbiting a star with a temperature of 7,430 Kelvin. As for the hottest exoplanet regardless of size, that distinction goes to <a href="https://en.wikipedia.org/wiki/Kepler-70b" target="_blank" rel="noopener">Kepler 70b</a>, a small, rocky planet with a surface temperature of 7,143 K (6,870 degrees C, 12,398 degrees F).</p>
-        <div class="wd-widget-toolbar">
-            <a><span class="glyphicon glyphicon-cog"></span></a>
-            <span class="glyphicon glyphicon-th"></span>
-        </div>
-    </div>
-    <div class="wd-widget">
-        <h4>Man in Wingsuit Flies Straight Through a Ring of Fire</h4>
-        <div class="wd-widget-toolbar">
-            <a href="widget-heading.view.client.html"><span class="glyphicon glyphicon-cog"></span></a>
-            <span class="glyphicon glyphicon-th"></span>
-        </div>
-    </div>
-    <div class="wd-widget">
-        <div class="video-wrapper">
-            <iframe src="https://www.youtube.com/embed/uLWLashCXHE" frameborder="0" allowfullscreen></iframe>
-        </div>
-        <div class="wd-widget-toolbar">
-            <a href="widget-youtube.view.client.html"><span class="glyphicon glyphicon-cog"></span></a>
-            <span class="glyphicon glyphicon-th"></span>
-        </div>
-    </div>
-    <div class="wd-widget">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum convallis sem sed ante rhoncus rhoncus. Quisque ipsum elit, iaculis sed magna non, volutpat egestas lorem. Ut quis turpis eget nisi porta semper. In ante tortor, ullamcorper ut dictum at, ullamcorper vitae urna. Nam sit amet dignissim nibh, sed viverra urna. Nunc pharetra lacinia commodo. Duis quis accumsan ante. Sed vehicula mauris orci, quis egestas nibh efficitur id. Maecenas tincidunt vitae diam eu facilisis. Donec lobortis risus erat, ac vestibulum nisi pharetra in. Curabitur sed quam ac diam aliquam cursus. Etiam lacus arcu, pulvinar nec nisi sit amet, commodo molestie magna. Sed rutrum nibh non eros molestie, vitae lacinia elit congue. Donec id nulla porttitor, varius lorem eget, porttitor purus.</p>
-        <div class="wd-widget-toolbar">
-            <a><span class="glyphicon glyphicon-cog"></span></a>
-            <span class="glyphicon glyphicon-th"></span>
+    <div ng-repeat="widget in model.widgets">
+        <div class="wd-widget">
+            <div ng-include="model.getWidgetUrlForType(widget.widgetType)"></div>
+            <div class="wd-widget-toolbar">
+                <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
+                    <span class="glyphicon glyphicon-cog"></span>
+                </a>
+                <span class="glyphicon glyphicon-th"></span>
+            </div>
         </div>
     </div>
 </div>
@@ -73,7 +32,7 @@
     <div class="container">
         <span class="glyphicon glyphicon-play navbar-text"></span>
         <span class="glyphicon glyphicon-eye-open navbar-text"></span>
-        <a href="../../user/templates/profile.view.client.html">
+        <a href="#!/user/{{model.userId}}">
            <span class="glyphicon glyphicon-user pull-right navbar-text"></span>
         </a>
     </div>

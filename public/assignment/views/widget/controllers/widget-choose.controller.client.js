@@ -4,6 +4,6 @@
         .controller('NewWidgetController',NewWidgetController);
 
     function NewWidgetController(){
-
+        var model = this;
     }
 })();

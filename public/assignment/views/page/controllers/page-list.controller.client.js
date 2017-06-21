@@ -3,7 +3,15 @@
         .module('WebAppMaker')
         .controller('PageListController',PageListController);
 
-    function PageListController(){
+    function PageListController($routeParams,PageService){
+        var model = this;
+        model.userId = $routeParams['uid'];
+        model.websiteId = $routeParams['wid'];
 
+        function init(){
+            model.pages = PageService.findPageByWebsiteId(model.websiteId);
+        }
+
+        init();
     }
 })();

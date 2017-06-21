@@ -1,0 +1,37 @@
+<div class="container">
+    <label for="name">
+        Name
+    </label>
+    <input ng-model="model.widget.name"
+           id="name"
+           class="form-control">
+    <label for="text">
+        Text
+    </label>
+    <input ng-model="model.widget.text"
+           id="text"
+           class="form-control">
+    <label for="url">
+        URL
+    </label>
+    <input ng-model="model.widget.url"
+           id="url"
+           class="form-control">
+    <label for="width">
+        Width
+    </label>
+    <select ng-model="model.widget.width"
+            id="width"
+            class="form-control">
+        <option>100%</option>
+        <option>90%</option>
+        <option>80%</option>
+        <option>70%</option>
+        <option>60%</option>
+        <option>50%</option>
+    </select>
+    <a ng-click="model.deleteWidget()"
+       class="btn btn-block btn-danger">
+        Delete
+    </a>
+</div>

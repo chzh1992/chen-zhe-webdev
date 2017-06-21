@@ -1,9 +1,10 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
-        <a class="navbar-brand" href="#">
+        <div class="navbar-brand">
             Profile
-        </a>
-        <a href="profile.view.client.html" class="navbar-link navbar-text pull-right">
+        </div>
+        <a ng-click="model.updateProfile()"
+           class="navbar-link navbar-text pull-right">
             <span class="glyphicon glyphicon-ok"></span>
         </a>
     </div>
@@ -15,31 +16,48 @@
         <form>
             <div class="form-group">
                 <label for="username">Username</label>
-                <input readonly type="text" class="form-control" id="username" placeholder="Username">
+                <input ng-model="model.user.username"
+                       readonly
+                       type="text"
+                       class="form-control"
+                       id="username">
             </div>
             <div class="form-group">
                 <label for="email">Email address</label>
-                <input type="email" class="form-control" id="email" placeholder="alice@wonderland.com">
+                <input ng-model="model.user.email"
+                       type="email"
+                       class="form-control"
+                       id="email">
             </div>
             <div class="form-group">
                 <label for="first-name">First Name</label>
-                <input type="text" class="form-control" id="first-name" placeholder="Alice">
+                <input ng-model="model.user.firstName"
+                       type="text"
+                       class="form-control"
+                       id="first-name">
             </div>
             <div class="form-group">
                 <label for="last-name">Last Name</label>
-                <input type="text" class="form-control" id="last-name" placeholder="Wonderland">
+                <input ng-model="model.user.lastName"
+                       type="text"
+                       class="form-control"
+                       id="last-name">
             </div>
         </form>
 
         <a class="btn btn-primary btn-block"
-           href="../../website/templates/website-list.view.client.html">Websites</a>
+           href="#!/user/{{model.userId}}/website">
+            Websites
+        </a>
         <a class="btn btn-danger  btn-block"
-           href="login.view.client.html">Logout</a>
+           href="#!/login">
+            Logout
+        </a>
     </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container">
-        <a href="/profile.html">
+        <a href="#!/user/{{model.userId}}">
             <span class="glyphicon glyphicon-user pull-right navbar-text"></span>
         </a>
     </div>

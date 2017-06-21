@@ -1,13 +1,13 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
-        <a href="../../user/templates/profile.view.client.html"
+        <a href="#!/user/{{model.userId}}"
            class="navbar-link navbar-text pull-left">
             <span class="glyphicon glyphicon-chevron-left"></span>
         </a>
         <div class="navbar-brand">
             Websites
         </div>
-        <a href="website-new.view.client.html"
+        <a href="#!/user/{{model.userId}}/website/new"
            class="navbar-link navbar-text pull-right">
             <span class="glyphicon glyphicon-plus"></span>
         </a>
@@ -22,97 +22,49 @@
                     Website
                 </div>
                 <div class="col-sm-3 hidden-xs">
-                    <span class="pull-right">Created</span>
+                    <span class="pull-right">
+                        Created
+                    </span>
                 </div>
                 <div class="col-sm-3 hidden-xs">
-                    <span class="pull-right">Updated</span>
+                    <span class="pull-right">
+                        Updated
+                    </span>
                 </div>
                 <div class="col-xs-6 col-sm-3">
-                </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row">
-                <a class="col-xs-6 col-sm-3"
-                   href="../../page/templates/page-list.view.client.html">
-                    Address Book App
-                </a>
-                <div class="col-sm-3 hidden-xs">
-                    <span class="pull-right">01/01/2015</span>
-                </div>
-                <div class="col-sm-3 hidden-xs">
-                    <span class="pull-right">01/01/2015</span>
-                </div>
-                <div class="col-xs-6 col-sm-3">
-                    <a href="website-edit.view.client.html">
-                        <span class="glyphicon glyphicon-cog pull-right"></span>
-                    </a>
                 </div>
             </div>
         </li>
-        <li class="list-group-item">
+        <li ng-repeat="website in model.websites"
+            class="list-group-item">
             <div class="row">
                 <a class="col-xs-6 col-sm-3"
-                   href="../../page/templates/page-list.view.client.html">
-                    Blogger
+                   href="#!/user/{{model.userId}}/website/{{website._id}}/page">
+                    {{website.name}}
                 </a>
                 <div class="col-sm-3 hidden-xs">
-                    <span class="pull-right">01/01/2015</span>
+                    <span class="pull-right">
+                       {{website.created | date}}
+                    </span>
                 </div>
                 <div class="col-sm-3 hidden-xs">
-                    <span class="pull-right">01/01/2015</span>
+                    <span class="pull-right">
+                        {{website.updated | date}}
+                    </span>
                 </div>
                 <div class="col-xs-6 col-sm-3">
-                    <a href="website-edit.view.client.html">
-                        <span class="glyphicon glyphicon-cog pull-right"></span>
-                    </a>
-                </div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row">
-                <a class="col-xs-6 col-sm-3"
-                   href="../../page/templates/page-list.view.client.html">
-                    Blogging APP
-                </a>
-                <div class="col-sm-3 hidden-xs">
-                    <span class="pull-right">01/01/2015</span>
-                </div>
-                <div class="col-sm-3 hidden-xs">
-                    <span class="pull-right">01/01/2015</span>
-                </div>
-                <div class="col-xs-6 col-sm-3">
-                    <a href="website-edit.view.client.html">
-                        <span class="glyphicon glyphicon-cog pull-right"></span>
-                    </a>
-                </div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row">
-                <a class="col-xs-6 col-sm-3"
-                   href="../../page/templates/page-list.view.client.html">
-                    Script Testing App
-                </a>
-                <div class="col-sm-3 hidden-xs">
-                    <span class="pull-right">01/01/2015</span>
-                </div>
-                <div class="col-sm-3 hidden-xs">
-                    <span class="pull-right">01/01/2015</span>
-                </div>
-                <div class="col-xs-6 col-sm-3">
-                    <a href="website-edit.view.client.html">
+                    <a href="#!/user/{{model.userId}}/website/{{website._id}}">
                         <span class="glyphicon glyphicon-cog pull-right"></span>
                     </a>
                 </div>
             </div>
         </li>
     </ul>
-    </div>
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container">
-        <a href="../../user/templates/profile.view.client.html">
+        <a href="#!/user/{{model.userId}}">
             <span class="glyphicon glyphicon-user pull-right navbar-text"></span>
         </a>
     </div>

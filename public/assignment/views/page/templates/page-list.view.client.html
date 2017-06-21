@@ -1,13 +1,13 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
-        <a href="../../website/templates/website-list.view.client.html"
+        <a href="#!/user/{{model.userId}}/website"
            class="navbar-link navbar-text pull-left">
             <span class="glyphicon glyphicon-chevron-left"></span>
         </a>
         <div class="navbar-brand">
             Pages
         </div>
-        <a href="page-new.view.client.html"
+        <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/new"
            class="navbar-link navbar-text pull-right">
             <span class="glyphicon glyphicon-plus"></span>
         </a>
@@ -29,97 +29,27 @@
                 </div>
                 <div class="col-xs-6 col-sm-3">
                 </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row">
-                <a class="col-xs-6 col-sm-3"
-                   href="../../widget/templates/widget-list.view.client.html">
-                    Blog Post
-                </a>
-                <div class="col-sm-3 hidden-xs">
-                    <span class="pull-right">01/01/2015</span>
-                </div>
-                <div class="col-sm-3 hidden-xs">
-                    <span class="pull-right">01/01/2015</span>
-                </div>
-                <div class="col-xs-6 col-sm-3">
-                    <a href="page-edit.view.client.html">
-                        <span class="glyphicon glyphicon-cog pull-right"></span>
-                    </a>
-                </div>
             </div>
         </li>
-        <li class="list-group-item">
+        <li ng-repeat="page in model.pages"
+            class="list-group-item">
             <div class="row">
                 <a class="col-xs-6 col-sm-3"
-                   href="../../widget/templates/widget-list.view.client.html">
-                    Blogs
+                   href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{page._id}}/widget">
+                    {{page.name}}
                 </a>
                 <div class="col-sm-3 hidden-xs">
-                    <span class="pull-right">01/01/2015</span>
+                    <span class="pull-right">
+                        {{page.created | date}}
+                    </span>
                 </div>
                 <div class="col-sm-3 hidden-xs">
-                    <span class="pull-right">01/01/2015</span>
+                    <span class="pull-right">
+                        {{page.updated | date}}
+                    </span>
                 </div>
                 <div class="col-xs-6 col-sm-3">
-                    <a href="page-edit.view.client.html">
-                        <span class="glyphicon glyphicon-cog pull-right"></span>
-                    </a>
-                </div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row">
-                <a class="col-xs-6 col-sm-3"
-                   href="../../widget/templates/widget-list.view.client.html">
-                    Home
-                </a>
-                <div class="col-sm-3 hidden-xs">
-                    <span class="pull-right">01/01/2015</span>
-                </div>
-                <div class="col-sm-3 hidden-xs">
-                    <span class="pull-right">01/01/2015</span>
-                </div>
-                <div class="col-xs-6 col-sm-3">
-                    <a href="page-edit.view.client.html">
-                        <span class="glyphicon glyphicon-cog pull-right"></span>
-                    </a>
-                </div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row">
-                <a class="col-xs-6 col-sm-3"
-                   href="../../widget/templates/widget-list.view.client.html">
-                    About
-                </a>
-                <div class="col-sm-3 hidden-xs">
-                    <span class="pull-right">01/01/2015</span>
-                </div>
-                <div class="col-sm-3 hidden-xs">
-                    <span class="pull-right">01/01/2015</span>
-                </div>
-                <div class="col-xs-6 col-sm-3">
-                    <a href="page-edit.view.client.html">
-                        <span class="glyphicon glyphicon-cog pull-right"></span>
-                    </a>
-                </div>
-            </div>
-        </li>
-        <li class="list-group-item">
-            <div class="row">
-                <a class="col-xs-6 col-sm-3"
-                   href="../../widget/templates/widget-list.view.client.html">
-                    Contact us
-                </a>
-                <div class="col-sm-3 hidden-xs">
-                    <span class="pull-right">01/01/2015</span>
-                </div>
-                <div class="col-sm-3 hidden-xs">
-                    <span class="pull-right">01/01/2015</span>
-                </div>
-                <div class="col-xs-6 col-sm-3">
-                    <a href="page-edit.view.client.html">
+                    <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{page._id}}">
                         <span class="glyphicon glyphicon-cog pull-right"></span>
                     </a>
                 </div>
@@ -131,7 +61,7 @@
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container">
-        <a href="../../user/templates/profile.view.client.html">
+        <a href="#!/user/{{model.userId}}">
             <span class="glyphicon glyphicon-user pull-right navbar-text"></span>
         </a>
     </div

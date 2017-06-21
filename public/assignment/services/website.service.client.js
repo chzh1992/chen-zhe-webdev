@@ -17,7 +17,7 @@
         var api = {
             createWebsite: createWebsite,
             findWebsiteById: findWebsiteById,
-            findWebsiteByUser: findWebsiteByUser,
+            findWebsitesByUser: findWebsitesByUser,
             updateWebsite: updateWebsite,
             deleteWebsite: deleteWebsite
         };
@@ -57,7 +57,7 @@
         function deleteWebsite(websiteId){
             for (var website in websites){
                 if (websites[website]._id == websiteId){
-                    websites.slice(website,1);
+                    websites.splice(website,1);
                     break;
                 }
             }
