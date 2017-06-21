@@ -1,11 +1,23 @@
-.navbar-default  {
-    background-color: lightskyblue;
+.navbar-default {
     background-image: none;
 }
 
-.navbar-default .navbar-text,
-.navbar-default .navbar-brand{
+.navbar-parent-page  {
+    background-color: lightskyblue;
+}
+
+.navbar-parent-page .navbar-text,
+.navbar-parent-page .navbar-brand{
     color: white;
+}
+
+.navbar-child-page  {
+    background-color: #f9f9f9;
+}
+
+.navbar-child-page .navbar-text,
+.navbar-child-page .navbar-brand{
+    color: black;
 }
 
 .navbar-brand{

@@ -8,6 +8,13 @@
         model.register = register;
 
         function register(){
+            if (typeof(model.user) == "undefined" ||
+                model.user.username == null ||
+                model.user.password == null ||
+                model.verifyPassword == null){
+                model.message = "All blanks must be filled";
+                return null;
+            }
             if (UserService.findUserByUsername(model.user.username)){
                 model.message = "Username " + model.user.username + " not available";
                 return null;

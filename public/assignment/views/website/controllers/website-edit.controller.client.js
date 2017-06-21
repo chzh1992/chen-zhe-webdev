@@ -19,11 +19,16 @@
 
         function deleteWebsite(){
             WebsiteService.deleteWebsite(model.websiteId);
-            $location.url("/user/" + model.userId);
+            $location.url("/user/" + model.userId + "/website");
         }
 
         function updateWebsite(){
+            if (model.website.name == ""){
+                model.message = "A website must have a name";
+                return null;
+            }
             WebsiteService.updateWebsite(model.website);
+            $location.url("/user/" + model.userId + "/website");
         }
 
 

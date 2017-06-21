@@ -1,6 +1,6 @@
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-default navbar-fixed-top navbar-child-page">
     <div class="container">
-        <a href="widget-list.view.client.html"
+        <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget"
            class="navbar-link navbar-text pull-left">
             <span class="glyphicon glyphicon-chevron-left"></span>
         </a>
@@ -12,22 +12,62 @@
 
 <div class="container">
     <ul class="list-group">
-        <li class="list-group-item"><a href="../editors/widget-heading-edit.view.client.html">Header</a></li>
-        <li class="list-group-item"><a>Label</a></li>
-        <li class="list-group-item"><a>HTML</a></li>
-        <li class="list-group-item"><a>Text Input</a></li>
-        <li class="list-group-item"><a>Link</a></li>
-        <li class="list-group-item"><a>Button</a></li>
-        <li class="list-group-item"><a href="../editors/widget-image-edit.view.client.html">Image</a></li>
-        <li class="list-group-item"><a href="../editors/widget-youtube-edit.view.client.html">Youtube</a></li>
-        <li class="list-group-item"><a>Data Table</a></li>
-        <li class="list-group-item"><a>Repeater</a></li>
+        <li class="list-group-item">
+            <a ng-click="model.createWidget('HEADING')">
+                Heading
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a>
+                Label
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a>
+                HTML
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a>
+                Text Input
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a>
+                Link
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a>
+                Button
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a ng-click="model.createWidget('IMAGE')">
+                Image
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a ng-click="model.createWidget('YOUTUBE')">
+                Youtube
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a>
+                Data Table
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a>
+                Repeater
+            </a>
+        </li>
     </ul>
 </div>
 
-<nav class="navbar navbar-default navbar-fixed-bottom">
+<nav class="navbar navbar-default navbar-fixed-bottom navbar-child-page">
     <div class="container">
-        <a href="">
+        <a href="#!/user/{{model.userId}}">
            <span class="glyphicon glyphicon-user pull-right navbar-text"></span>
         </a>
     </div>

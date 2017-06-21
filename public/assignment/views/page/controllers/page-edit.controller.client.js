@@ -19,7 +19,12 @@
         model.updatePage = updatePage;
 
         function updatePage(){
+            if (model.page.name == ""){
+                model.message = "A page must have a name";
+                return null;
+            }
             PageService.updatePage(model.pageId,model.page);
+            $location.url("/user/" + model.userId + "/website/" + model.websiteId + "/page");
         }
 
         model.deletePage = deletePage;
