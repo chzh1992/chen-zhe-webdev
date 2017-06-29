@@ -1,0 +1,85 @@
+# Problem Statement
+
+The website I'm going to build is an online book social network, through which people can share reviews on books, and information on events related to books.
+
+# API I'm interested in: Goodreads
+
+# Solution Description
+
+## Domain Objects
+### 1. Book
+A book has a title, an author, an ISBN, a publisher, an editor's note, a cover, a genre, a page number, a format ,a created time, reviews and users who are reading it.
+* #### Relations with other domain objects:
+1. A book has zero or more reviews
+### 2. Review
+A review has a reviewer, a rating, a text content, a created time ,an updated time and a corresponding book.
+* #### Relations with other domain objects:
+1. An review is linked to a book
+### 3. Event
+An event has a poster, a text content and a created time and corresponding books.
+* #### Relations with other domain objects:
+1. An event is linked to zero or more books
+## Human Users
+### 1. Reader
+A reader has a username, a password, a photo, an introduction, a list of books s/he is currently reading, his/her reviews, following users, followers and posted events.
+* #### Goals:
+1. Search for books
+2. View book details
+3. Create/update books
+4. Review books
+5. View users' profiles
+6. Follow users
+7. View posts/reviews from users that s/he is following
+8. Add/remove books to/from his/her "Currently-reading" list
+9. Post events
+* #### Relations with other users:
+1. A reader follows authors
+2. A reader follows publishers
+3. A reader follows readers
+* #### Relations with domain objects:
+1. A reader has zero or more reviews
+2. A reader has zero or more books in his/her "Currently-reading" list
+3. A reader has zero or more events
+### 2. Author
+An author has a username, a password, a photo, an introduction, a list of books s/he is reading, his/her reviews, following users, followers, books authored by him/her and posted events.
+* #### Goals:
+1. Search for books
+2. View book details
+3. Create/update books
+4. Review books
+5. Link books to him/herself
+6. View users' profiles
+7. Follow users
+8. View posts/reviews from users s/he is following
+9. View reviews on his/her books
+10. Post events
+11. Add/remove books to/from his/her "Currently-reading" list
+* #### Relations with other users:
+1. An author follows readers
+2. An author follows authors
+3. An author follows publishers
+* #### Relations with domain objects:
+1. An author has one or more books
+2. An author has zero or more reviews
+3. An author has zero or more events
+### 3. Publisher
+A publisher has a username, a password, a photo, an introduction, following users, followers, books it published and posted events.
+* #### Goals:
+1. Search for books
+2. View book details
+3. Create/update books
+4. Link books to it
+5. View users' profiles
+6. Follow users
+7. View posts/reviews from users s/he is following
+8. View reviews on its books
+9. Post events
+* #### Relations with other users:
+1. A publisher follows readers
+2. A publisher follows authors
+3. A publisher follows publishers
+* #### Relations with domain objects:
+1. A publisher has one or more books
+2. A publisher has zero or more events
+
+
