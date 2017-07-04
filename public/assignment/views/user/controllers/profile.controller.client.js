@@ -6,17 +6,23 @@
     function ProfileController($location,$routeParams, UserService){
         var model = this;
         model.userId = $routeParams["uid"];
+        model.updateProfile = updateProfile;
+
         function init() {
-            var user = UserService.findUserById(model.userId);
-            model.user = user;
+            UserService
+                .findUserById(model.userId)
+                .then(function (response){
+                    model.user = response.data;
+                });
         }
         init();
 
-        model.updateProfile = updateProfile;
-
         function updateProfile(){
-            UserService.updateUser(model.userId,model.user);
-            $location.url("/user/" + model.userId);
+            UserService
+                .updateUser(model.userId,model.user)
+                .then(function (response){
+                    model.message = "Profile successfully updated!"
+                });
         }
     }
 })();

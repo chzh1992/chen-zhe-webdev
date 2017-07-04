@@ -10,18 +10,18 @@
         model.websiteId = $routeParams['wid'];
         model.pageId = $routeParams['pid'];
 
+        model.getWidgetUrlForType = getWidgetUrlForType;
+        model.getYoutubeEmbedUrl = getYoutubeEmbedUrl;
+        model.trustThisContent = trustThisContent;
+
         function init(){
             model.widgets = WidgetService.findWidgetsByPageId(model.pageId);
         }
         init();
 
-        model.getWidgetUrlForType = getWidgetUrlForType;
-
         function getWidgetUrlForType(type){
             return "views/widget/templates/widget-" + type.toLowerCase()+".view.client.html";
         }
-
-        model.getYoutubeEmbedUrl = getYoutubeEmbedUrl;
 
         function getYoutubeEmbedUrl(youtubeLink){
             var embedUrl = "https://www.youtube.com/embed/";
@@ -30,8 +30,6 @@
             embedUrl += id;
             return $sce.trustAsResourceUrl(embedUrl);
         }
-
-        model.trustThisContent = trustThisContent;
 
         function trustThisContent(html){
             return $sce.trustAsHtml(html);

@@ -8,10 +8,16 @@
         model.login = login;
 
         function login(){
-            var foundUser = UserService.findUserByCredentials(model.user.username,model.user.password);
-            if (foundUser) {
-                $location.url("/user/"+foundUser._id);
-            } else {
+            UserService
+                .findUserByCredentials(model.user.username,model.user.password)
+                .then(successfulLogin,failedLogin);
+
+            function successfulLogin(response){
+                var user = response.data;
+                $location.url("/user/"+user._id);
+            }
+
+            function failedLogin(response){
                 model.message = "User " + model.user.username + " not found";
             }
         }

@@ -45,6 +45,11 @@
             </div>
         </form>
 
+        <div ng-show="model.message"
+             class="alert alert-success">
+            {{model.message}}
+        </div>
+
         <a class="btn btn-primary btn-block"
            href="#!/user/{{model.userId}}/website">
             Websites
