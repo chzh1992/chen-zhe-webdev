@@ -7,12 +7,16 @@
         var model = this;
         model.userId = $routeParams['uid'];
 
+        model.createWebsite = createWebsite;
+
         function init(){
-            model.websites = WebsiteService.findWebsitesByUser(model.userId);
+            WebsiteService
+                .findWebsitesByUser(model.userId)
+                .then(function (response) {
+                    model.websites = response.data;
+                });
         }
         init();
-
-        model.createWebsite = createWebsite;
 
         function createWebsite(){
             if (typeof(model.website) == "undefined" ||
@@ -20,9 +24,11 @@
                 model.message = "A website must have a name";
                 return null;
             }
-            model.website._id = Date.now();
-            WebsiteService.createWebsite(model.userId,model.website);
-            $location.url("/user/"+ model.userId + "/website");
+            WebsiteService
+                .createWebsite(model.userId,model.website)
+                .then(function (response) {
+                    $location.url("/user/"+ model.userId + "/website");
+                });
         }
 
     }

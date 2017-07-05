@@ -16,42 +16,56 @@ var websites = [
     { "_id": "789", "name": "Chess",       "developerId": "234", "description": "Lorem" }
 ];
 
-function createWebsite(userId, website){
+function createWebsite(req,res){
+    var website = req.body;
+    var userId = req.params['userId'];
+    website._id = Date.now();
     website.developerId = userId;
     websites.push(website);
+    res.json(website);
 }
 
-function findWebsitesByUser(userId){
+function findWebsitesByUser(req,res){
+    var userId = req.params['userId'];
     var foundWebsites = [];
     for (var website in websites){
         if (websites[website].developerId == userId)
             foundWebsites.push(websites[website]);
     }
-    return foundWebsites;
+    res.json(foundWebsites);
 }
 
-function findWebsiteById(websiteId){
+function findWebsiteById(req,res){
+    var websiteId = req.params['websiteId'];
     for (var website in websites){
-        if (websites[website]._id == websiteId)
-            return websites[website];
+        if (websites[website]._id == websiteId){
+            res.json(websites[website]);
+            return;
+        }
     }
-    return null;
+    res.sendStatus(404);
 }
 
-function updateWebsite(websiteId, website){
+function updateWebsite(req,res){
+    var websiteId = req.params['websiteId'];
+    var website = req.body;
     for (var i in websites){
         if (websites[i]._id == websiteId){
             websites[i] = website;
-            break;
+            res.sendStatus(200);
+            return;
         }
     }
+    res.sendStatus(404);
 }
 
-function deleteWebsite(websiteId){
+function deleteWebsite(req,res){
+    var websiteId = req.params['websiteId'];
     for (var website in websites){
         if (websites[website]._id == websiteId){
             websites.splice(website,1);
             break;
         }
     }
+    res.sendStatus(200);
 }
