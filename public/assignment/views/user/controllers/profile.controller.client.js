@@ -21,7 +21,7 @@
             UserService
                 .updateUser(model.userId,model.user)
                 .then(function (response){
-                    model.message = "Profile successfully updated!"
+                    model.message = "Profile successfully updated!";
                 });
         }
     }

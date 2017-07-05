@@ -18,7 +18,7 @@ function createUser(req,res) {
     var user = req.body;
     user._id = Date.now();
     users.push(user);
-    res.sendStatus(200);
+    res.json(user);
 }
 
 function findUserById(req,res) {

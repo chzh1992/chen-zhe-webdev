@@ -16,18 +16,25 @@
                 return null;
             }
             if (model.user.password != model.verifyPassword){
-                model.message = "Passwords must match"
+                model.message = "Passwords must match";
                 return null;
             }
 
-            if (UserService.findUserByUsername(model.user.username)){
+            UserService
+                .findUserByUsername(model.user.username)
+                .then(usernameNotAvailable,usernameAvailable);
+
+            function usernameAvailable(response) {
+                UserService
+                    .createUser(model.user)
+                    .then(function (response) {
+                        var userId = response.data._id;
+                        $location.url("/user/" + userId);
+                    });
+            }
+            function usernameNotAvailable(response){
                 model.message = "Username " + model.user.username + " not available";
-                return null;
             }
-
-            model.user._id = Date.now();
-            UserService.createUser(model.user);
-            $location.url("/user/"+model.user._id);
         }
     }
 })();
