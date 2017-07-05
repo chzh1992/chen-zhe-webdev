@@ -15,7 +15,11 @@
         model.trustThisContent = trustThisContent;
 
         function init(){
-            model.widgets = WidgetService.findWidgetsByPageId(model.pageId);
+            WidgetService
+                .findWidgetsByPageId(model.pageId)
+                .then(function (response) {
+                    model.widgets = response.data;
+                });
         }
         init();
 

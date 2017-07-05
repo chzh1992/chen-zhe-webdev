@@ -22,9 +22,9 @@
 
             UserService
                 .findUserByUsername(model.user.username)
-                .then(usernameNotAvailable,usernameAvailable);
+                .then(setErrorMessage,registerUser);
 
-            function usernameAvailable(response) {
+            function registerUser(response) {
                 UserService
                     .createUser(model.user)
                     .then(function (response) {
@@ -32,7 +32,7 @@
                         $location.url("/user/" + userId);
                     });
             }
-            function usernameNotAvailable(response){
+            function setErrorMessage(response){
                 model.message = "Username " + model.user.username + " not available";
             }
         }

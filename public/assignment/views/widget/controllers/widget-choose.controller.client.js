@@ -14,12 +14,15 @@
 
         function createWidget(type){
             var widget = {
-                _id: Date.now(),
                 widgetType: type
             }
-            WidgetService.createWidget(model.pageId,widget);
-            $location.url("/user/" + model.userId + "/website/" + model.websiteId + "/page/" + model.pageId +
-                "/widget/" + widget._id);
+
+            WidgetService
+                .createWidget(model.pageId,widget)
+                .then(function (response){
+                    $location.url("/user/" + model.userId + "/website/" + model.websiteId + "/page/" + model.pageId +
+                        "/widget/" + response.data._id);
+                });
         }
 
     }

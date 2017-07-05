@@ -9,12 +9,16 @@
         model.userId = $routeParams['uid'];
         model.websiteId = $routeParams['wid'];
 
+        model.createPage = createPage;
+
         function init(){
-            model.pages = PageService.findPageByWebsiteId(model.websiteId);
+            PageService
+                .findPagesByWebsiteId(model.websiteId)
+                .then(function (response) {
+                    model.pages = response.data;
+                });
         }
         init();
-
-        model.createPage = createPage;
 
         function createPage(){
             if (typeof(model.page) == "undefined" ||
@@ -22,11 +26,11 @@
                 model.message = "A new page must have a name";
                 return null;
             }
-            model.page._id = Date.now();
-            PageService.createPage(model.websiteId,model.page);
-            $location.url("/user/" + model.userId + "/website/" + model.websiteId + "/page");
+            PageService
+                .createPage(model.websiteId,model.page)
+                .then(function (response) {
+                    $location.url("/user/" + model.userId + "/website/" + model.websiteId + "/page");
+                });
         }
-
-
     }
 })();

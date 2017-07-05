@@ -9,9 +9,12 @@
         model.websiteId = $routeParams['wid'];
 
         function init(){
-            model.pages = PageService.findPageByWebsiteId(model.websiteId);
+            PageService
+                .findPagesByWebsiteId(model.websiteId)
+                .then(function (response) {
+                    model.pages = response.data;
+                });
         }
-
         init();
     }
 })();

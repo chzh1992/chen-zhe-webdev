@@ -11,23 +11,32 @@
         model.pageId = $routeParams['pid'];
         model.widgetId = $routeParams['wgid'];
 
+        model.updateWidget = updateWidget;
+        model.deleteWidget = deleteWidget;
+
         function init(){
-            model.widget = WidgetService.findWidgetById(model.widgetId);
+            WidgetService
+                .findWidgetById(model.widgetId)
+                .then(function (response) {
+                    model.widget = response.data;
+                });
         }
         init();
 
-        model.updateWidget = updateWidget;
-
         function updateWidget(){
-            WidgetService.updateWidget(model.widgetId,model.widget);
-            $location.url("/user/" + model.userId + "/website/" + model.websiteId + "/page/" + model.pageId + "/widget");
+            WidgetService
+                .updateWidget(model.widgetId,model.widget)
+                .then(function (response) {
+                    $location.url("/user/" + model.userId + "/website/" + model.websiteId + "/page/" + model.pageId + "/widget");
+                });
         }
 
-        model.deleteWidget = deleteWidget;
-
         function deleteWidget(){
-            WidgetService.deleteWidget(model.widgetId);
-            $location.url("/user/" + model.userId + "/website/" + model.websiteId + "/page/" + model.pageId + "/widget");
+            WidgetService
+                .deleteWidget(model.widgetId)
+                .then(function (response) {
+                    $location.url("/user/" + model.userId + "/website/" + model.websiteId + "/page/" + model.pageId + "/widget");
+                });
         }
     }
 })();

@@ -10,14 +10,14 @@
         function login(){
             UserService
                 .findUserByCredentials(model.user.username,model.user.password)
-                .then(successfulLogin,failedLogin);
+                .then(loginUser,setErrorMessage);
 
-            function successfulLogin(response){
+            function loginUser(response){
                 var user = response.data;
                 $location.url("/user/"+user._id);
             }
 
-            function failedLogin(response){
+            function setErrorMessage(response){
                 model.message = "User " + model.user.username + " not found";
             }
         }
