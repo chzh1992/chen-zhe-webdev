@@ -9,14 +9,14 @@
         }
 
         function linkFunction(scope,element){
-            $(element).sortable({
+            angular.element(element).sortable({
                 handle: ".handle",
                 start: setInitialIndex,
                 update: updateServerWidgetPosition
             });
             
             function updateServerWidgetPosition(event,ui) {
-                var sortedIds = $(element).sortable("toArray");
+                var sortedIds = angular.element(element).sortable("toArray");
                 var widgetId = ui.item.attr("id");
                 var initial = ui.item.initialIndex;
                 var final = sortedIds.indexOf(widgetId);
@@ -33,7 +33,7 @@
             }
 
             function setInitialIndex(event,ui){
-                var sortedIds = $(element).sortable("toArray");
+                var sortedIds = angular.element(element).sortable("toArray");
                 ui.item.initialIndex = sortedIds.indexOf(ui.item.attr("id"));
             }
 
