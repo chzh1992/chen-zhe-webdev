@@ -1,7 +1,8 @@
 
 input.form-control,
 textarea.form-control,
-select.form-control{
+select.form-control,
+.container form{
     margin-bottom: 10px;
 }
 

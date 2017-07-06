@@ -16,7 +16,7 @@
 
 <div wd-sortable
      class="container">
-    <div ng-repeat="widget in model.widgets">
+    <div ng-repeat="widget in model.widgets" id="{{widget._id}}">
         <div class="wd-widget">
             <div ng-include="model.getWidgetUrlForType(widget.widgetType)"></div>
             <div class="wd-widget-toolbar">

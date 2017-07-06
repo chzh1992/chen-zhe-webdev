@@ -5,6 +5,12 @@ app.get('/api/page/:pageId/widget',findWidgetsByPageId);
 app.get('/api/widget/:widgetId',findWidgetById);
 app.put('/api/widget/:widgetId',updateWidget);
 app.delete('/api/widget/:widgetId',deleteWidget);
+app.put('/page/:pageId/widget',updateWidgetPosition);
+
+var multer = require('multer');
+var upload = multer({ dest: __dirname+'/../../public/uploads' });
+
+app.post ("/api/upload", upload.single('myFile'), uploadImage);
 
 var widgets = [
     { "_id": "123", "widgetType": "HEADING", "pageId": "321", "size": 2, "text": "GIZMODO"},
@@ -70,4 +76,55 @@ function deleteWidget(req,res){
         }
     }
     res.sendStatus(200);
+}
+
+function updateWidgetPosition(req,res){
+    var pageId = req.params['pageId'];
+    var initial = req.query['initial'];
+    var final = req.query['final'];
+    var pageWidgets = [];
+    for (var widget in widgets){
+        if (widgets[widget].pageId == pageId)
+            pageWidgets.push(widgets[widget]);
+    }
+    var widgetToMove = pageWidgets[initial];
+    var initialPositionInServer = widgets.indexOf(widgetToMove);
+    var finalPositionInServer = widgets.indexOf(pageWidgets[final]);
+    widgets.splice(initialPositionInServer,1);
+    widgets.splice(finalPositionInServer,0,widgetToMove);
+    res.sendStatus(200);
+}
+
+function uploadImage(req, res) {
+
+    var widgetId      = req.body.widgetId;
+    var width         = req.body.width;
+    var myFile        = req.file;
+
+    var userId = req.body.userId;
+    var websiteId = req.body.websiteId;
+    var pageId = req.body.pageId;
+
+    var originalname  = myFile.originalname; // file name on user's computer
+    var filename      = myFile.filename;     // new file name in upload folder
+    var path          = myFile.path;         // full path of uploaded file
+    var destination   = myFile.destination;  // folder where file is saved to
+    var size          = myFile.size;
+    var mimetype      = myFile.mimetype;
+
+    widget = getWidgetById(widgetId);
+    widget.url = '/uploads/'+filename;
+
+    var callbackUrl   = "assignment/index.html#!/user/"+userId+"/website/"+websiteId+"/page/"+pageId;
+
+    res.redirect(callbackUrl);
+
+    function getWidgetById(id){
+        for (var widget in widgets){
+            if (widgets[widget]._id == id){
+                return widgets[widget];
+            }
+        }
+        return null;
+    }
 }
