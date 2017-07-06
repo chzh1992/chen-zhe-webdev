@@ -15,6 +15,15 @@
     background-color: #f9f9f9;
 }
 
+.navbar-flickr{
+    background-color: forestgreen;
+}
+
+.navbar-flickr .navbar-brand,
+.navbar-flickr .navbar-text{
+    color: white;
+}
+
 .navbar-child-page .navbar-text,
 .navbar-child-page .navbar-brand{
     color: black;

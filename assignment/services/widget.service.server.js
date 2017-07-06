@@ -115,9 +115,12 @@ function uploadImage(req, res) {
     widget = getWidgetById(widgetId);
     widget.url = '/uploads/'+filename;
 
-    var callbackUrl   = "assignment/index.html#!/user/"+userId+"/website/"+websiteId+"/page/"+pageId;
-
-    res.redirect(callbackUrl);
+    var host = req.url.split('/')[0];
+    res.writeHead(301,
+        {Location: host+"/assignment/index.html#!/user/"+userId+"/website/"+
+        websiteId+"/page/"+pageId+"/widget"}
+    );
+    res.end();
 
     function getWidgetById(id){
         for (var widget in widgets){

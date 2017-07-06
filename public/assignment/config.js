@@ -2,10 +2,10 @@
     angular
         .module('WebAppMaker')
         .config(Config);
-    
+
     function Config($routeProvider) {
         $routeProvider
-            // default route
+        // default route
             .when('/',{
                 templateUrl:"home.html"
             })
@@ -80,5 +80,10 @@
                 controller: "EditWidgetController",
                 controllerAs: "model"
             })
+            .when('/user/:uid/website/:wid/page/:pid/widget/:wgid/flickr-search', {
+                templateUrl: "views/widget/templates/widget-flickr-search.view.client.html",
+                controller: "FlickrImageSearchController",
+                controllerAs: "model"
+            });
     }
 })();
