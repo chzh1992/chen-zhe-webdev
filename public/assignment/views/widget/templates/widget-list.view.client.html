@@ -18,7 +18,7 @@
      class="container">
     <div ng-repeat="widget in model.widgets" id="{{widget._id}}">
         <div class="wd-widget">
-            <div ng-include="model.getWidgetUrlForType(widget.widgetType)"></div>
+            <div ng-include="model.getWidgetUrlForType(widget.type)"></div>
             <div class="wd-widget-toolbar">
                 <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
                     <span class="glyphicon glyphicon-cog"></span>

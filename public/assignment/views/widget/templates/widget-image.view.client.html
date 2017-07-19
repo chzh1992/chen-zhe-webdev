@@ -1,14 +1,16 @@
-<div ng-switch="widget.width">
-    <div ng-switch-when="100%">
-        <img src="{{widget.url}}" width="100%">
-    </div>
-    <div ng-switch-when="90%">
-        <img src="{{widget.url}}" width="90%">
-    </div>
-    <div ng-switch-when="80%">
-        <img src="{{widget.url}}" width="80%">
-    </div>
-    <div ng-switch-when="70%">
-        <img src="{{widget.url}}" width="70%">
-    </div>
-</div>
+<!--<div ng-switch="widget.width">-->
+    <!--<div ng-switch-when="100%">-->
+        <!--<img ng-src="{{widget.url}}" width="100%">-->
+    <!--</div>-->
+    <!--<div ng-switch-when="90%">-->
+        <!--<img ng-src="{{widget.url}}" width="90%">-->
+    <!--</div>-->
+    <!--<div ng-switch-when="80%">-->
+        <!--<img ng-src="{{widget.url}}" width="80%">-->
+    <!--</div>-->
+    <!--<div ng-switch-when="70%">-->
+        <!--<img ng-src="{{widget.url}}" width="70%">-->
+    <!--</div>-->
+<!--</div>-->
+
+<img ng-src="{{widget.url}}" width = "{{widget.width}}">

@@ -14,7 +14,7 @@
 
         function createWidget(type){
             var widget = {
-                widgetType: type
+                type: type
             }
 
             WidgetService

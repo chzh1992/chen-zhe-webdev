@@ -25,7 +25,7 @@
                     .then(updatePosition);
 
                 function updatePosition(response){
-                    var pageId = response.data.pageId;
+                    var pageId = response.data._page;
                     WidgetService
                         .updateWidgetPosition(pageId,initial,final)
                         .then(function (response) {});

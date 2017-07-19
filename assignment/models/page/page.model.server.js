@@ -10,7 +10,6 @@ pageModel.updatePage = updatePage;
 pageModel.deletePage = deletePage;
 pageModel.addWidgetToPage = addWidgetToPage;
 pageModel.removeWidgetFromPage = removeWidgetFromPage;
-pageModel.updateWidgetPosition = updateWidgetPosition;
 
 module.exports = pageModel;
 
@@ -80,8 +79,4 @@ function removeWidgetFromPage(pageId,widgetId){
             page._widgets.splice(index,1);
             return page.save();
         });
-}
-
-function updateWidgetPosition(pageId,initial,final){
-
 }

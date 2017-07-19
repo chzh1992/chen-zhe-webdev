@@ -5,7 +5,6 @@ app.get('/api/website/:websiteId/page',findPagesByWebsiteId);
 app.get('/api/page/:pageId',findPageById);
 app.put('/api/page/:pageId',updatePage);
 app.delete('/api/page/:pageId',deletePage);
-app.put('/page/:pageId/widget',updateWidgetPosition);
 
 var pageModel = require('../models/page/page.model.server');
 

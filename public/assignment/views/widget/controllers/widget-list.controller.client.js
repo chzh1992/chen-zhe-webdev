@@ -19,6 +19,8 @@
                 .findWidgetsByPageId(model.pageId)
                 .then(function (response) {
                     model.widgets = response.data;
+                },function (response){
+                    model.widgets = [];
                 });
         }
         init();

@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var widgetSchema = require('./widget.schema.server');
-var widgetModel = mongoose.Model('AssignmentWidgetModel',widgetSchema);
+var widgetModel = mongoose.model('AssignmentWidgetModel',widgetSchema);
 var pageModel = require('../page/page.model.server');
 
 widgetModel.createWidget = createWidget;
@@ -8,6 +8,7 @@ widgetModel.findWidgetsByPageId = findWidgetsByPageId;
 widgetModel.findWidgetById = findWidgetById;
 widgetModel.updateWidget = updateWidget;
 widgetModel.deleteWidget = deleteWidget;
+widgetModel.updateWidgetPosition = updateWidgetPosition;
 
 module.exports = widgetModel;
 
@@ -16,7 +17,7 @@ function createWidget(pageId,widget){
     return widgetModel
         .create(widget)
         .then(function (widget){
-            pageModel
+            return pageModel
                 .addWidgetToPage(pageId,widget._id)
                 .then(function(doc){
                     return widgetModel
@@ -68,6 +69,17 @@ function deleteWidget(widgetId){
                         .removeWidgetFromPage(pageId,widgetId);
                 });
         });
+}
+
+function updateWidgetPosition(pageId,initial,final){
+    return pageModel
+        .findById(pageId)
+        .then(function (page){
+            var widgetToMove = page._widgets[initial];
+            page._widgets.splice(initial,1);
+            page._widgets.splice(final,0,widgetToMove);
+            return page.save();
+        })
 }
 
 

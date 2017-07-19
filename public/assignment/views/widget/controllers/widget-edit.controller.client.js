@@ -19,11 +19,13 @@
                 .findWidgetById(model.widgetId)
                 .then(function (response) {
                     model.widget = response.data;
+                    model.sizeAsText = model.widget.size.toString();
                 });
         }
         init();
 
         function updateWidget(){
+            model.widget.size = Number(model.sizeAsText);
             WidgetService
                 .updateWidget(model.widgetId,model.widget)
                 .then(function (response) {
