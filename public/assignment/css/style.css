@@ -2,7 +2,8 @@
 input.form-control,
 textarea.form-control,
 select.form-control,
-.ta-style{
+.ta-style,
+.input-group{
     margin-bottom: 10px;
 }
 
