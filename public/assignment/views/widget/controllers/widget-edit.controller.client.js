@@ -13,6 +13,7 @@
 
         model.updateWidget = updateWidget;
         model.deleteWidget = deleteWidget;
+        model.getWidgetEditorUrlForType = getWidgetEditorUrlForType;
 
         function init(){
             WidgetService
@@ -39,6 +40,11 @@
                 .then(function (response) {
                     $location.url("/user/" + model.userId + "/website/" + model.websiteId + "/page/" + model.pageId + "/widget");
                 });
+        }
+
+        function getWidgetEditorUrlForType(type){
+            var editorUrl = "views/widget/editors/widget-" + type.toLowerCase() + "-edit.view.client.html";
+            return editorUrl;
         }
     }
 })();

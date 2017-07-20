@@ -26,7 +26,8 @@
         init();
 
         function getWidgetUrlForType(type){
-            return "views/widget/templates/widget-" + type.toLowerCase()+".view.client.html";
+            var widgetUrl = "views/widget/templates/widget-" + type.toLowerCase()+".view.client.html";
+            return widgetUrl;
         }
 
         function getYoutubeEmbedUrl(youtubeLink){
