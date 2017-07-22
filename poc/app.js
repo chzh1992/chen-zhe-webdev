@@ -7,8 +7,7 @@ var DOMParser = require('xmldom').DOMParser;
 app.get("/api/poc/books/:searchText",searchGoodreads);
 app.get("/api/poc/bookdetails/:bookId",searchGoodreadsById);
 
-// var developerKey = process.env.DEVELOPER_KEY
-var developerKey = 'XMhP6c4CRGTAGXMtpjS7IA';
+var developerKey = process.env.GOODREADS_DEVELOPER_KEY
 
 function searchGoodreads(req,res){
     var searchText = req.params['searchText'];
