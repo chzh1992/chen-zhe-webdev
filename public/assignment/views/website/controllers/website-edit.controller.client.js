@@ -4,15 +4,15 @@
         .controller('EditWebsiteController',EditWebsiteController);
 
     function EditWebsiteController($location,$routeParams,WebsiteService){
-        var model = this;
-        model.userId = $routeParams['uid'];
-        model.websiteId = $routeParams['wid'];
+    var model = this;
+    model.userId = $routeParams['uid'];
+    model.websiteId = $routeParams['wid'];
 
-        model.deleteWebsite = deleteWebsite;
-        model.updateWebsite = updateWebsite;
+    model.deleteWebsite = deleteWebsite;
+    model.updateWebsite = updateWebsite;
 
-        function init(){
-            WebsiteService
+    function init(){
+        WebsiteService
                 .findWebsitesByUser(model.userId)
                 .then(initializeUserWebsites);
             WebsiteService

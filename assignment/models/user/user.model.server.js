@@ -10,6 +10,7 @@ userModel.updateUser = updateUser;
 userModel.deleteUser = deleteUser;
 userModel.addWebsiteToUser = addWebsiteToUser;
 userModel.removeWebsiteFromUser = removeWebsiteFromUser;
+userModel.findUserByFacebookId = findUserByFacebookId;
 
 module.exports = userModel;
 
@@ -70,4 +71,9 @@ function removeWebsiteFromUser(userId,websiteId){
             user._websites.splice(index,1);
             return user.save();
         });
+}
+
+function findUserByFacebookId(facebookId){
+    return userModel
+        .findOne({'facebook.id': facebookId});
 }

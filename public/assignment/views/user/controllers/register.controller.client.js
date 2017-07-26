@@ -26,10 +26,9 @@
 
             function registerUser(response) {
                 UserService
-                    .createUser(model.user)
+                    .register(model.user)
                     .then(function (response) {
-                        var userId = response.data._id;
-                        $location.url("/user/" + userId);
+                        $location.url("/profile");
                     });
             }
             function setErrorMessage(response){

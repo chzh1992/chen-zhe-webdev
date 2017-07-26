@@ -9,12 +9,11 @@
 
         function login(){
             UserService
-                .findUserByCredentials(model.user.username,model.user.password)
+                .login(model.user)
                 .then(loginUser,setErrorMessage);
 
             function loginUser(response){
-                var user = response.data;
-                $location.url("/user/"+user._id);
+                $location.url("/profile");
             }
 
             function setErrorMessage(response){

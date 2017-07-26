@@ -24,10 +24,13 @@
                 controller: "RegisterController",
                 controllerAs: "model"
             })
-            .when('/user/:uid',{
+            .when('/profile',{
                 templateUrl: "views/user/templates/profile.view.client.html",
                 controller: "ProfileController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    currentUser: getCurrentUser
+                }
             })
 
             // route to website pages
@@ -85,5 +88,21 @@
                 controller: "FlickrImageSearchController",
                 controllerAs: "model"
             });
+    }
+
+    function getCurrentUser($q,$location,UserService){
+        var deferred = $q.defer();
+        UserService
+            .checkLoggedIn()
+            .then(function (response){
+                var currentUser = response.data;
+                if (currentUser == '0'){
+                    deferred.reject();
+                    $location.url('/');
+                } else{
+                    deferred.resolve(currentUser);
+                }
+            });
+        return deferred.promise;
     }
 })();
