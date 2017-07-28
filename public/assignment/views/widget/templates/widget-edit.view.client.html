@@ -13,14 +13,19 @@
     </div>
 </nav>
 
-<div ng-if="model.widget.type">
-    <div ng-include="model.getWidgetEditorUrlForType(model.widget.type)"></div>
+<div class="container">
+    <div ng-show="model.message"
+         class="alert alert-danger">
+        {{model.message}}
+    </div>
+    <div ng-if="model.widget.type">
+        <div ng-include="model.getWidgetEditorUrlForType(model.widget.type)"></div>
+    </div>
 </div>
-
 
 <nav class="navbar navbar-default navbar-fixed-bottom navbar-child-page">
     <div class="container">
-        <a href="#!/user/{{model.userId}}">
+        <a href="#!/profile">
             <span class="glyphicon glyphicon-user pull-right navbar-text"></span>
         </a>
     </div>

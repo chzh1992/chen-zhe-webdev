@@ -38,8 +38,9 @@
         }
 
         function updateWebsite(){
-            if (model.website.name == ""){
-                model.message = "A website must have a name";
+            model.form.$submitted = true;
+            if (model.form.websiteName.$error.required){
+                model.message = "Required field(s) empty!";
                 return null;
             }
             WebsiteService
@@ -48,5 +49,6 @@
                     $location.url("/user/" + model.userId + "/website");
                 });
         }
+
     }
 })();

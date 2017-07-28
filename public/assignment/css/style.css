@@ -85,3 +85,15 @@ body {
 .container a {
     text-decoration: none;
 }
+
+.error-message {
+    color: red;
+    margin-top: -9px;
+    margin-bottom: 10px;
+}
+
+.invalid-input {
+    border-color: red;
+    outline: 0;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(234, 10, 10, 0.6);
+}

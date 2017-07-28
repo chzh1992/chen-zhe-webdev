@@ -52,23 +52,37 @@
                  class="alert alert-danger">
                 {{model.message}}
             </div>
-            <label for="name">Name</label>
-            <input ng-model="model.website.name"
-                   placeholder="Name"
-                   id="name"
-                   class="form-control">
-            <label for="description">Description</label>
-            <textarea ng-model="model.website.description"
-                      class="form-control"
-                      rows="5"
-                      id="description"
-                      placeholder="Description"></textarea>
+
+            <form novalidate
+                  name="model.form">
+                <label for="name">Website name</label>
+
+                <input ng-model="model.website.name"
+                       placeholder="Name"
+                       id="name"
+                       name="websiteName"
+                       ng-class="{'invalid-input': model.form.$submitted && model.form.websiteName.$error.required}"
+                       required
+                       class="form-control">
+
+                <div class="error-message"
+                     ng-show="model.form.$submitted && model.form.websiteName.$error.required">
+                    Website name is required!
+                </div>
+
+                <label for="description">Description</label>
+                <textarea ng-model="model.website.description"
+                          class="form-control"
+                          rows="5"
+                          id="description"
+                          placeholder="Description"></textarea>
+            </form>
         </div>
     </div>
 </div>
 <nav class="navbar navbar-default navbar-fixed-bottom navbar-parent-page">
     <div class="container">
-        <a href="#!/user/{{model.userId}}">
+        <a href="#!/profile">
             <span class="glyphicon glyphicon-user pull-right navbar-text"></span>
         </a>
     </div>

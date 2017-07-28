@@ -21,11 +21,12 @@
         init();
 
         function createPage(){
-            if (typeof(model.page) == "undefined" ||
-                model.page.name == ""){
-                model.message = "A new page must have a name";
+            model.form.$submitted = true;
+            if (model.form.pageName.$error.required){
+                model.message = "Required field(s) empty!";
                 return null;
             }
+
             PageService
                 .createPage(model.websiteId,model.page)
                 .then(function (response) {

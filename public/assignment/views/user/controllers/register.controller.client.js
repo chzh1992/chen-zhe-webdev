@@ -8,16 +8,17 @@
         model.register = register;
 
         function register(){
-            if (typeof(model.user) == "undefined" ||
-                model.user.username == null ||
-                model.user.password == null ||
-                model.verifyPassword == null){
-                model.message = "All blanks must be filled";
-                return null;
+            if (model.form.username.$error.required ||
+                model.form.password.$error.required ||
+                model.form.verifyPassword.$error.required){
+                model.error = "Required field(s) empty"
+                return;
             }
-            if (model.user.password != model.verifyPassword){
-                model.message = "Passwords must match";
-                return null;
+
+            if (model.user.password != model.user.verifyPassword){
+                model.error = "Passwords don't match!";
+                model.passwordsMismatch = true;
+                return;
             }
 
             UserService
@@ -32,7 +33,7 @@
                     });
             }
             function setErrorMessage(response){
-                model.message = "Username " + model.user.username + " not available";
+                model.error = "Username " + model.user.username + " not available";
             }
         }
     }

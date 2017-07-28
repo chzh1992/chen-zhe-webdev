@@ -26,6 +26,11 @@
         init();
 
         function updateWidget(){
+            model.form.$submitted = true;
+            if (model.form.widgetName.$error.required){
+                model.message = "Required field(s) empty!";
+                return;
+            }
             model.widget.size = Number(model.sizeAsText);
             WidgetService
                 .updateWidget(model.widgetId,model.widget)

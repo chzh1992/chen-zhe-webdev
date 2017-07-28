@@ -1,10 +1,9 @@
-<div class="container">
-    <label for="name">
-        Name
-    </label>
-    <input ng-model="model.widget.name"
-           id="name"
-           class="form-control">
+
+<form novalidate
+      name="model.form">
+
+    <div ng-include="'views/widget/editors/common/required-input-field-name.view.client.html'"></div>
+
     <label for="text">
         Text
     </label>
@@ -30,45 +29,47 @@
         <option>60%</option>
         <option>50%</option>
     </select>
-    <label for="upload">
-        Upload
-    </label>
-    <form action="/api/upload"
-          method="post"
-          enctype="multipart/form-data">
-        <input  name="myFile"
-                type="file"
-                id="upload"
-                required
-                class="form-control">
-        <input  name="width"
-                value="{{model.widget.width}}"
-                style="display: none"/>
-        <input  name="userId"
-                value="{{model.userId}}"
-                style="display: none"/>
-        <input  name="websiteId"
-                value="{{model.websiteId}}"
-                style="display: none"/>
-        <input  name="pageId"
-                value="{{model.pageId}}"
-                style="display: none"/>
-        <input  name="widgetId"
-                value="{{model.widget._id}}"
-                style="display: none"/>
-        <button type="submit"
-                class="btn btn-block btn-primary">
-            Upload Image
-        </button>
-    </form>
+</form>
 
-    <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{model.widgetId}}/flickr-search"
-       class="btn btn-block btn-success">
-        Search Flickr
-    </a>
+<label for="upload">
+    Upload
+</label>
 
-    <a ng-click="model.deleteWidget()"
-       class="btn btn-block btn-danger">
-        Delete
-    </a>
-</div>
+<form action="/api/upload"
+      method="post"
+      enctype="multipart/form-data">
+    <input  name="myFile"
+            type="file"
+            id="upload"
+            required
+            class="form-control">
+    <input  name="width"
+            value="{{model.widget.width}}"
+            style="display: none"/>
+    <input  name="userId"
+            value="{{model.userId}}"
+            style="display: none"/>
+    <input  name="websiteId"
+            value="{{model.websiteId}}"
+            style="display: none"/>
+    <input  name="pageId"
+            value="{{model.pageId}}"
+            style="display: none"/>
+    <input  name="widgetId"
+            value="{{model.widget._id}}"
+            style="display: none"/>
+    <button type="submit"
+            class="btn btn-block btn-primary">
+        Upload Image
+    </button>
+</form>
+
+<a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{model.widgetId}}/flickr-search"
+   class="btn btn-block btn-success">
+    Search Flickr
+</a>
+
+<a ng-click="model.deleteWidget()"
+   class="btn btn-block btn-danger">
+    Delete
+</a>

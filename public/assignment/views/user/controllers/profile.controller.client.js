@@ -10,11 +10,12 @@
         model.logout = logout;
 
         function init() {
-            UserService
-                .findUserById(model.userId)
-                .then(function (response){
-                    model.user = response.data;
-                });
+            // UserService
+            //     .findUserById(model.userId)
+            //     .then(function (response){
+            //         model.user = response.data;
+            //     });
+            model.user = currentUser;
         }
         init();
 

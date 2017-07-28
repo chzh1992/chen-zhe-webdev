@@ -8,6 +8,11 @@
         model.login = login;
 
         function login(){
+            if (model.form.username.$error.required ||
+                model.form.password.$error.required) {
+                model.error = "Required field(s) empty";
+                return;
+            }
             UserService
                 .login(model.user)
                 .then(loginUser,setErrorMessage);
@@ -17,7 +22,7 @@
             }
 
             function setErrorMessage(response){
-                model.message = "User " + model.user.username + " not found";
+                model.error = 'username/password combination not found';
             }
         }
     }

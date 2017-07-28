@@ -1,10 +1,8 @@
-<div class="container">
-    <label for="name">
-        Name
-    </label>
-    <input id="name"
-           ng-model="model.widget.name"
-           class="form-control">
+<form novalidate
+      name="model.form">
+
+    <div ng-include="'views/widget/editors/common/required-input-field-name.view.client.html'"></div>
+
     <label for="text">
         Text
     </label>
@@ -31,11 +29,12 @@
             <input id="formatted"
                    ng-model="model.widget.formatted"
                    type="checkbox">
-        </span>
+            </span>
     </div>
+</form>
 
-    <a class="btn btn-block btn-danger"
-       ng-click="model.deleteWidget()">
-        Delete
-    </a>
-</div>
+<a class="btn btn-block btn-danger"
+   ng-click="model.deleteWidget()">
+    Delete
+</a>
+

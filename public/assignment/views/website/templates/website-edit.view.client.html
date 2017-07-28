@@ -50,16 +50,31 @@
                  class="alert alert-danger">
                 {{model.message}}
             </div>
-            <label for="name">Website Name</label>
-            <input ng-model="model.website.name"
-                   placeholder="name"
-                   id="name"
-                   class="form-control">
-            <label for="description">Description</label>
-            <textarea ng-model="model.website.description"
-                      class="form-control"
-                      rows="5"
-                      id="description"></textarea>
+
+            <form novalidate
+                  name="model.form"
+                  id="form">
+                <label for="name">Website Name</label>
+                <input ng-model="model.website.name"
+                       placeholder="name"
+                       id="name"
+                       name="websiteName"
+                       class="form-control"
+                       ng-class="{'invalid-input': model.form.$submitted && model.form.websiteName.$error.required}"
+                       required>
+
+                <div class="error-message"
+                     ng-show="model.form.$submitted && model.form.websiteName.$error.required">
+                    Website name is required!
+                </div>
+
+                <label for="description">Description</label>
+                <textarea ng-model="model.website.description"
+                          class="form-control"
+                          rows="5"
+                          id="description"></textarea>
+            </form>
+
             <a ng-click="model.deleteWebsite()"
                class="btn btn-danger btn-block">
                 Delete
@@ -71,7 +86,7 @@
 
 <nav class="navbar navbar-default navbar-fixed-bottom navbar-parent-page">
     <div class="container">
-        <a href="#!/user/{{model.userId}}">
+        <a href="#!/profile">
             <span class="glyphicon glyphicon-user pull-right navbar-text"></span>
         </a>
     </div>

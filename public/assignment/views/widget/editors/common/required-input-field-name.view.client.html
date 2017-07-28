@@ -1,0 +1,15 @@
+<label for="name">
+    Widget name
+</label>
+
+<input ng-model="model.widget.name"
+       id="name"
+       name="widgetName"
+       required
+       ng-class="{'invalid-input': model.form.$submitted && model.form.widgetName.$error.required}"
+       class="form-control">
+
+<div class="error-message"
+     ng-show="model.form.$submitted && model.form.widgetName.$error.required">
+    Widget Name is required!
+</div>

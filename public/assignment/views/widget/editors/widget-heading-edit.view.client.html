@@ -1,13 +1,20 @@
-<div class="container">
-   <label for="name">Name</label>
-    <input ng-model="model.widget.name"
-           id="name"
-           class="form-control">
-    <label for="text">Text</label>
+<form novalidate
+      name="model.form">
+
+    <div ng-include="'views/widget/editors/common/required-input-field-name.view.client.html'"></div>
+
+    <label for="text">
+        Text
+    </label>
+
     <input ng-model="model.widget.text"
            id="text"
            class="form-control">
-    <label for="size">Size</label>
+
+    <label for="size">
+        Size
+    </label>
+
     <select ng-model="model.sizeAsText"
             id="size"
             class="form-control">
@@ -16,8 +23,10 @@
         <option>3</option>
         <option>4</option>
     </select>
-    <a ng-click="model.deleteWidget()"
-       class="btn btn-block btn-danger">
-        Delete
-    </a>
-</div>
+</form>
+
+<a ng-click="model.deleteWidget()"
+   class="btn btn-block btn-danger">
+    Delete
+</a>
+

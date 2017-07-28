@@ -32,8 +32,9 @@
         init();
 
         function updatePage(){
-            if (model.page.name == ""){
-                model.message = "A page must have a name";
+            model.form.$submitted = true;
+            if (model.form.pageName.$error.required){
+                model.message = "Required field(s) empty!";
                 return null;
             }
             PageService
