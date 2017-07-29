@@ -1,0 +1,33 @@
+<div class="container">
+    <h1>Libri</h1>
+    <div>
+        <a href="#!/login" style="margin-right: 10px">
+            Login
+        </a>
+        <a href="#!/register">
+            Sign up
+        </a>
+    </div>
+
+    <div class="input-group">
+        <input class="form-control"
+               type="text"
+               ng-model="model.searchText"
+               placeholder="Search By title/author/isbn">
+        <span class="input-group-btn">
+                    <a href="#!/search/text={{model.searchText}}"
+                       class="btn btn-default">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </a>
+                </span>
+    </div>
+
+    <h2>People are reading</h2>
+
+    <h2>Popular users</h2>
+
+    <h2>Quotes</h2>
+
+    <h2>New books</h2>
+
+</div>

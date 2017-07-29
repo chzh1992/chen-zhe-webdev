@@ -1,0 +1,25 @@
+<div class="container">
+    <h1>Book details</h1>
+    <img ng-src="{{model.book.image_url[0]}}">
+    <div ng-show="model.book">
+        <h2>
+            {{model.book.title[0]}}
+        </h2>
+
+        <b>By</b> {{model.book.authors[0].author[0].name[0]}} <br>
+
+        <b>Goodreads average rating</b> {{model.book.average_rating[0]}} <br>
+
+        <a class="btn btn-success">starts reading this book</a>
+        <a class="btn btn-primary">claim this book</a>
+        <a class="btn btn-danger">review this book</a>
+
+        <h3>Description</h3>
+        <div ng-bind-html="model.book.description"></div>
+    </div>
+    <div ng-bind-html="model.book.reviews_widget"></div>
+
+    <h3>Libri reviews</h3>
+
+</div>
+

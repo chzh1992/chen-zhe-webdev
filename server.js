@@ -33,6 +33,7 @@ mongoose.Promise = require('q').Promise;
 require ("./test/app.js")(app);
 require("./assignment/app");
 require("./poc/app");
+require("./project/app");
 
 var port = process.env.PORT || 3000;
 

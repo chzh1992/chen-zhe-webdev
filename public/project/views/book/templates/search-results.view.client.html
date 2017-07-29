@@ -1,0 +1,28 @@
+<div class="container">
+
+    <div class="input-group">
+        <input class="form-control"
+               type="text"
+               ng-model="model.searchText"
+               placeholder="Search By title/author/isbn">
+        <span class="input-group-btn">
+                    <a href="#!/search/text={{model.searchText}}"
+                       class="btn btn-default">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </a>
+                </span>
+    </div>
+
+    <div class="list-group" style="margin-top: 10px">
+        <a class="list-group-item"
+             ng-repeat="book in model.books"
+             href="#!/book/goodreadsId={{book.best_book[0].id[0]._}}">
+            <img ng-src="{{book.best_book[0].image_url[0]}}">
+            <b>
+                {{book.best_book[0].title[0]}}
+            </b>
+            {{book.best_book[0].author[0].name[0]}}
+        </a>
+    </div>
+
+</div>

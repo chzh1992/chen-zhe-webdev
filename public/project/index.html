@@ -1,10 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="Libri">
 <head>
     <meta charset="UTF-8">
-    <title>Project Home Page</title>
+    <title>Libri - WebDev Project</title>
+
+    <!--AngularJS-->
+    <script src="../vendor/angular/angular.min.js"></script>
+    <script src="../vendor/angular/angular-route.min.js"></script>
+
+    <!--BootStrap CSS-->
+    <link href="../vendor/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="app.js"></script>
+    <script src="config.js"></script>
+
+    <!--services-->
+    <script src="services/goodreads.service.client.js"></script>
+
+    <!--home-->
+    <script src="views/home/home.controller.client.html.js"></script>
+
+    <!--book-->
+    <script src="views/book/controllers/search-results.controller.client.js"></script>
+    <script src="views/book/controllers/book-details.controller.client.js"></script>
+
+
+
+
 </head>
+
 <body>
-    <h1>Project Home Page</h1>
+
+    <div ng-view></div>
+
 </body>
+
 </html>
