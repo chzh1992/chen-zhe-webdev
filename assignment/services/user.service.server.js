@@ -34,7 +34,7 @@ var facebookConfig = {
     clientSecret : '3b161b482eaef7178cc56bc602e2e6a5',
     callbackURL  : '/auth/facebook/callback'
 };
-//passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
+passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
 
 function serializeUser(user, done) {
     done(null, user._id);
@@ -71,7 +71,7 @@ function localStrategy(username, password, done) {
 
 function facebookStrategy(token, refreshToken, profile, done){
     console.log(profile);
-    return done(null,null);
+    return done(err);
     // userModel
     //     .findUserByFacebookId(profile.id)
     //     .then(
