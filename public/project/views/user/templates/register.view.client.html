@@ -1,0 +1,71 @@
+<div class="container">
+    <h1>Register</h1>
+    <div ng-show="model.error"
+         class="alert alert-danger">
+        {{model.error}}
+    </div>
+    <form name="model.form"
+          novalidate
+          ng-submit="model.register()">
+
+        <input ng-model="model.user.username"
+               type="text"
+               name="username"
+               class="form-control"
+               ng-class="{'invalid-input': model.form.username.$error.required && model.form.$submitted}"
+               placeholder="username"
+               required>
+
+        <div ng-show="model.form.username.$error.required && model.form.$submitted"
+             class="error-message">
+            username is required!
+        </div>
+
+        <input ng-model="model.user.password"
+               type="password"
+               name="password"
+               class="form-control"
+               ng-class="{'invalid-input': (model.form.password.$error.required || model.passwordsMismatch)
+                        && model.form.$submitted}"
+               placeholder="password"
+               required>
+
+        <div ng-show="model.form.$submitted"
+             class="error-message">
+            <div ng-if="model.form.password.$error.required">
+                Password is required!
+            </div>
+            <div ng-if="model.passwordsMismatch">
+                Passwords must match!
+            </div>
+        </div>
+
+        <input ng-model="model.user.verifyPassword"
+               type="password"
+               name="verifyPassword"
+               class="form-control"
+               ng-class="{'invalid-input': (model.form.verifyPassword.$error.required || model.passwordsMismatch)
+                        && model.form.$submitted}"
+               placeholder="verify password"
+               required>
+
+        <div ng-show="model.form.$submitted"
+             class="error-message">
+            <div ng-if="model.form.verifyPassword.$error.required">
+                Please verify the password!
+            </div>
+            <div ng-if="model.passwordsMismatch">
+                Passwords must match!
+            </div>
+        </div>
+
+        <input class="btn btn-primary btn-block"
+               type="submit"
+               value="Register">
+    </form>
+
+    <a class="btn btn-danger  btn-block"
+       href="#!/login">
+        Cancel
+    </a>
+</div>

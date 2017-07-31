@@ -1,6 +1,6 @@
 (function (){
     angular
-        .module('WebAppMaker')
+        .module('Libri')
         .controller('LoginController',LoginController);
 
     function LoginController($location,UserService){

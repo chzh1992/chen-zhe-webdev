@@ -19,6 +19,16 @@
                templateUrl: "views/book/templates/book-details.view.client.html",
                controller: "BookDetailsController",
                controllerAs: "model"
+           })
+           .when('/login',{
+               templateUrl: "views/user/templates/login.view.client.html",
+               controller: "LoginController",
+               controllerAs: "model"
+           })
+           .when('/register',{
+               templateUrl: "views/user/templates/register.view.client.html",
+               controller: "RegisterController",
+               controllerAs: "model"
            });
    }
 })();

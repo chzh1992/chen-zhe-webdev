@@ -30,10 +30,12 @@ if(process.env.MLAB_USERNAME_WEBDEV) { // check if running remotely
 mongoose.connect(connectionString);
 mongoose.Promise = require('q').Promise;
 
+require("./passportjs-config");
 require ("./test/app.js")(app);
 require("./assignment/app");
 require("./poc/app");
 require("./project/app");
+
 
 var port = process.env.PORT || 3000;
 

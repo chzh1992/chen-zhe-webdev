@@ -10,7 +10,7 @@ userModel.updateUser = updateUser;
 userModel.deleteUser = deleteUser;
 userModel.addWebsiteToUser = addWebsiteToUser;
 userModel.removeWebsiteFromUser = removeWebsiteFromUser;
-userModel.findUserByFacebookId = findUserByFacebookId;
+userModel.findUserByGoogleId = findUserByGoogleId;
 
 module.exports = userModel;
 
@@ -73,7 +73,7 @@ function removeWebsiteFromUser(userId,websiteId){
         });
 }
 
-function findUserByFacebookId(facebookId){
+function findUserByGoogleId(googleId){
     return userModel
-        .findOne({'facebook.id': facebookId});
+        .findOne({'google.id': googleId});
 }
