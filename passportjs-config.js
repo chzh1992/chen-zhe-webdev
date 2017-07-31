@@ -11,7 +11,7 @@ passport.deserializeUser(deserializeUser);
 passport.use('assignment',new LocalStrategy(assignmentLocalStrategy));
 
 var facebookConfig = {
-    clientID     : '1492858747417897',
+    clientID     : '1',
     clientSecret : '3b161b482eaef7178cc56bc602e2e6a5',
     callbackURL  : '/auth/facebook/callback'
 };
@@ -20,9 +20,9 @@ passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
 // passport.use('project',new LocalStrategy(projectLocalStrategy));
 
 var googleConfig = {
-    clientID     : '561889118048-kuveq5vlfa59j8h04tfc6snr4n783loc.apps.googleusercontent.com',
-    clientSecret : 'P5SdytwPzPE2y8dbc5dXSq5s',
-    callbackURL  : '/auth/google/callback'
+    clientID     : process.env.GOOGLE_CLIENT_ID,
+    clientSecret : process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL  : process.env.GOOGLE_CALLBACK_URL
 };
 passport.use(new GoogleStrategy(googleConfig,googleStrategy));
 

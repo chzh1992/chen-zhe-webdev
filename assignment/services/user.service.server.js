@@ -25,8 +25,8 @@ app.get('/api/loggedin',loggedin);
 app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
 app.get('/auth/google/callback',
     passport.authenticate('google', {
-        successRedirect: 'http://localhost:3000/assignment/index.html#!/profile',
-        failureRedirect: 'http://localhost:3000/assignment/index.html#!/login'
+        successRedirect: 'https://chen-zhe-webdev.herokuapp.com/assignment/index.html#!/profile',
+        failureRedirect: 'https://chen-zhe-webdev.herokuapp.com/assignment/index.html#!/login'
     }));
 
 // var users = [
