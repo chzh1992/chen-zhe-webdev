@@ -117,9 +117,8 @@ function googleStrategy(token,refreshToken,profile,done){
                     return done(null, user);
                 } else {
                     var email = profile.emails[0].value;
-                    var emailParts = email.split("@");
                     var newGoogleUser = {
-                        username:  emailParts[0] + ' - Google',
+                        username: 'Google User',
                         firstName: profile.name.givenName,
                         lastName:  profile.name.familyName,
                         email:     email,

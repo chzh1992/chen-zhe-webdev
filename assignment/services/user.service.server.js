@@ -11,10 +11,7 @@ app.get('/api/user/:userId',findUserById);
 app.put('/api/user/:userId',updateUser);
 app.delete('/api/user/:userId',deleteUser);
 
-app.post('/api/login',
-    passport.authenticate('assignment',{
-        successRedirect: assignmentBaseUrl + '#!/profile'
-    }));
+app.post('/api/login',passport.authenticate('assignment'),login);
 app.post('/api/logout',logout);
 app.post('/api/register',register);
 app.get('/api/loggedin',loggedin);
