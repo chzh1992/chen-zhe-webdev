@@ -104,12 +104,7 @@ function deleteUser(req,res) {
 }
 
 function login(req,res){
-    var user = req.user;
-    if (user == '0'){
-        res.sendStatus(404);
-    } else {
-        res.json(user);
-    }
+    res.json(req.user);
 }
 
 function logout(req,res){

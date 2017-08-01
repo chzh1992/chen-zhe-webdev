@@ -59,7 +59,7 @@ function assignmentLocalStrategy(username, password, done) {
                 if(user && bcrypt.compareSync(password, user.password)) {
                     return done(null, user);
                 } else {
-                    return done(null, '0');
+                    return done(null, false);
                 }
             },
             function(err) {
