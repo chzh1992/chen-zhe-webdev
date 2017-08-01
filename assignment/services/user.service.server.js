@@ -2,6 +2,7 @@ var app = require('../../express');
 var userModel = require('../models/user/user.model.server');
 var passport = require('passport');
 var bcrypt = require('bcrypt-nodejs');
+var assignmentBaseUrl = process.env.ASSIGNMENT_BASE_URL;
 
 app.post('/api/user',createUser);
 app.get('/api/username',findUserByUsername);
@@ -10,7 +11,10 @@ app.get('/api/user/:userId',findUserById);
 app.put('/api/user/:userId',updateUser);
 app.delete('/api/user/:userId',deleteUser);
 
-app.post('/api/login',passport.authenticate('assignment'), login);
+app.post('/api/login',
+    passport.authenticate('assignment',{
+        successRedirect: assignmentBaseUrl + '#!/profile'
+    }));
 app.post('/api/logout',logout);
 app.post('/api/register',register);
 app.get('/api/loggedin',loggedin);
@@ -21,8 +25,6 @@ app.get('/api/loggedin',loggedin);
 //         successRedirect: '#!/profile',
 //         failureRedirect: '#!/login'
 //     }));
-
-var assignmentBaseUrl = process.env.ASSIGNMENT_BASE_URL;
 
 app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
 app.get('/auth/google/callback',

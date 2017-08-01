@@ -50,12 +50,7 @@
 
         function login(user){
             var url = "/api/login";
-            // return $http.post(url, user);
-            return $http({
-               method: 'post',
-               url: url,
-               data: user
-            });
+            return $http.post(url, user);
         }
 
         function logout(){
