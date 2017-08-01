@@ -12,8 +12,8 @@ passport.use('assignment',new LocalStrategy(assignmentLocalStrategy));
 
 var facebookConfig = {
     clientID     : '1',
-    clientSecret : '3b161b482eaef7178cc56bc602e2e6a5',
-    callbackURL  : '/auth/facebook/callback'
+    clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
+    callbackURL  : process.env.FACEBOOK_CALLBACK_URL
 };
 passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
 
@@ -59,7 +59,7 @@ function assignmentLocalStrategy(username, password, done) {
                 if(user && bcrypt.compareSync(password, user.password)) {
                     return done(null, user);
                 } else {
-                    return done(null, false);
+                    return done(null, '0');
                 }
             },
             function(err) {

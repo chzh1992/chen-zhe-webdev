@@ -2,6 +2,7 @@ node_modules
 .idea
 public/vendor
 **/exp.html
+env.js
 
 
 

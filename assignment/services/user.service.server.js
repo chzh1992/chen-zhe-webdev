@@ -22,11 +22,13 @@ app.get('/api/loggedin',loggedin);
 //         failureRedirect: '#!/login'
 //     }));
 
+var assignmentBaseUrl = process.env.ASSIGNMENT_BASE_URL;
+
 app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
 app.get('/auth/google/callback',
     passport.authenticate('google', {
-        successRedirect: 'https://chen-zhe-webdev.herokuapp.com/assignment/index.html#!/profile',
-        failureRedirect: 'https://chen-zhe-webdev.herokuapp.com/assignment/index.html#!/login'
+        successRedirect: assignmentBaseUrl + '#!/profile',
+        failureRedirect: assignmentBaseUrl + '#!/login'
     }));
 
 // var users = [
@@ -103,7 +105,7 @@ function deleteUser(req,res) {
 
 function login(req,res){
     var user = req.user;
-    if (!user){
+    if (user == '0'){
         res.sendStatus(404);
     } else {
         res.json(user);
