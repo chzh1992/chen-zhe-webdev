@@ -19,7 +19,7 @@
                 .then(loginUser,setErrorMessage);
 
             function loginUser(response){
-                $location.url("/profile");
+                $location.url("/personal-page");
             }
 
             function setErrorMessage(response){

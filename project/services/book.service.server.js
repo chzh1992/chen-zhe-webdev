@@ -4,9 +4,9 @@ var https = require('https');
 var parseString = require('xml2js').parseString;
 
 app.get("/api/project/search/:searchText",searchGoodreads);
-app.get("/api/project/book/:goodreadsId",searchGoodreadsById);
+app.get("/api/project/book/:goodreadsId",searchBookByGoodreadsId);
 
-var developerKey = 'XMhP6c4CRGTAGXMtpjS7IA';
+var developerKey = process.env.GOODREADS_DEVELOPER_KEY;
 
 function searchGoodreads(req,res){
     var searchText = req.params['searchText'];
@@ -27,9 +27,9 @@ function SearchGoodreadsOptions(searchText){
     return options;
 }
 
-function searchGoodreadsById(req,res){
+function searchBookByGoodreadsId(req,res){
     var goodreadsId = req.params['goodreadsId'];
-    var options = searchGoodreadsByIdOptions(goodreadsId);
+    var options = searchBookByGoodreadsIdOptions(goodreadsId);
     getGoodreadsResponse(options)
         .then(function (response){
             res.json(response.GoodreadsResponse.book[0]);
@@ -38,7 +38,7 @@ function searchGoodreadsById(req,res){
         });
 }
 
-function searchGoodreadsByIdOptions(goodreadsId){
+function searchBookByGoodreadsIdOptions(goodreadsId){
     var options = {
         host: 'www.goodreads.com',
         path: '/book/show/' + goodreadsId + '.xml?key=' + developerKey

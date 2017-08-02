@@ -3,13 +3,13 @@
         .module('Libri')
         .controller('BookDetailsController',BookDetailsController);
 
-    function BookDetailsController($routeParams,$http,$sce,GoodreadsService,UserService,ReviewService){
+    function BookDetailsController($routeParams,$http,$sce,BookService,UserService,ReviewService){
         var model = this;
         var goodreadsId = $routeParams['goodreadsId'];
 
         function init(){
-            GoodreadsService
-                .searchGoodreadsById(goodreadsId)
+            BookService
+                .searchBookByGoodreadsId(goodreadsId)
                 .then(
                     function (response){
                         model.book = response.data;

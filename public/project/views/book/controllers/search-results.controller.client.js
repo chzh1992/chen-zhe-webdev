@@ -3,12 +3,12 @@
         .module('Libri')
         .controller('SearchResultController',SearchResultController);
 
-    function SearchResultController(GoodreadsService,$routeParams){
+    function SearchResultController(BookService,$routeParams){
         var model = this;
         var searchText = $routeParams['searchText'];
 
         function init(){
-            GoodreadsService
+            BookService
                 .searchGoodreads(searchText)
                 .then(
                     function (response){

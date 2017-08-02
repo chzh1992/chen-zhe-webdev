@@ -1,12 +1,12 @@
 (function (){
     angular
         .module('Libri')
-        .factory('GoodreadsService',GoodreadsService);
+        .factory('BookService',BookService);
 
-    function GoodreadsService($http){
+    function BookService($http){
         var api = {
             searchGoodreads: searchGoodreads,
-            searchGoodreadsById: searchGoodreadsById
+            searchBookByGoodreadsId: searchBookByGoodreadsId
         };
         return api;
 
@@ -15,7 +15,7 @@
             return $http.get(url);
         }
 
-        function searchGoodreadsById(goodreadsId){
+        function searchBookByGoodreadsId(goodreadsId){
             var url = "/api/project/book/" + goodreadsId;
             return $http.get(url);
         }

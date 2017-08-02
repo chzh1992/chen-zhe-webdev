@@ -22,8 +22,8 @@
             }
 
             UserService
-                .findUserByUsername(model.user.username)
-                .then(setErrorMessage,registerUser);
+                .isUsernameAvailable(model.user.username)
+                .then(registerUser,setErrorMessage);
 
             function registerUser(response) {
                 UserService

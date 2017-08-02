@@ -7,7 +7,8 @@
         var api = {
             checkLoggedIn: checkLoggedIn,
             login: login,
-            register: register
+            register: register,
+            isUsernameAvailable: isUsernameAvailable
         };
         return api;
 
@@ -16,12 +17,19 @@
             return $http.get(url);
         }
 
-        function login(){
-
+        function login(user){
+            var url = '/api/project/login';
+            return $http.post(url,user);
         }
 
-        function register(){
+        function register(user){
+            var url = '/api/project/register';
+            return $http.post(url,user);
+        }
 
+        function isUsernameAvailable(username){
+            var url = '/api/project/isAvailable/' + username;
+            return $http.get(url)
         }
     }
 })();

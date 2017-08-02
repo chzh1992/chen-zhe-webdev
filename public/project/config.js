@@ -29,6 +29,11 @@
                templateUrl: "views/user/templates/register.view.client.html",
                controller: "RegisterController",
                controllerAs: "model"
+           })
+           .when('/personal-page',{
+               templateUrl: "views/user/templates/personal-page.view.client.html",
+               // controller: "RegisterController",
+               // controllerAs: "model"
            });
    }
 })();
