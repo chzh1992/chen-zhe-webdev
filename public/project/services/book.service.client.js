@@ -6,7 +6,8 @@
     function BookService($http){
         var api = {
             searchGoodreads: searchGoodreads,
-            searchBookByGoodreadsId: searchBookByGoodreadsId
+            searchBookByGoodreadsId: searchBookByGoodreadsId,
+            findBookById: findBookById
         };
         return api;
 
@@ -16,7 +17,7 @@
         }
 
         function searchBookByGoodreadsId(goodreadsId){
-            var url = "/api/project/book/" + goodreadsId;
+            var url = "/api/project/book/goodreads/" + goodreadsId;
             return $http.get(url);
         }
 

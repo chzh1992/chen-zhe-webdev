@@ -10,12 +10,14 @@ var userSchema = mongoose.Schema({
         token: String
     },
     group: {type: String, default:'PROJECT'},
-    following: [
-        {type: mongoose.Schema.Types.ObjectId, ref: "ProjectUserModel"}
+    socialNetwork:{
+        following: [
+            {type: mongoose.Schema.Types.ObjectId, ref: "ProjectUserModel"}
         ],
-    followers: [
-        {type: mongoose.Schema.Types.ObjectId, ref: "ProjectUserModel"}
-    ],
+        followers: [
+            {type: mongoose.Schema.Types.ObjectId, ref: "ProjectUserModel"}
+        ]
+    },
     authoredBooks: [
         {type: mongoose.Schema.Types.ObjectId, ref: "ProjectBookModel"}
     ],

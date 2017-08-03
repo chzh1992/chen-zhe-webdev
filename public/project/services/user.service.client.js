@@ -8,7 +8,8 @@
             checkLoggedIn: checkLoggedIn,
             login: login,
             register: register,
-            isUsernameAvailable: isUsernameAvailable
+            isUsernameAvailable: isUsernameAvailable,
+            findAssociatedUsersByUser: findAssociatedUsersByUser
         };
         return api;
 
@@ -30,6 +31,11 @@
         function isUsernameAvailable(username){
             var url = '/api/project/isAvailable/' + username;
             return $http.get(url)
+        }
+
+        function findAssociatedUsersByUser(userId){
+            var url = '/api/project/social-network/' + userId;
+            return $http.get(url);
         }
     }
 })();

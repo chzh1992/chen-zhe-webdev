@@ -32,8 +32,26 @@
            })
            .when('/personal-page',{
                templateUrl: "views/user/templates/personal-page.view.client.html",
-               // controller: "RegisterController",
-               // controllerAs: "model"
+               controller: "PersonalPageController",
+               controllerAs: "model",
+               resolve: {
+                   CurrentUser: getCurrentUser
+               }
            });
+   }
+
+   function getCurrentUser($q,$location,UserService){
+       var deferred = $q.defer();
+       UserService
+           .checkLoggedIn()
+           .then(
+               function (response){
+                   var currentUser = response.data;
+                   deferred.resolve(currentUser);
+               },function (err){
+                   deferred.reject();
+                   $location.url('/login');
+               });
+       return deferred.promise;
    }
 })();

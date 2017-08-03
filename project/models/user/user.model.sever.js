@@ -5,6 +5,7 @@ var userModel = mongoose.model('ProjectUserModel',userSchema);
 userModel.createUser = createUser;
 userModel.findUserByUsername = findUserByUsername;
 userModel.findUserById = findUserById;
+userModel.findAssociatedUsersById = findAssociatedUsersById;
 
 module.exports = userModel;
 
@@ -23,5 +24,14 @@ function findUserById(userId){
         .findById(userId);
 }
 
-
+function findAssociatedUsersById(userId){
+    var socialNetwork = {};
+    userModel
+        .findById(userId)
+        .populate('socialNetwork.following')
+        .populate('socialNetwork.followers')
+        .exec(function (err, user){
+            console.log(user);
+        });
+}
 

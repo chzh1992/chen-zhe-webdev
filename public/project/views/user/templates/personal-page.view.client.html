@@ -1,0 +1,34 @@
+<div class="container">
+    <h1>Username: {{model.user.username}}</h1>
+    <h1>My bookshelf</h1>
+    <h2>Want to read:</h2>
+    <ul>
+       <li ng-repeat="book in model.user.bookshelf.wantToRead">
+           {{model.getBookTitle(book)}}
+       </li>
+    </ul>
+    <h2>Reading:</h2>
+    <ul>
+        <li ng-repeat="book in model.user.bookshelf.reading">
+            {{model.getBookTitle(book)}}
+        </li>
+    </ul>
+    <h2>Have read:</h2>
+    <ul>
+        <li ng-repeat="book in model.user.bookshelf.haveRead">
+            {{model.getBookTitle(book)}}
+        </li>
+    </ul>
+    <h1>Following</h1>
+    <ul>
+        <li ng-repeat="user in model.user.following">
+            {{model.getUsername(user)}}
+        </li>
+    </ul>
+    <h1>Followers</h1>
+    <ul>
+        <li ng-repeat="user in model.user.followers">
+            {{model.getUsername(user)}}
+        </li>
+    </ul>
+</div>

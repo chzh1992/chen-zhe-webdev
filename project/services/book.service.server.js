@@ -2,9 +2,11 @@ var q = require('q');
 var app = require('../../express');
 var https = require('https');
 var parseString = require('xml2js').parseString;
+var bookModel = require('../models/book/book.model.server');
+
 
 app.get("/api/project/search/:searchText",searchGoodreads);
-app.get("/api/project/book/:goodreadsId",searchBookByGoodreadsId);
+app.get("/api/project/book/goodreads/:goodreadsId",searchBookByGoodreadsId);
 
 var developerKey = process.env.GOODREADS_DEVELOPER_KEY;
 
@@ -29,13 +31,34 @@ function SearchGoodreadsOptions(searchText){
 
 function searchBookByGoodreadsId(req,res){
     var goodreadsId = req.params['goodreadsId'];
+    bookModel
+        .findBookByGoodreadsId(goodreadsId)
+        .then(
+            function (book){
+                if (book){
+                    res.json(book);
+                } else {
+                    searchGoodreadsById(goodreadsId)
+                        .then(
+                            function (response){
+                                res.json(response.GoodreadsResponse.book[0]);
+                            },function (error){
+                                res.sendStatus(404);
+                            });
+                }
+            }
+        );
+}
+
+function searchGoodreadsById(goodreadsId){
     var options = searchBookByGoodreadsIdOptions(goodreadsId);
-    getGoodreadsResponse(options)
-        .then(function (response){
-            res.json(response.GoodreadsResponse.book[0]);
-        },function (error){
-            res.sendStatus(404);
-        });
+    return getGoodreadsResponse(options);
+    // .then(
+    //     function (response){
+    //         return response.GoodreadsResponse.book[0];
+    //     },function (error){
+    //         return '0';
+    //     });
 }
 
 function searchBookByGoodreadsIdOptions(goodreadsId){

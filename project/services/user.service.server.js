@@ -7,6 +7,7 @@ app.post("/api/project/login",passport.authenticate('project'),login);
 app.post("/api/project/register",register);
 app.get("/api/project/isAvailable/:username",isUsernameAvailable);
 app.get("/api/project/checkLoggedIn",checkLoggedIn);
+app.get("/api/project/social-network/:userId",getAssociatedUsers);
 
 function checkLoggedIn(req,res){
     if (req.isAuthenticated()){
@@ -53,4 +54,14 @@ function isUsernameAvailable(req,res){
                 }
             }
         )
+}
+
+function getAssociatedUsers(req,res){
+    var userId = req.params['userId'];
+    userModel
+        .findAssociatedUsersById(userId)
+        .then(
+            function (socialNetwork){
+               res.json(socialNetwork);
+            });
 }
