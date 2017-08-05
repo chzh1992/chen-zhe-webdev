@@ -37,21 +37,27 @@
                resolve: {
                    CurrentUser: getCurrentUser
                }
+           })
+           .when('/profile/:userId',{
+               templateUrl: "views/user/templates/public-profile.view.client.html",
+               controller: "PublicProfileController",
+               controllerAs: "model"
            });
    }
 
    function getCurrentUser($q,$location,UserService){
        var deferred = $q.defer();
        UserService
-           .checkLoggedIn()
+           .populateUserInformation()
            .then(
                function (response){
-                   var currentUser = response.data;
-                   deferred.resolve(currentUser);
+                   var user = response.data;
+                   deferred.resolve(user);
                },function (err){
                    deferred.reject();
                    $location.url('/login');
-               });
+               }
+           );
        return deferred.promise;
    }
 })();

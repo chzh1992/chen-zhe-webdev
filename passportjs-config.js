@@ -55,11 +55,11 @@ function deserializeUserAgainstModel(userModel,unit,done){
 }
 
 function assignmentLocalStrategy(username, password, done) {
-    localStrategyAgaistModel(assignmentUserModel,username,password,done);
+    localStrategyAgainstModel(assignmentUserModel,username,password,done);
 }
 
 function projectLocalStrategy(username,password,done){
-    localStrategyAgaistModel(projectUserModel,username,password,done);
+    localStrategyAgainstModel(projectUserModel,username,password,done);
 }
 
 function googleStrategy(token,refreshToken,profile,done){
@@ -135,7 +135,7 @@ function facebookStrategy(token, refreshToken, profile, done){
 }
 
 // userModel must've implemented findUserByUsername
-function localStrategyAgaistModel(userModel,username,password,done){
+function localStrategyAgainstModel(userModel,username,password,done){
     userModel
         .findUserByUsername(username)
         .then(

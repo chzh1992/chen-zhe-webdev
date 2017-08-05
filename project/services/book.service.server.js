@@ -3,6 +3,7 @@ var app = require('../../express');
 var https = require('https');
 var parseString = require('xml2js').parseString;
 var bookModel = require('../models/book/book.model.server');
+var userModel = require('../models/user/user.model.sever');
 
 
 app.get("/api/project/search/:searchText",searchGoodreads);
@@ -15,10 +16,25 @@ function searchGoodreads(req,res){
     var options = SearchGoodreadsOptions(searchText);
     getGoodreadsResponse(options)
         .then(function (response){
-            res.json(response.GoodreadsResponse.search[0].results[0].work);
+            var results = response.GoodreadsResponse.search[0].results[0].work;
+            res.json(results);
         },function (error){
             res.sendStatus(404);
         });
+}
+
+function prettifyGoodreadsSearchResults(results){
+    for (var work in results.work){
+        results[work].id = results[work].id[0];
+        results[work].books_count = results[work].books_count[0];
+        results[work].ratings_count = results[work].ratings_count[0];
+        results[work].text_reviews_count = results[work].text_reviews_count[0];
+        results[work].original_publication_year = results[work].original_publication_year[0];
+        results[work].original_publication_month = results[work].original_publication_month[0];
+        results[work].original_publication_day = results[work].original_publication_day[0];
+        results[work].average_rating = results[work].average_rating[0];
+        results[work].best_book = results[work].best_book[0];
+    }
 }
 
 function SearchGoodreadsOptions(searchText){
@@ -31,23 +47,32 @@ function SearchGoodreadsOptions(searchText){
 
 function searchBookByGoodreadsId(req,res){
     var goodreadsId = req.params['goodreadsId'];
-    bookModel
-        .findBookByGoodreadsId(goodreadsId)
+    // bookModel
+    //     .findBookByGoodreadsId(goodreadsId)
+    //     .then(
+    //         function (book){
+    //             if (book){
+    //                 res.json(book);
+    //             } else {
+    //                 searchGoodreadsById(goodreadsId)
+    //                     .then(
+    //                         function (response){
+    //                             var book = response.GoodreadsResponse.book[0];
+    //                             res.json(book);
+    //                         },function (error){
+    //                             res.sendStatus(404);
+    //                         });
+    //             }
+    //         }
+    //     );
+    return searchGoodreadsById(goodreadsId)
         .then(
-            function (book){
-                if (book){
-                    res.json(book);
-                } else {
-                    searchGoodreadsById(goodreadsId)
-                        .then(
-                            function (response){
-                                res.json(response.GoodreadsResponse.book[0]);
-                            },function (error){
-                                res.sendStatus(404);
-                            });
-                }
-            }
-        );
+            function (response){
+                var book = response.GoodreadsResponse.book[0];
+                res.json(book);
+            },function (error){
+                res.sendStatus(404);
+            });
 }
 
 function searchGoodreadsById(goodreadsId){

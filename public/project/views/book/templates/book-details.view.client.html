@@ -9,22 +9,29 @@
         <b>By</b> {{model.book.authors[0].author[0].name[0]}} <br>
 
         <b>Your rating</b>
-        <span ng-switch="model.currentUserHasReview">
-            <span ng-switch-when="not logged in">
+        <span ng-show="!model.user">
                 <a href="#!/login">Log in</a> to review this book.
             </span>
-            <span ng-switch-when="no">
-                You haven't reviewed this book. <a>Review it</a>.
+        <span ng-show="model.user">
+            <span ng-show="!model.currentUserHasReview">
+                You haven't reviewed this book. <a ng-click="model.goToReviewForm()">Review it</a>
             </span>
-            <span ng-switch-when="yes">
-
-            </span>
+             <span ng-show="model.currentUserHasReview">
+                 {{model.currentUserReview.rating || 'no rating'}}
+             </span>
         </span> <br>
         <b>Goodreads average rating</b> {{model.book.average_rating[0]}} <br>
         <b>Libri average rating</b> <br>
 
-        <a class="btn btn-success">starts reading this book</a>
-        <a class="btn btn-primary">claim this book</a>
+        <a class="btn btn-success"
+           ng-click="model.wantToRead()">
+            want to read
+        </a>
+
+        <a ng-show="model.user.role == 'AUTHOR'"
+           class="btn btn-primary">
+            claim this book
+        </a>
 
         <h3>Description</h3>
         <div ng-bind-html="model.book.description"></div>
@@ -35,19 +42,30 @@
     <div ng-show="model.currentUserHasReview == 'yes'">
         <a>Edit</a> Created on {{model.currentUserReview.date || date}}
     </div>
-    <div ng-switch="model.currentUserHasReview">
-        <div ng-switch-when="not logged in">
-            <a href="#!/login">Log in</a> to review this book.
+    <div ng-show="!model.user">
+        <a href="#!/login">Log in</a> to review this book.
+    </div>
+    <div ng-show="model.user" id="#review">
+        <div ng-show="!model.currentUserHasReview">
+            Your rating:
+            <input ng-model="model.currentUserReview.rating"
+                   class="form-control"> <br>
+            <textarea ng-model="model.currentUserReview.content"
+                      class="form-control"></textarea>
+            <a class="btn btn-block btn-primary"
+               ng-click="model.postReview()">Post</a>
         </div>
-        <div ng-switch-when="no">
-            You haven't reviewed this book. <a>Review it</a>.
-        </div>
-        <div ng-switch-when="yes">
-            
+        <div ng-show="model.currentUserHasReview">
+            <textarea ng-model="model.currentUserReview.content"
+                      class="form-control"></textarea>
         </div>
     </div>
-
     <h3>Libri reviews</h3>
-
+    <div ng-repeat="review in model.book.reviews">
+        <h3>Username: {{review.reviewer}}</h3>
+        <textArea class="form-control">
+            {{review.content}}
+        </textArea>
+    </div>
 </div>
 

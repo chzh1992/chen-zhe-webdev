@@ -7,7 +7,6 @@
         var api = {
             searchGoodreads: searchGoodreads,
             searchBookByGoodreadsId: searchBookByGoodreadsId,
-            findBookById: findBookById
         };
         return api;
 
@@ -20,7 +19,6 @@
             var url = "/api/project/book/goodreads/" + goodreadsId;
             return $http.get(url);
         }
-
     }
 
 })();

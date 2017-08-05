@@ -3,36 +3,31 @@
         .module('Libri')
         .controller('PersonalPageController',PersonalPageController);
 
-    function PersonalPageController(CurrentUser,BookService,UserService){
+    function PersonalPageController(CurrentUser,UserService,$location){
         var model = this;
+
+        model.logout = logout;
 
         function init(){
             model.user = CurrentUser;
-            model.user.associatedBooks = getAssociatedBooks(model.user);
-            model.user.associatedUsers = getAssociatedUsers(model.user);
+            UserService
+                .getUserFollowers(model.user._id)
+                .then(
+                    function (response){
+                        model.user.followers = response.data;
+                    }
+                );
         }
         init();
 
-        function getAssociatedBooks(user){
-            return BookService
-                .findAssociatedBooksByUser(user._id)
+        function logout(){
+            UserService
+                .logout()
                 .then(
                     function (response){
-                        var books = response.data;
-                        return books;
+                        $location.url('/');
                     }
-                );
-        }
-
-        function getAssociatedUsers(user){
-            return UserService
-                .findAssociatedUsersByUser(user._id)
-                .then(
-                    function (response){
-                        var users = response.data;
-                        return users;
-                    }
-                );
+                )
         }
     }
 })();

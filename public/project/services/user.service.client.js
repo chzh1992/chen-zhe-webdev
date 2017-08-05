@@ -8,8 +8,13 @@
             checkLoggedIn: checkLoggedIn,
             login: login,
             register: register,
+            logout: logout,
             isUsernameAvailable: isUsernameAvailable,
-            findAssociatedUsersByUser: findAssociatedUsersByUser
+            putBookOnBookshelf: putBookOnBookshelf,
+            getUserProfileById: getUserProfileById,
+            following: following,
+            getUserFollowers: getUserFollowers,
+            populateUserInformation: populateUserInformation
         };
         return api;
 
@@ -33,8 +38,33 @@
             return $http.get(url)
         }
 
-        function findAssociatedUsersByUser(userId){
-            var url = '/api/project/social-network/' + userId;
+        function putBookOnBookshelf(book,bookshelfPart){
+            var url = '/api/project/bookshelf/'+bookshelfPart;
+            return $http.put(url,book);
+        }
+
+        function logout(){
+            var url = '/api/project/logout';
+            return $http.post(url);
+        }
+
+        function getUserProfileById(userId){
+            var url = '/api/project/profile/'+userId;
+            return $http.get(url);
+        }
+
+        function following(userId,status){
+            var url = '/api/project/following/' + userId;
+            return $http.put(url,status);
+        }
+
+        function getUserFollowers(userId){
+            var url = '/api/project/followers/' + userId;
+            return $http.get(url);
+        }
+
+        function populateUserInformation(){
+            var url = '/api/project/personal-page';
             return $http.get(url);
         }
     }

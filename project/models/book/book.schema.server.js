@@ -4,6 +4,11 @@ var bookSchema = mongoose.Schema({
     authors: [String],
     publisher: String,
     dateCreated: {type: Date, default: Date.now},
-    goodreadsId: String
+    goodreads: {
+        id: String,
+        rating: String,
+        review_widget: String
+    },
+    rating: Number
 },{collection: 'project_book'});
 module.exports = bookSchema;
