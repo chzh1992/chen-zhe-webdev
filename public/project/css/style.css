@@ -33,7 +33,15 @@ select.form-control,
     left: 50%;
     transform: translate(-50%,-50%);
     margin-right: -50%;
+}
+
+.pr-home-searchbar{
     width: 40%;
+}
+
+.pr-anti-home-color-pattern{
+    background-color: whitesmoke;
+    color: #262525;
 }
 
 .pr-full-screen{
@@ -46,19 +54,13 @@ select.form-control,
 }
 
 .logo-image{
-    margin-left: 50%;
-    transform: translate(-50%,0);
     margin-bottom: 40px;
     width: 60%;
 }
 
-.pr-home-page-tip{
+.pr-horizontal-center{
     margin-left: 50%;
     transform: translate(-50%,0);
-}
-
-.pr-navbar-bottom{
-    position: absolute;
 }
 
 .pr-home-label{
@@ -73,4 +75,55 @@ select.form-control,
 
 #secondSearchBar{
     visibility: hidden;
+    width: 40%;
 }
+
+.invalid-input {
+    border-color: red;
+    outline: 0;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(234, 10, 10, 0.6);
+}
+
+.pr-login-window{
+    width: 35%;
+    text-align: center;
+}
+
+.pr-login-tab{
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.pr-login-form{
+    padding: 40px;
+    padding-top: 0px;
+    padding-bottom: 30px;
+}
+
+.pr-login-error{
+    background-color: #D64242;
+    color: whitesmoke;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.pr-login-head{
+    padding-top: 30px;
+    margin-bottom: 40px;
+}
+
+.pr-login-bottom{
+    padding-bottom: 10px;
+}
+
+.pr-login-outside-tab-message a{
+    font-size: 20px;
+    margin-right: 40px;
+    color: whitesmoke;
+}
+
+.pr-register-window{
+    width: 45%;
+    text-align: center;
+}
+

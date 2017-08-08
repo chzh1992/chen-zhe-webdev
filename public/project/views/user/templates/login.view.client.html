@@ -1,44 +1,67 @@
-<div class="container">
-    <h1>Login</h1>
-    <div ng-show="model.error"
-         class="alert alert-danger">
-        {{model.error}}
+<div class="pr-home-color-pattern" pr-full-screen>
+
+    <div class="pr-center pr-login-window">
+        <div class=" pr-login-tab pr-anti-home-color-pattern">
+            <div class="pr-login-head">
+                <h3>
+                    Log in to your account
+                </h3>
+
+                <div ng-show="model.error"
+                     class="alert pr-login-error">
+                    {{model.error}}
+                </div>
+            </div>
+
+            <form ng-submit="model.login()"
+                  name="model.form"
+                  class="pr-login-form"
+                  novalidate>
+
+                <div class="input-group">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-user"></span>
+                </span>
+                    <input ng-model="model.user.username"
+                           type="text"
+                           class="form-control"
+                           ng-class="{'invalid-input': model.form.$submitted && model.form.username.$error.required}"
+                           name="username"
+                           placeholder="username"
+                           required>
+                </div>
+
+                <div class="input-group">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-lock"></span>
+                </span>
+                    <input ng-model="model.user.password"
+                           type="password"
+                           class="form-control"
+                           ng-class="{'invalid-input': model.form.$submitted && model.form.password.$error.required}"
+                           name="password"
+                           placeholder="password"
+                           required>
+                </div>
+
+                <input type="submit"
+                       value="Login"
+                       class="btn btn-block pr-home-color-pattern">
+            </form>
+
+            <hr>
+
+            <div class="pr-login-bottom">
+                <h4 class="">
+                    New to Libri? <a href="#!/register">Sign up</a>
+                </h4>
+            </div>
+        </div>
+
+        <div class="pr-login-outside-tab-message">
+            <a href="/auth/faceboook">Log in with Facebook</a>
+            <a href="#!/">Libri home page</a>
+        </div>
+
     </div>
-    <form ng-submit="model.login()"
-          name="model.form"
-          novalidate>
-        <input ng-model="model.user.username"
-               type="text"
-               class="form-control"
-               ng-class="{'invalid-input': model.form.$submitted && model.form.username.$error.required}"
-               name="username"
-               placeholder="username"
-               required>
-        <div ng-show="model.form.$submitted && model.form.username.$error.required"
-             class="error-message">
-            username is required!
-        </div>
-        <input ng-model="model.user.password"
-               type="password"
-               class="form-control"
-               ng-class="{'invalid-input': model.form.$submitted && model.form.password.$error.required}"
-               name="password"
-               placeholder="password"
-               required>
-        <div ng-show="model.form.$submitted && model.form.password.$error.required"
-             class="error-message">
-            password is required!
-        </div>
-        <input type="submit"
-               value="Login"
-               class="btn btn-primary btn-block">
-    </form>
-    <a class="btn btn-success btn-block"
-       href="#!/register">
-        Register
-    </a>
-    <a href="/auth/google" class="btn btn-info btn-block">
-        <span class="fa fa-facebook"></span>
-        Login with Facebook
-    </a>
 </div>
