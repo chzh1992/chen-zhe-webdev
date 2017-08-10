@@ -1,27 +1,28 @@
-<div class="container">
-    <h1>Username: {{model.user.username}}</h1>
-    <h2>Joined on: {{model.user.dateCreated || date}}</h2>
-    <a class="btn btn-success"
-       ng-show="!model.isUserFollowed()"
-       ng-click="model.viewerFollowUser()">
-        follow this user
-    </a>
-    <a class="btn btn-primary"
-       ng-show="model.isUserFollowed()"
-       ng-click="model.viewerUnfollowUser()">
-        unfollow this user
-    </a>
-    <h1>Following</h1>
-    <ul>
-        <li ng-repeat="user in model.user.following">
-            {{user.username}}
-        </li>
-    </ul>
-    <h1>Followers</h1>
-    <ul>
-        <li ng-repeat="user in model.user.followers">
-            {{user.username}}
-        </li>
-    </ul>
+<div ng-include="'views/common/navbar-menubar.view.client.html'"></div>
+<hr>
 
-</div>
+
+<h1>Username: {{model.user.username}}</h1>
+<h2>Joined on: {{model.user.dateCreated || date}}</h2>
+<a class="btn btn-success"
+   ng-show="!model.isUserFollowed()"
+   ng-click="model.viewerFollowUser()">
+    follow this user
+</a>
+<a class="btn btn-primary"
+   ng-show="model.isUserFollowed()"
+   ng-click="model.viewerUnfollowUser()">
+    unfollow this user
+</a>
+<h1>Following</h1>
+<ul>
+    <li ng-repeat="user in model.user.following">
+        {{user.username}}
+    </li>
+</ul>
+<h1>Followers</h1>
+<ul>
+    <li ng-repeat="user in model.user.followers">
+        {{user.username}}
+    </li>
+</ul>

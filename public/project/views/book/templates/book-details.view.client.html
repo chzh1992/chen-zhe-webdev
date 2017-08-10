@@ -1,71 +1,244 @@
-<div class="container">
-    <h1>Book details</h1>
-    <img ng-src="{{model.book.image_url[0]}}">
-    <div ng-show="model.book">
-        <h2>
-            {{model.book.title[0]}}
-        </h2>
+<div ng-include="'views/common/navbar-menubar.view.client.html'"></div>
 
-        <b>By</b> {{model.book.authors[0].author[0].name[0]}} <br>
+<hr>
 
-        <b>Your rating</b>
-        <span ng-show="!model.user">
-                <a href="#!/login">Log in</a> to review this book.
-            </span>
-        <span ng-show="model.user">
-            <span ng-show="!model.currentUserHasReview">
-                You haven't reviewed this book. <a ng-click="model.goToReviewForm()">Review it</a>
-            </span>
-             <span ng-show="model.currentUserHasReview">
-                 {{model.currentUserReview.rating || 'no rating'}}
-             </span>
-        </span> <br>
-        <b>Goodreads average rating</b> {{model.book.average_rating[0]}} <br>
-        <b>Libri average rating</b> <br>
+<div class="pr-horizontal-center pr-book-detail" ng-show="model.book">
 
-        <a class="btn btn-success"
-           ng-click="model.wantToRead()">
-            want to read
-        </a>
-
-        <a ng-show="model.user.role == 'AUTHOR'"
-           class="btn btn-primary">
-            claim this book
-        </a>
-
-        <h3>Description</h3>
-        <div ng-bind-html="model.book.description"></div>
+    <div class="pr-edit-book-link">
+        <div ng-if="model.book._id">
+            <a href="#!/book/edit/{{model.book._id}}">Edit this book</a>
+        </div>
+        <div ng-if="model.book.id && model.isImported()">
+            <a ng-click="model.viewLibriBook()">Imported Goodreads book</a>
+        </div>
+        <div ng-if="model.book.id && !model.isImported()">
+            <a ng-click="model.importGoodreadsBook()">Goodreads book. Import it to Libri!</a>
+        </div>
     </div>
-    <div ng-bind-html="model.book.reviews_widget"></div>
+
+    <div class="row pr-book-detail-head">
+        <div class="col-sm-3">
+            <img class="pr-book-detail-image"
+                 ng-src="{{model.book.image_url}}">
+        </div>
+
+        <div class="col-sm-9">
+            <h2>
+                {{model.book.title}}
+            </h2>
+
+            <div>
+                <b>By</b> {{model.book.author}}
+            </div>
+
+            <div>
+                published on {{model.book.publication_year}}-{{model.book.publication_month}}-{{model.book.publication_day}}
+                by <b>{{model.book.publisher}}</b>
+            </div>
+
+            <div>
+                <a ng-click="model.goToReview()">Your review</a>
+            </div>
+
+            <div class="row"
+                 ng-show="model.book.id">
+                <div class="col-sm-4">
+                    <div>
+                        <b>Goodreads average rating</b>
+                    </div>
+                </div>
+                <div class="col-sm-8 pr-ngrateit">
+                    <ng-rate-it ng-model="model.book.average_rating"
+                                step="0.01"
+                                read-only="true">
+                    </ng-rate-it>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <div>
+                        <b>Libri average rating</b>
+                    </div>
+                </div>
+                <div class="col-sm-8 pr-ngrateit">
+                    <ng-rate-it ng-model="model.getLibriRating()"
+                                step="0.01"
+                                read-only="true">
+                    </ng-rate-it>
+                </div>
+            </div>
+
+            <div class="row pr-book-operation-options">
+                <div class="col-sm-4 pr-rate-book">
+                    <div ng-show="model.user">
+                        Rate it!
+                        <ng-rate-it ng-model="model.currentUserReview.rating"
+                                    step="1"
+                                    resetable="false"
+                                    rated="model.updateRating()">
+                        </ng-rate-it>
+                    </div>
+                    <div ng-show="!model.user">
+                        <a href="#!/login">Log in</a> to rate this book.
+                    </div>
+                </div>
+                <div class="col-sm-4 pr-book-operation">
+                    <div class="btn-group btn-flex">
+                        <button ng-if="!model.user || !model.bookshelfPart" class="btn btn-default">Put it on bookshelf</button>
+                        <button ng-if="model.user && model.bookshelfPart" class="btn btn-default">{{model.bookshelfPart}}</button>
+                        <button type="button"
+                                class="btn btn-success dropdown-toggle"
+                                data-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li><a ng-click="model.putBookOnBookshelf('WANTTOREAD')">Want to read</a></li>
+                            <li><a ng-click="model.putBookOnBookshelf('READING')">Reading</a></li>
+                            <li><a ng-click="model.putBookOnBookshelf('HAVEREAD')">Have read</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-4 pr-book-operation"
+                     ng-show="model.user.role == 'AUTHOR'">
+                    <a class="btn btn-primary btn-block"
+                       ng-click="model.claimThisBook()">
+                        claim this book
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <h3>Description</h3>
+    <div ng-bind-html="model.book.description"></div>
+
+    <hr>
+
+    <div ng-show="model.book.reviews_widget">
+        <div>
+            <h3>
+                <a ng-click="model.isCollapsed = !model.isCollapsed">
+                    Goodreads Reviews
+                </a>
+            </h3>
+        </div>
+
+        <div uib-collapse="model.isCollapsed">
+            <div ng-bind-html="model.book.reviews_widget"></div>
+        </div>
+        <hr>
+    </div>
 
     <h3 id="userReview">Your review</h3>
-    <div ng-show="model.currentUserHasReview == 'yes'">
-        <a>Edit</a> Created on {{model.currentUserReview.date || date}}
-    </div>
+
     <div ng-show="!model.user">
-        <a href="#!/login">Log in</a> to review this book.
+        <div class="pr-rate-book">
+            <a href="#!/login">Log in</a> to review this book.
+        </div>
     </div>
-    <div ng-show="model.user" id="#review">
-        <div ng-show="!model.currentUserHasReview">
-            Your rating:
-            <input ng-model="model.currentUserReview.rating"
-                   class="form-control"> <br>
-            <textarea ng-model="model.currentUserReview.content"
-                      class="form-control"></textarea>
+
+    <div ng-show="model.user && !model.currentUserHasReview">
+        <div ng-show="!model.showReviewEditor"
+             class="pr-rate-book">
+            You haven't reviewed this book. <a ng-click="model.showReviewEditor = true">Review</a> it!
+        </div>
+    </div>
+
+    <div ng-show="model.user && model.currentUserHasReview">
+        <div ng-show="!model.showReviewEditor">
+            <ng-rate-it ng-model="model.currentUserReview.rating"
+                        read-only="true"></ng-rate-it>
+            on {{model.currentUserReview.dateUpdated || date}}
+            <div ng-bind-html="model.currentUserReview.content"></div>
             <a class="btn btn-block btn-primary"
-               ng-click="model.postReview()">Post</a>
-        </div>
-        <div ng-show="model.currentUserHasReview">
-            <textarea ng-model="model.currentUserReview.content"
-                      class="form-control"></textarea>
+               ng-click="model.showReviewEditor = true">
+                Edit
+            </a>
         </div>
     </div>
+
+    <div ng-show="model.showReviewEditor">
+        <ng-rate-it ng-model="model.currentUserReview.rating"
+                    resetable="false"
+                    step="1"></ng-rate-it>
+        <span ng-show="model.currentUserHasReview">
+            on {{model.currentUserReview.dateUpdated || date}}
+        </span>
+        <div text-angular
+             ng-model="model.currentUserReview.content"
+             class="ta-style"
+             ta-toolbar="[['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p','quote'],
+                                   ['bold', 'italics', 'underline', 'strikeThrough', 'ul', 'ol', 'redo', 'undo', 'clear'],
+                                   ['justifyLeft', 'justifyCenter', 'justifyRight', 'indent', 'outdent'],
+                                   ['html','wordcount']]"
+             ta-text-editor-class="form-control myform2-height"
+             ta-html-editor-class="form-control myform2-height"
+             ta-toolbar-class="btn-toolbar ta-style"></div>
+        <div ng-if="model.currentUserHasReview">
+            <a class="btn btn-block btn-success" ng-click="model.updateReview()">
+                Finish
+            </a>
+        </div>
+        <div ng-if="!model.currentUserHasReview">
+            <a class="btn btn-block btn-success" ng-click="model.createReview()">
+                Post
+            </a>
+        </div>
+    </div>
+
+    <hr>
+
     <h3>Libri reviews</h3>
-    <div ng-repeat="review in model.book.reviews">
-        <h3>Username: {{review.reviewer}}</h3>
-        <textArea class="form-control">
-            {{review.content}}
-        </textArea>
+
+    <div ng-repeat="review in model.book.reviews" class="pr-review">
+        By <a href="#!/user/{{review.reviewer._id}}">{{review.reviewer.name}}</a> , on {{review.dateCreated}}
+        <div ng-bind-html="{{review.content}}"></div>
     </div>
+
 </div>
+
+<!--<h3 id="userReview">Your review</h3>-->
+<!--<div ng-show="model.currentUserHasReview == 'yes'">-->
+<!--<a>Edit</a> Created on {{model.currentUserReview.date || date}}-->
+<!--</div>-->
+<!--<div ng-show="!model.user">-->
+<!--<a href="#!/login">Log in</a> to review this book.-->
+<!--</div>-->
+<!--<div ng-show="model.user" id="#review">-->
+<!--<div ng-show="!model.currentUserHasReview">-->
+<!--Your rating:-->
+<!--<input ng-model="model.currentUserReview.rating"-->
+<!--class="form-control"> <br>-->
+<!--<textarea ng-model="model.currentUserReview.content"-->
+<!--class="form-control"></textarea>-->
+<!--<a class="btn btn-block btn-primary"-->
+<!--ng-click="model.postReview()">Post</a>-->
+<!--</div>-->
+<!--<div ng-show="model.currentUserHasReview">-->
+<!--<textarea ng-model="model.currentUserReview.content"-->
+<!--class="form-control"></textarea>-->
+<!--</div>-->
+<!--</div>-->
+
+
+<!--<div>-->
+<!--<span ng-show="!model.user">-->
+<!--<a href="#!/login">Log in</a> to review this book.-->
+<!--</span>-->
+<!--<span ng-show="model.user">-->
+<!--<span ng-show="!model.currentUserHasReview">-->
+<!--You haven't reviewed this book. <a ng-click="model.goToReviewForm()">Review it</a>-->
+<!--</span>-->
+<!--<span ng-show="model.currentUserHasReview">-->
+<!--{{model.currentUserReview.rating || 'no rating'}}-->
+<!--</span>-->
+<!--</span>-->
+<!--</div>-->
 

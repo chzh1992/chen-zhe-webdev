@@ -3,31 +3,41 @@
         .module('Libri')
         .controller('BookDetailsController',BookDetailsController);
 
-    function BookDetailsController($routeParams,$sce,BookService,UserService,ReviewService,$route,$anchorScroll){
+    function BookDetailsController($routeParams,$sce,BookService,GoodreadsService,UserService,ReviewService,$route,$anchorScroll){
         var model = this;
-        var goodreadsId = $routeParams['goodreadsId'];
 
-        model.wantToRead = wantToRead;
+        model.putBookOnBookshelf = putBookOnBookshelf;
         model.postReview = postReview;
-        model.goToReviewForm = goToReviewForm;
+        model.goToReview = goToReview;
+        model.getSearchText = getSearchText;
+        model.isImported = isImported;
+        model.getLibriRating = getLibriRating;
+        model.viewLibriBook = viewLibriBook;
+        model.importGoodreadsBook = importGoodreadsBook;
+        model.updateRating = updateRating;
+        model.claimThisBook = claimThisBook;
 
         function init(){
-            BookService
-                .searchBookByGoodreadsId(goodreadsId)
-                .then(
-                    function (response){
+            if ($routeParams['goodreadsId']){
+                var goodreadsId = $routeParams['goodreadsId'];
+                GoodreadsService
+                    .searchGoodreadsById(goodreadsId)
+                    .then(
+                        function (response) {
+                            model.book = response.data;
+                            model.book.description = $sce.trustAsHtml(model.book.description);
+                            model.book.reviews_widget = $sce.trustAsHtml(model.book.reviews_widget);
+                            model.isCollapsed = true;
+                        }
+                    );
+            } else if($routeParams['libriId']){
+                var libriId = $routeParams['libriId'];
+                BookService
+                    .findBookById(libriId)
+                    .then(function (response){
                         model.book = response.data;
-                        model.book.reviews_widget = $sce.trustAsHtml(model.book.reviews_widget[0].replace('\n',''));
-                        model.book.description = $sce.trustAsHtml(model.book.description[0]);
-                        ReviewService
-                            .findReviewsByBook(goodreadsId)
-                            .then(
-                                function (response){
-                                    model.book.reviews = response.data;
-                                }
-                            );
-                    }
-                );
+                    });
+            }
             getCurrentUserInformation();
         }
         init();
@@ -76,8 +86,42 @@
                 );
         }
 
-        function goToReviewForm(){
-            $anchorScroll('#review');
+        function goToReview(){
+            $anchorScroll('userReview');
+        }
+
+        function getSearchText(){
+            if (model.searchText){
+                return model.searchText.replace(/\s/g,'+');
+            }
+        }
+
+        function isImported(){
+
+        }
+
+        function getLibriRating(){
+
+        }
+
+        function viewLibriBook(){
+
+        }
+
+        function importGoodreadsBook(){
+
+        }
+
+        function updateRating(){
+
+        }
+
+        function claimThisBook(){
+
+        }
+
+        function putBookOnBookshelf(bookshelfPart){
+
         }
     }
 })();

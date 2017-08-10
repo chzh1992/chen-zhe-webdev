@@ -5,18 +5,12 @@
 
     function BookService($http){
         var api = {
-            searchGoodreads: searchGoodreads,
-            searchBookByGoodreadsId: searchBookByGoodreadsId
+            findBooksByTerm: findBooksByTerm
         };
         return api;
 
-        function searchGoodreads(searchText){
-            var url = "/api/project/search/" + searchText;
-            return $http.get(url);
-        }
-
-        function searchBookByGoodreadsId(goodreadsId){
-            var url = "/api/project/book/goodreads/" + goodreadsId;
+        function findBooksByTerm(searchTerm){
+            var url = "/api/search/" + searchTerm;
             return $http.get(url);
         }
     }
