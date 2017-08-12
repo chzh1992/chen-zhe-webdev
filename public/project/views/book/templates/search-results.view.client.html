@@ -29,9 +29,17 @@
                             <h5>
                                 published {{book.publication_year}}
                             </h5>
-                            <h5>
-                                Libri rating: {{book.average_rating}}
-                            </h5>
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    Libri rating:
+                                </div>
+                                <div class="col-xs-8 pr-ngrateit">
+                                    <ng-rate-it ng-model="book.average_rating"
+                                                step="0.01"
+                                                read-only="true">
+                                    </ng-rate-it>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

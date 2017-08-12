@@ -5,7 +5,10 @@
 
     function BookService($http){
         var api = {
-            findBooksByTerm: findBooksByTerm
+            findBooksByTerm: findBooksByTerm,
+            findBookById : findBookById,
+            findBookByGoodreadsId: findBookByGoodreadsId,
+            createBook: createBook
         };
         return api;
 
@@ -13,5 +16,19 @@
             var url = "/api/search/" + searchTerm;
             return $http.get(url);
         }
+
+        function findBookById(libriId){
+
+        }
+
+        function findBookByGoodreadsId(goodreadsId){
+
+        }
+
+        function createBook(libriId){
+
+        }
+
+
     }
 })();

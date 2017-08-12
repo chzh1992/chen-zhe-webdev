@@ -14,7 +14,8 @@
             getUserProfileById: getUserProfileById,
             following: following,
             getUserFollowers: getUserFollowers,
-            populateUserInformation: populateUserInformation
+            populateUserInformation: populateUserInformation,
+            claimBook: claimBook
         };
         return api;
 
@@ -66,6 +67,10 @@
         function populateUserInformation(){
             var url = '/api/project/personal-page';
             return $http.get(url);
+        }
+
+        function claimBook(libriId){
+
         }
     }
 })();

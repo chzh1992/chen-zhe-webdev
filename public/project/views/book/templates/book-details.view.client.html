@@ -8,10 +8,10 @@
         <div ng-if="model.book._id">
             <a href="#!/book/edit/{{model.book._id}}">Edit this book</a>
         </div>
-        <div ng-if="model.book.id && model.isImported()">
-            <a ng-click="model.viewLibriBook()">Imported Goodreads book</a>
+        <div ng-if="model.book.id && !(model.libriId === '-1')">
+            <a href="#!/book/libriId={{model.libriId}}">Imported Goodreads book</a>
         </div>
-        <div ng-if="model.book.id && !model.isImported()">
+        <div ng-if="model.book.id && model.libriId === '-1'">
             <a ng-click="model.importGoodreadsBook()">Goodreads book. Import it to Libri!</a>
         </div>
     </div>
@@ -78,6 +78,9 @@
                                     resetable="false"
                                     rated="model.updateRating()">
                         </ng-rate-it>
+                        <div ng-show="model.ratingMessage">
+                            {{model.ratingMessage}}
+                        </div>
                     </div>
                     <div ng-show="!model.user">
                         <a href="#!/login">Log in</a> to rate this book.
@@ -117,7 +120,7 @@
     <hr>
 
     <h3>Description</h3>
-    <div ng-bind-html="model.book.description"></div>
+    <div ng-bind-html="model.trustThisContent(model.book.description)"></div>
 
     <hr>
 
@@ -131,7 +134,7 @@
         </div>
 
         <div uib-collapse="model.isCollapsed">
-            <div ng-bind-html="model.book.reviews_widget"></div>
+            <div ng-bind-html="model.trustThisContent(model.book.reviews_widget)"></div>
         </div>
         <hr>
     </div>
@@ -187,9 +190,12 @@
             </a>
         </div>
         <div ng-if="!model.currentUserHasReview">
-            <a class="btn btn-block btn-success" ng-click="model.createReview()">
+            <a class="btn btn-block btn-success" ng-click="model.postReview()">
                 Post
             </a>
+        </div>
+        <div class="btn btn-danger btn-block" ng-click="model.showReviewEditor = false">
+            Cancel
         </div>
     </div>
 
@@ -207,42 +213,4 @@
     </div>
 
 </div>
-
-<!--<h3 id="userReview">Your review</h3>-->
-<!--<div ng-show="model.currentUserHasReview == 'yes'">-->
-<!--<a>Edit</a> Created on {{model.currentUserReview.date || date}}-->
-<!--</div>-->
-<!--<div ng-show="!model.user">-->
-<!--<a href="#!/login">Log in</a> to review this book.-->
-<!--</div>-->
-<!--<div ng-show="model.user" id="#review">-->
-<!--<div ng-show="!model.currentUserHasReview">-->
-<!--Your rating:-->
-<!--<input ng-model="model.currentUserReview.rating"-->
-<!--class="form-control"> <br>-->
-<!--<textarea ng-model="model.currentUserReview.content"-->
-<!--class="form-control"></textarea>-->
-<!--<a class="btn btn-block btn-primary"-->
-<!--ng-click="model.postReview()">Post</a>-->
-<!--</div>-->
-<!--<div ng-show="model.currentUserHasReview">-->
-<!--<textarea ng-model="model.currentUserReview.content"-->
-<!--class="form-control"></textarea>-->
-<!--</div>-->
-<!--</div>-->
-
-
-<!--<div>-->
-<!--<span ng-show="!model.user">-->
-<!--<a href="#!/login">Log in</a> to review this book.-->
-<!--</span>-->
-<!--<span ng-show="model.user">-->
-<!--<span ng-show="!model.currentUserHasReview">-->
-<!--You haven't reviewed this book. <a ng-click="model.goToReviewForm()">Review it</a>-->
-<!--</span>-->
-<!--<span ng-show="model.currentUserHasReview">-->
-<!--{{model.currentUserReview.rating || 'no rating'}}-->
-<!--</span>-->
-<!--</span>-->
-<!--</div>-->
 

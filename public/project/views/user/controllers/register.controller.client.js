@@ -21,6 +21,8 @@
                 return;
             }
 
+            model.user.role = model.user.role.toUpperCase();
+
             UserService
                 .isUsernameAvailable(model.user.username)
                 .then(registerUser,setErrorMessage);

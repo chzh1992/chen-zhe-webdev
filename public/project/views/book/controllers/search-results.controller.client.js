@@ -3,12 +3,13 @@
         .module('Libri')
         .controller('SearchResultController',SearchResultController);
 
-    function SearchResultController(BookService,$routeParams,GoodreadsService){
+    function SearchResultController(BookService,$routeParams,GoodreadsService,UserService){
         var model = this;
         var initSearchText = $routeParams['searchText'];
 
         model.goodreadsPageChanged = goodreadsPageChanged;
         model.getSearchText = getSearchText;
+        model.logout = logout;
 
         function init(){
             GoodreadsService
@@ -27,6 +28,13 @@
                         model.libriBooks = response.data;
                     },function (error){}
                 );
+            UserService
+                .checkLoggedIn()
+                .then(
+                    function (response){
+                        model.user = response.data;
+                    }
+                )
         }
         init();
 
@@ -45,6 +53,16 @@
             if (model.searchText){
                 return model.searchText.replace(/\s/g,'+');
             }
+        }
+
+        function logout(){
+            UserService
+                .logout()
+                .then(
+                    function (response){
+                        $location.url('/');
+                    }
+                );
         }
     }
 })();
