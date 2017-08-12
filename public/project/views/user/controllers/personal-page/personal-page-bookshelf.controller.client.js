@@ -1,10 +1,11 @@
 (function (){
     angular
         .module('Libri')
-        .controller('HomeController',HomeController);
+        .controller('PersonalPageBookshelfController',PersonalPageBookshelfController);
 
-    function HomeController(){
+    function PersonalPageBookshelfController(){
         var model = this;
+
         model.getSearchText = getSearchText;
 
         function getSearchText(){
@@ -14,4 +15,5 @@
         }
 
     }
+
 })();

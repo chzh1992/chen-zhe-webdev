@@ -1,0 +1,78 @@
+<div ng-include="'views/common/personal-page-navbar.view.client.html'"></div>
+
+<img src="http://lorempixel.com/400/200"
+     class="pr-personal-page-title pr-horizontal-center">
+
+<hr>
+
+<div class="row">
+    <div class="col-sm-1 hidden-xs"></div>
+    <div class="col-sm-3 col-xs-4">
+        <div>
+            My works
+            <ul>
+                <li ng-repeat="work in model.user.works"
+                    ng-click="model.focusOnWork(work)">
+                    {{work.title}}
+                </li>
+            </ul>
+        </div>
+
+        <div class="pr-work-statitics-tab" ng-show="model.focusedWork">
+            <div>
+                {{model.focusedWork.wantToRead}} persons want to read
+            </div>
+            <div>
+                {{model.focusedWork.reading}} persons are reading
+            </div>
+            <div>
+                {{model.focusedWork.haveRead}} persons have read
+            </div>
+
+            <hr>
+            <div>
+                Average rating:
+            </div>
+            <ng-rate-it ng-model="model.focusedWork.average_rating"
+                        step="0.01"
+                        read-only="true">
+            </ng-rate-it>
+        </div>
+
+    </div>
+    <div class="col-sm-6 col-xs-8">
+        <div class="list-group">
+            <div class="list-group-item"
+                 ng-repeat="news in model.user.workRelatedNews">
+                <div ng-switch="news.type">
+                    <div ng-switch-when="FOLLOW">
+                        <img src="new.user.image_url"
+                             class="pr-user-small-photo">
+                        <a href="#!/profile/{{news.user._id}}">{{news.user.username}}</a> followed
+                        <a href="#!/profile/{{new.following._id}}">{{news.following.username}}</a>
+                    </div>
+                    <div ng-switch-when="READ">
+                        <img src="new.user.image_url"
+                             class="pr-user-small-photo">
+                        <a href="#!/profile/{{news.user._id}}">{{news.user.username}}</a> started reading
+                        <a href="#!/book/libriId={{news.book._id}}">{{news.book._id}}</a>
+                    </div>
+                    <div ng-switch-when="REVIEW">
+                        <img src="new.user.image_url"
+                             class="pr-user-small-photo">
+                        <a href="#!/profile/{{news.user._id}}">{{news.user.username}}</a> rated
+                        <a href="#!/book/libriId={{news.book._id}}">{{news.book._id}}</a>
+                        <ng-rate-it ng-model="news.rating"
+                                    step="1"
+                                    read-only="true"
+                                    class="pr-ngrateit">
+                        </ng-rate-it>
+                        <div ng-bind-html="model.trustContent(news.content)"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-2 hidden-xs"></div>
+</div>
+

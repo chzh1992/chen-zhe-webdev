@@ -11,14 +11,7 @@
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <img src="brand.png" height="52px" width="auto">
-            <!--<ul class="nav navbar-nav navbar-right">-->
-            <!--<li>-->
-            <!--<a href="#!/login">Log in</a>-->
-            <!--</li>-->
-            <!--<li>-->
-            <!--<a href="#!/register">Sign up</a>-->
-            <!--</li>-->
-            <!--</ul>-->
+
             <div class="input-group pr-center"
                  id="secondSearchBar">
                 <input class="form-control"
@@ -26,17 +19,14 @@
                        ng-model="model.searchText"
                        placeholder="Search By title/author/isbn">
                 <span class="input-group-btn">
-                    <a href="#!/search/text={{model.searchText}}"
+                    <a href="#!/search/text={{model.getSearchText()}}"
                        class="btn btn-default">
                         <span class="glyphicon glyphicon-search"></span>
                     </a>
                 </span>
             </div>
 
-            <div class="pull-right navbar-text"
-                 ng-show="!model.user">
-                <a href="#!/login">Log in</a> <b>Or</b> <a href="#!/register">Sign up</a>
-            </div>
+            <ng-include src="'views/common/navbar-login.view.client.html'"></ng-include>
         </div>
     </nav>
 
@@ -51,7 +41,7 @@
                        ng-model="model.searchText"
                        placeholder="Search By title/author/isbn">
                 <span class="input-group-btn">
-                    <a href="#!/search/text={{model.searchText}}"
+                    <a href="#!/search/text={{model.getSearchText()}}"
                        class="btn btn-default">
                         <span class="glyphicon glyphicon-search"></span>
                     </a>

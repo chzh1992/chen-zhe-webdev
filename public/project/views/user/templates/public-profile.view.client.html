@@ -1,28 +1,134 @@
-<div ng-include="'views/common/navbar-menubar.view.client.html'"></div>
+<nav class="navbar navbar-default">
+    <div class="container">
+        <a href="#!/">
+            <img src="brand.png" height="52px" width="auto">
+        </a>
+
+        <div class="pull-right navbar-text"
+             ng-show="!model.viewer">
+            <a href="#!/login">Log in</a> <b>Or</b> <a href="#!/register">Sign up</a>
+        </div>
+    </div>
+</nav>
+
+<div>
+    <div class="pr-menubar pr-horizontal-center">
+        <div class="input-group">
+            <input class="form-control"
+                   type="text"
+                   ng-model="model.searchText"
+                   placeholder="Search by title/author/isbn">
+            <span class="input-group-btn">
+                <a href="#!/search/text={{model.getSearchText()}}"
+                   class="btn btn-default">
+                    <span class="glyphicon glyphicon-search"></span>
+                </a>
+            </span>
+        </div>
+    </div>
+</div>
+
 <hr>
 
+<div class="pr-user-basic-information">
+    <img src="{{model.user.photo_url}}" class="pr-user-photo pr-horizontal-center">
+    <div class="pr-user-statistics">
+        <h4>{{model.user.username}}</h4>
+        <div ng-show="model.user.role == 'AUTHOR'">
+            Libri Author
+        </div>
+        <div>
+            {{model.user.followerNumber}} followers
+        </div>
 
-<h1>Username: {{model.user.username}}</h1>
-<h2>Joined on: {{model.user.dateCreated || date}}</h2>
-<a class="btn btn-success"
-   ng-show="!model.isUserFollowed()"
-   ng-click="model.viewerFollowUser()">
-    follow this user
-</a>
-<a class="btn btn-primary"
-   ng-show="model.isUserFollowed()"
-   ng-click="model.viewerUnfollowUser()">
-    unfollow this user
-</a>
-<h1>Following</h1>
-<ul>
-    <li ng-repeat="user in model.user.following">
-        {{user.username}}
-    </li>
-</ul>
-<h1>Followers</h1>
-<ul>
-    <li ng-repeat="user in model.user.followers">
-        {{user.username}}
-    </li>
-</ul>
+        <div>
+            {{model.user.bookNumber}} books
+        </div>
+        <div>
+            {{model.user.reviewNumber}} reviews
+        </div>
+    </div>
+
+    <a class="btn btn-block btn-default"
+       ng-click="">
+        follow this user
+    </a>
+
+    <div ng-show="model.user.role == 'AUTHOR'"
+         class="pr-author-statistics">
+        <hr>
+        <div>
+            {{model.user.workNumber}} works
+        </div>
+        <div>
+            most-admired work: {{model.user.mostAdmiredWork}}
+        </div>
+        <div>
+            average rating: {{model.user.averageRating}}
+        </div>
+    </div>
+</div>
+
+<div class="pr-user-further-information">
+    <div class="pr-user-info-box">
+        <h2>This user is reading</h2>
+        <hr>
+        <div ng-show="!model.user.bookshelf.reading">None</div>
+        <div class="list-group">
+            <div class="list-group-item" ng-repeat="book in model.user.bookshelf.reading">
+                <div class="row">
+                    <div class="col-xs-2">
+                        <img ng-src="{{book.image_url}}">
+                    </div>
+                    <div class="col-xs-1"></div>
+                    <div class="col-xs-9">
+                        <h4><a href="#!/book/bookId={{book.id}}">{{book.title}}</a></h4>
+                        <h5>
+                            <b>by</b> {{book.author}}
+                        </h5>
+                        <h6>
+                            published {{book.publication_year}}
+                        </h6>
+                        <div class="row">
+                            <div class="col-xs-4">
+                                Libri rating:
+                            </div>
+                            <div class="col-xs-8 pr-ngrateit">
+                                <ng-rate-it ng-model="book.average_rating"
+                                            step="0.01"
+                                            read-only="true">
+                                </ng-rate-it>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pr-user-info-box">
+        <h2>This user is following</h2>
+        <hr>
+        <div ng-show="!model.user.following">None</div>
+        <div class="list-group">
+            <div class="list-group-item" ng-repeat="user in model.user.following">
+                <img src="{{user.photo_url}}" class="pr-user-small-photo">
+                <a href="#!/profile/{{model.user._id}}">{{user.username}}</a>
+                <span ng-show="user.role == 'AUTHOR'">Libri author</span>
+            </div>
+        </div>
+    </div>
+    <div class="pr-user-info-box">
+        <h2>This user's reviews</h2>
+        <hr>
+        <div ng-show="!model.user.reviews">None</div>
+        <div ng-repeat="review in model.book.reviews" class="pr-review">
+            <ng-rate-it ng-model="review.rating"
+                        read-only="true"
+                        class="pr-ngrateit">
+            </ng-rate-it>
+            on {{review.dateUpdated || date}}
+            <div ng-bind-html="{{review.content}}"></div>
+        </div>
+    </div>
+</div>
+

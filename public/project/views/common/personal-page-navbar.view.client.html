@@ -4,16 +4,7 @@
             <img src="brand.png" height="52px" width="auto">
         </a>
 
-        <div class="pull-right navbar-text"
-             ng-show="!model.user">
-            <a href="#!/login">Log in</a> <b>Or</b> <a href="#!/register">Sign up</a>
-        </div>
-    </div>
-</nav>
-
-<div>
-    <div class="pr-menubar pr-horizontal-center">
-        <div class="input-group">
+        <div class="input-group pr-center pr-nav-searchbar">
             <input class="form-control"
                    type="text"
                    ng-model="model.searchText"
@@ -23,7 +14,9 @@
                    class="btn btn-default">
                     <span class="glyphicon glyphicon-search"></span>
                 </a>
-            </span>
+                </span>
         </div>
+
+        <ng-include src="'views/common/navbar-login.view.client.html'"></ng-include>
     </div>
-</div>
+</nav>

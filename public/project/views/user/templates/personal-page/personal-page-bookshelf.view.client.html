@@ -1,0 +1,151 @@
+<div ng-include="'views/common/personal-page-navbar.view.client.html'"></div>
+
+<img src="http://lorempixel.com/400/200"
+     class="pr-personal-page-title pr-horizontal-center">
+
+<div class="pr-search-result-tab">
+
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-target="#wantToRead" data-toggle="tab"><b>Want to read</b></a></li>
+        <li ><a data-target="#reading" data-toggle="tab"><b>Reading</b></a></li>
+        <li ><a data-target="#haveRead" data-toggle="tab"><b>Have read</b></a></li>
+    </ul>
+</div>
+
+<div class="container">
+    <div class="tab-content">
+
+        <div class="tab-pane active" id="wantToread">
+            <div class="list-group">
+                <div class="list-group-item"
+                     ng-repeat="book in model.user.wantToread">
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <img ng-src="{{book.image_url}}">
+                        </div>
+                        <div class="col-xs-1"></div>
+                        <div class="col-xs-9">
+                            <h3><a href="#!/book/libriId={{book._id}}">{{book.title}}</a></h3>
+                            <h4>
+                                <b>by</b> {{book.author}}
+                            </h4>
+                            <h5>
+                                published {{book.publication_year}}
+                            </h5>
+                            <h5>
+                                Libri rating: {{book.average_rating}}
+                            </h5>
+
+                            <div>
+                                <div class="btn-group">
+                                    <button type="button"
+                                            class="btn btn-default dropdown-toggle"
+                                            data-toggle="dropdown"
+                                            aria-haspopup="true"
+                                            aria-expanded="false">
+                                        Move to ... <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Reading</a></li>
+                                        <li><a href="#">Have read</a></li>
+                                    </ul>
+                                </div>
+
+                                <button class="btn btn-danger" ng-click="model.removeBookFromBookshelf(book,'WANTTOREAD')">remove</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane" id="reading">
+            <div class="list-group">
+                <div class="list-group-item"
+                     ng-repeat="book in model.user.reading">
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <img ng-src="{{book.image_url}}">
+                        </div>
+                        <div class="col-xs-1"></div>
+                        <div class="col-xs-9">
+                            <h3><a href="#!/book/libriId={{book._id}}">{{book.title}}</a></h3>
+                            <h4>
+                                <b>by</b> {{book.author}}
+                            </h4>
+                            <h5>
+                                published {{book.publication_year}}
+                            </h5>
+                            <h5>
+                                Libri rating: {{book.average_rating}}
+                            </h5>
+
+                            <div>
+                                <div class="btn-group">
+                                    <button type="button"
+                                            class="btn btn-default dropdown-toggle"
+                                            data-toggle="dropdown"
+                                            aria-haspopup="true"
+                                            aria-expanded="false">
+                                        Move to ... <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Want to read</a></li>
+                                        <li><a href="#">Have read</a></li>
+                                    </ul>
+                                </div>
+
+                                <button class="btn btn-danger" ng-click="model.removeBookFromBookshelf(book,'READING')">remove</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane" id="haveRead">
+            <div class="list-group">
+                <div class="list-group-item"
+                     ng-repeat="book in model.user.haveRead">
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <img ng-src="{{book.image_url}}">
+                        </div>
+                        <div class="col-xs-1"></div>
+                        <div class="col-xs-9">
+                            <h3><a href="#!/book/libriId={{book._id}}">{{book.title}}</a></h3>
+                            <h4>
+                                <b>by</b> {{book.author}}
+                            </h4>
+                            <h5>
+                                published {{book.publication_year}}
+                            </h5>
+                            <h5>
+                                Libri rating: {{book.average_rating}}
+                            </h5>
+
+                            <div>
+                                <div class="btn-group">
+                                    <button type="button"
+                                            class="btn btn-default dropdown-toggle"
+                                            data-toggle="dropdown"
+                                            aria-haspopup="true"
+                                            aria-expanded="false">
+                                        Move to ... <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Want to read</a></li>
+                                        <li><a href="#">Reading</a></li>
+                                    </ul>
+                                </div>
+
+                                <button class="btn btn-danger" ng-click="model.removeBookFromBookshelf(book,'HAVEREAD')">remove</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+

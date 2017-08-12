@@ -1,0 +1,26 @@
+<nav class="navbar navbar-default">
+    <div class="container">
+        <a href="#!/">
+            <img src="brand.png" height="52px" width="auto">
+        </a>
+
+        <ng-include src="'views/common/navbar-login.view.client.html'"></ng-include>
+    </div>
+</nav>
+
+<div>
+    <div class="pr-menubar pr-horizontal-center">
+        <div class="input-group">
+            <input class="form-control"
+                   type="text"
+                   ng-model="model.searchText"
+                   placeholder="Search by title/author/isbn">
+            <span class="input-group-btn">
+                <a href="#!/search/text={{model.getSearchText()}}"
+                   class="btn btn-default">
+                    <span class="glyphicon glyphicon-search"></span>
+                </a>
+            </span>
+        </div>
+    </div>
+</div>

@@ -36,8 +36,32 @@
                 controllerAs: "model"
             })
             .when('/personal-page',{
-                templateUrl: "views/user/templates/personal-page.view.client.html",
-                controller: "PersonalPageController",
+                templateUrl: "views/user/templates/personal-page/personal-page-profile.view.client.html",
+                controller: "PersonalPageProfileController",
+                controllerAs: "model",
+                resolve: {
+                    CurrentUser: getCurrentUser
+                }
+            })
+            .when('/personal-page/bookshelf',{
+                templateUrl: "views/user/templates/personal-page/personal-page-bookshelf.view.client.html",
+                controller: "PersonalPageBookshelfController",
+                controllerAs: "model",
+                resolve: {
+                    CurrentUser: getCurrentUser
+                }
+            })
+            .when('/personal-page/news',{
+                templateUrl: "views/user/templates/personal-page/personal-page-news.view.client.html",
+                controller: "PersonalPageNewsController",
+                controllerAs: "model",
+                resolve: {
+                    CurrentUser: getCurrentUser
+                }
+            })
+            .when('/personal-page/works',{
+                templateUrl: "views/user/templates/personal-page/personal-page-works.view.client.html",
+                controller: "PersonalPageWorksController",
                 controllerAs: "model",
                 resolve: {
                     CurrentUser: getCurrentUser

@@ -1,4 +1,4 @@
-<div ng-include="'views/common/navbar-menubar.view.client.html'"></div>
+<div ng-include="'views/common/navbar-searchbar.view.client.html'"></div>
 
 <hr>
 
@@ -198,7 +198,11 @@
     <h3>Libri reviews</h3>
 
     <div ng-repeat="review in model.book.reviews" class="pr-review">
-        By <a href="#!/user/{{review.reviewer._id}}">{{review.reviewer.name}}</a> , on {{review.dateCreated}}
+        <ng-rate-it ng-model="review.rating"
+                    read-only="true"
+                    class="pr-ngrateit">
+        </ng-rate-it>
+        By <a href="#!/user/{{review.reviewer._id}}">{{review.reviewer.name}}</a> , on {{review.dateUpdated || date}}
         <div ng-bind-html="{{review.content}}"></div>
     </div>
 

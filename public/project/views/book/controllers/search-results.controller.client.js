@@ -32,7 +32,7 @@
 
         function goodreadsPageChanged(){
             GoodreadsService
-                .searchGoodreads(searchText,model.currentGoodreadsPage)
+                .searchGoodreads(getSearchText(),model.currentGoodreadsPage)
                 .then(
                     function (response){
                         model.goodreadsBooks = response.data.work;

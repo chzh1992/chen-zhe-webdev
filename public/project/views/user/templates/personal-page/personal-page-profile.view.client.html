@@ -1,0 +1,179 @@
+<div ng-include="'views/common/personal-page-navbar.view.client.html'"></div>
+
+<img src="http://lorempixel.com/400/200"
+     class="pr-personal-page-title pr-horizontal-center">
+
+<div class="pr-search-result-tab">
+
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-target="#profile" data-toggle="tab"><b>Profile</b></a></li>
+        <li ><a data-target="#following" data-toggle="tab"><b>Following</b></a></li>
+        <li ><a data-target="#followers" data-toggle="tab"><b>Followers</b></a></li>
+    </ul>
+</div>
+
+<div class="container">
+    <div class="tab-content">
+
+        <div class="tab-pane active" id="profile">
+            <div class="row">
+                <div class="col-sm-1 hidden-xs"></div>
+                <div class="col-sm-3">
+                    <img src="http://lorempixel.com/400/200"
+                         class="pr-user-photo-personal pr-horizontal-center">
+
+                    <form action="/api/project/upload"
+                          method="post"
+                          enctype="multipart/form-data">
+                        <input  name="myFile"
+                                type="file"
+                                id="upload"
+                                required
+                                class="form-control">
+                        <button type="submit"
+                                class="btn btn-block btn-primary">
+                            Upload your photo
+                        </button>
+                    </form>
+
+                </div>
+                <div class="col-sm-7">
+                    <div class="row">
+                        <div class="col-sm-2 hidden-xs"></div>
+                        <div class="col-sm-8">
+                            <label for="username"
+                                   class="control-label">
+                                Username
+                            </label>
+                            <input id="username"
+                                   class="form-control"
+                                   ng-model="model.user.username"
+                                   readonly>
+
+                            <label for="email"
+                                   class="control-label">
+                                Email
+                            </label>
+                            <input id="email"
+                                   type="email"
+                                   class="form-control"
+                                   ng-model="model.user.email">
+
+                            <label for="country"
+                                   class="control-label">
+                                Country
+                            </label>
+                            <input id="country"
+                                   class="form-control"
+                                   ng-model="model.user.country">
+
+                            <label for="language"
+                                   class="control-label">
+                                Native Language
+                            </label>
+                            <input id="language"
+                                   class="form-control"
+                                   ng-model="model.user.nativeLanguage">
+
+                            <a class="btn btn-block btn-success">
+                                Update Profile
+                            </a>
+                        </div>
+                        <div class="col-sm-2 hidden-xs"></div>
+                    </div>
+                </div>
+                <div class="col-sm-1 hidden-xs"></div>
+            </div>
+        </div>
+
+        <div class="tab-pane" id="following">
+            <div class="list-group">
+
+                <div class="list-group-item">
+                    <div class="row">
+                        <div class="col-sm-3 col-xs-6">
+                            User
+                        </div>
+                        <div class="col-sm-3 hidden-xs">
+                            Number of reviews
+                        </div>
+                        <div class="col-sm-3 hidden-xs">
+                            Number of followers
+                        </div>
+                        <div class="col-sm-3 col-xs-6">
+                            Number of books
+                        </div>
+                    </div>
+                </div>
+
+                <div class="list-group-item"
+                     ng-repeat="user in model.user.following">
+                    <div class="row">
+                        <div class="col-sm-3 col-xs-6">
+                            <img ng-src="user.photo_url"
+                                 class="pr-user-small-photo">
+                            {{user.username}}
+                        </div>
+                        <div class="col-sm-3 hidden-xs">
+                            {{user.reviewNumber}}
+                        </div>
+                        <div class="col-sm-3 hidden-xs">
+                            {{user.followerNumber}}
+                        </div>
+                        <div class="col-sm-3 col-xs-6">
+                            {{user.bookNumber}}
+                            <span class="pull-right">
+                                <span ng-click="model.removeFollowing(user)"
+                                      class="glyphicon glyphicon-remove"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane" id="followers">
+            <div class="list-group">
+                <div class="list-group-item">
+                    <div class="row">
+                        <div class="col-sm-3 col-xs-6">
+                            User
+                        </div>
+                        <div class="col-sm-3 hidden-xs">
+                            Number of reviews
+                        </div>
+                        <div class="col-sm-3 hidden-xs">
+                            Number of followers
+                        </div>
+                        <div class="col-sm-3 col-xs-6">
+                            Number of books
+                        </div>
+                    </div>
+
+                    <div class="list-group-item"
+                         ng-repeat="user in model.user.followers">
+                        <div class="row">
+                            <div class="col-sm-3 col-xs-6">
+                                <img ng-src="user.photo_url"
+                                     class="pr-user-small-photo">
+                                {{user.username}}
+                            </div>
+                            <div class="col-sm-3 hidden-xs">
+                                {{user.reviewNumber}}
+                            </div>
+                            <div class="col-sm-3 hidden-xs">
+                                {{user.followerNumber}}
+                            </div>
+                            <div class="col-sm-3 col-xs-6">
+                                {{user.bookNumber}}
+                            </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+

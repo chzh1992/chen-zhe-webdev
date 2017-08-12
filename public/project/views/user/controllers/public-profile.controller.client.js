@@ -6,6 +6,7 @@
     function PublicProfileController(UserService,$routeParams,$location){
         var model = this;
 
+        model.getSearchText = getSearchText;
         model.isUserFollowed = isUserFollowed;
         model.viewerFollowUser = viewerFollowUser;
         model.viewerUnfollowUser = viewerUnfollowUser;
@@ -64,6 +65,25 @@
                     }
                 );
         }
+
+        function getWorkNumber(){
+
+        }
+
+        function getMostAdmiredWork(){
+
+        }
+
+        function getAuthorAverageRating(){
+
+        }
+
+        function getSearchText(){
+            if (model.searchText){
+                return model.searchText.replace(/\s/g,'+');
+            }
+        }
+
     }
 
 })();
