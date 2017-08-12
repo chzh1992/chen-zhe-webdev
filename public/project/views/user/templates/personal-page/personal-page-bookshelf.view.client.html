@@ -46,12 +46,12 @@
                                         Move to ... <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu">
-                                        <li><a href="#">Reading</a></li>
-                                        <li><a href="#">Have read</a></li>
+                                        <li><a ng-click="model.putBookOnBookshelf(book._id,'READING')">Reading</a></li>
+                                        <li><a ng-click="model.putBookOnBookshelf(book._id,'HAVEREAD')">Have read</a></li>
                                     </ul>
                                 </div>
 
-                                <button class="btn btn-danger" ng-click="model.removeBookFromBookshelf(book,'WANTTOREAD')">remove</button>
+                                <button class="btn btn-danger" ng-click="model.putBookOnBookshelf(book._id,'OUT')">remove</button>
                             </div>
                         </div>
                     </div>
@@ -90,12 +90,12 @@
                                         Move to ... <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu">
-                                        <li><a href="#">Want to read</a></li>
-                                        <li><a href="#">Have read</a></li>
+                                        <li><a ng-click="model.putBookOnBookshelf(book._id,'WANTTOREAD')">Want to read</a></li>
+                                        <li><a ng-click="model.putBookOnBookshelf(book._id,'HAVEREAD')">Have read</a></li>
                                     </ul>
                                 </div>
 
-                                <button class="btn btn-danger" ng-click="model.removeBookFromBookshelf(book,'READING')">remove</button>
+                                <button class="btn btn-danger" ng-click="model.putBookOnBookshelf(book._id,'OUT')">remove</button>
                             </div>
                         </div>
                     </div>
@@ -134,12 +134,12 @@
                                         Move to ... <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu">
-                                        <li><a href="#">Want to read</a></li>
-                                        <li><a href="#">Reading</a></li>
+                                        <li><a ng-click="model.putBookOnBookshelf(book._id,'WANTTOREAD')">Want to read</a></li>
+                                        <li><a ng-click="model.putBookOnBookshelf(book._id,'READING')">Reading</a></li>
                                     </ul>
                                 </div>
 
-                                <button class="btn btn-danger" ng-click="model.removeBookFromBookshelf(book,'HAVEREAD')">remove</button>
+                                <button class="btn btn-danger" ng-click="model.putBookOnBookshelf(book._id,'OUT')">remove</button>
                             </div>
                         </div>
                     </div>
@@ -147,5 +147,6 @@
             </div>
         </div>
     </div>
+</div>
 
 

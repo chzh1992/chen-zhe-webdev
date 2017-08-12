@@ -11,11 +11,14 @@
             logout: logout,
             isUsernameAvailable: isUsernameAvailable,
             putBookOnBookshelf: putBookOnBookshelf,
-            getUserProfileById: getUserProfileById,
-            following: following,
-            getUserFollowers: getUserFollowers,
-            populateUserInformation: populateUserInformation,
-            claimBook: claimBook
+            getUserPublicProfile: getUserPublicProfile,
+            claimBook: claimBook,
+            toggleFollowingStatus: toggleFollowingStatus,
+            isUserFollowed: isUserFollowed,
+            getUserPersonalProfile: getUserPersonalProfile,
+            getUserBookshelf: getUserBookshelf,
+            getUserNews: getUserNews,
+            getAuthorWorks: getAuthorWorks
         };
         return api;
 
@@ -49,28 +52,45 @@
             return $http.post(url);
         }
 
-        function getUserProfileById(userId){
+        function getUserPublicProfile(userId){
             var url = '/api/project/profile/'+userId;
             return $http.get(url);
         }
 
-        function following(userId,status){
-            var url = '/api/project/following/' + userId;
-            return $http.put(url,status);
-        }
-
-        function getUserFollowers(userId){
-            var url = '/api/project/followers/' + userId;
-            return $http.get(url);
-        }
-
-        function populateUserInformation(){
-            var url = '/api/project/personal-page';
-            return $http.get(url);
-        }
-
         function claimBook(libriId){
-
+            var url = '/api/project/claim';
+            return $http.put(url,libriId);
         }
+
+        function toggleFollowingStatus(userId){
+            var url= '/api/project/follow';
+            return $http.put(url,userId);
+        }
+
+        function isUserFollowed(userId) {
+            var url = '/api/project/isFollowing/'+userId;
+            return $http.get(url);
+        }
+
+        function getUserPersonalProfile(){
+            var url = '/api/project/personal-page/profile';
+            return $http.get(url);
+        }
+
+        function getUserBookshelf(){
+            var url = '/api/project/personal-page/bookshelf';
+            return $http.get(url);
+        }
+
+        function getUserNews(){
+            var url = '/api/project/personal-page/news';
+            return $http.get(url);
+        }
+
+        function getAuthorWorks(){
+            var url = '/api/project/personal-page/works';
+            return $http.get(url);
+        }
+
     }
 })();

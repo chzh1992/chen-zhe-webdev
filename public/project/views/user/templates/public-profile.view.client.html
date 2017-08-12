@@ -69,9 +69,16 @@
         </div>
     </div>
 
-    <a class="btn btn-block btn-default"
-       ng-click="">
+    <a ng-show="!model.isUserFollowed"
+       class="btn btn-block btn-follow"
+       ng-click="model.toggleFollowingStatus()">
         follow this user
+    </a>
+
+    <a ng-show="model.isUserFollowed"
+       class="btn btn-block btn-unfollow"
+       ng-click="model.toggleFollowingStatus()">
+        unfollow this user
     </a>
 
     <div ng-show="model.user.role == 'AUTHOR'"

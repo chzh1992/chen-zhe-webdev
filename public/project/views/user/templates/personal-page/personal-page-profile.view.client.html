@@ -6,7 +6,7 @@
 <div class="pr-search-result-tab">
 
     <ul class="nav nav-tabs">
-        <li class="active"><a data-target="#profile" data-toggle="tab"><b>Profile</b></a></li>
+        <li class="active"><a data-target="#profile" data-toggle="tab"><b>Edit Profile</b></a></li>
         <li ><a data-target="#following" data-toggle="tab"><b>Following</b></a></li>
         <li ><a data-target="#followers" data-toggle="tab"><b>Followers</b></a></li>
     </ul>
@@ -75,7 +75,8 @@
                                    class="form-control"
                                    ng-model="model.user.nativeLanguage">
 
-                            <a class="btn btn-block btn-success">
+                            <a class="btn btn-block btn-success"
+                               ng-click="model.updateProfile()">
                                 Update Profile
                             </a>
                         </div>
@@ -123,7 +124,7 @@
                         <div class="col-sm-3 col-xs-6">
                             {{user.bookNumber}}
                             <span class="pull-right">
-                                <span ng-click="model.removeFollowing(user)"
+                                <span ng-click="model.stopFollowing(user._id)"
                                       class="glyphicon glyphicon-remove"></span>
                             </span>
                         </div>

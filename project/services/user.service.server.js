@@ -10,7 +10,7 @@ app.post("/api/project/logout",logout);
 app.get("/api/project/isAvailable/:username",isUsernameAvailable);
 app.get("/api/project/checkLoggedIn",checkLoggedIn);
 app.put("/api/project/bookshelf/:bookshelfPart",putBookOnBookshelf);
-app.get("/api/project/profile/:userId",getUserProfileById);
+app.get("/api/project/profile/:userId",getUserPublicProfile);
 app.put("/api/project/following/:userId",following);
 app.get("/api/project/followers/:userId",getUserFollowers);
 app.get("/api/project/personal-page",populateUserInformation);
@@ -23,15 +23,6 @@ function checkLoggedIn(req,res){
         res.sendStatus(401);
     }
 }
-
-// var userId = req.user._id;
-// userModel
-//     .populateUserInformation(userId)
-//     .then(
-//         function (user){
-//             res.json(user);
-//         }
-//     );
 
 function populateUserInformation(req,res){
     if (req.isAuthenticated()){
@@ -119,7 +110,7 @@ function logout(req,res){
     res.sendStatus(200);
 }
 
-function getUserProfileById(req,res){
+function getUserPublicProfile(req,res){
     var userId = req.params['userId'];
     userModel
         .findUserById(userId)

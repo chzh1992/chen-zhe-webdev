@@ -1,7 +1,7 @@
 var app = require('../../express');
 var reviewModel = require('../models/review/review.model.server');
 
-app.get("/api/review/:bookId/:userId",findReviewByBookAndUser);
+app.get("/api/review/:libriId/:userId",findReviewByBookAndUser);
 app.post("/api/review/new",createReview);
 app.get("/api/review/:bookId",findReviewsByBook);
 

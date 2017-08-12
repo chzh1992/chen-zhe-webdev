@@ -7,14 +7,12 @@
         var model = this;
 
         model.getSearchText = getSearchText;
-        model.isUserFollowed = isUserFollowed;
-        model.viewerFollowUser = viewerFollowUser;
-        model.viewerUnfollowUser = viewerUnfollowUser;
+        model.toggleFollowingStatus = toggleFollowingStatus;
 
         function init(){
             var userId = $routeParams['userId'];
             UserService
-                .getUserProfileById(userId)
+                .getUserPublicProfile(userId)
                 .then(
                     function (response){
                         model.user = response.data;
@@ -25,57 +23,31 @@
                 .then(
                     function (response){
                         model.viewer = response.data;
+                        model.isUserFollowed = getUserFollowingStatus();
                     }
                 )
         }
         init();
 
-        function isUserFollowed(){
-            if (model.viewer){
-                return model.viewer.following.indexOf(model.user._id) > -1;
-            }
-            return false;
-        }
-
-        function viewerFollowUser(){
-            UserService
-                .following(model.user._id,{value: true})
+        function getUserFollowingStatus(){
+            return UserService
+                .isUserFollowed(userId)
                 .then(
-                  function (response){
-
-                  },function (error){
-                        $location.url('/login');
-                      // if (error.message.statusCode == 401){
-                      //
-                      // }
+                    function  (response){
+                        return response.data.value;
                     }
                 );
         }
 
-        function viewerUnfollowUser(){
+
+        function toggleFollowingStatus(){
             UserService
-                .following(model.user._id,{value: false})
+                .toggleFollowingStatus(model.user._id)
                 .then(
                     function (response){
-
-                    },function (error){
-                        if (error.message.statusCode == 401){
-                            $location.url('/login');
-                        }
+                        model.isUserFollowed = getUserFollowingStatus();
                     }
                 );
-        }
-
-        function getWorkNumber(){
-
-        }
-
-        function getMostAdmiredWork(){
-
-        }
-
-        function getAuthorAverageRating(){
-
         }
 
         function getSearchText(){

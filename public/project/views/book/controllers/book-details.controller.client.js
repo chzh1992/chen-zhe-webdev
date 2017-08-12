@@ -126,11 +126,22 @@
         function postReview(){
             model.currentUserReview.reviewer = model.user._id;
             if (model.libriId === '-1'){
-                importGoodreadsBook();
-                model.currentUserReview.onBook = model.libriId;
+                BookService
+                    .createBook(model.book)
+                    .then(
+                        function (response){
+                            model.libriId = response.data._id;
+                            postReviewOnLibriBook();
+                        }
+                    );
             } else{
-                model.currentUserReview.onBook = model.libriId;
+                postReviewOnLibriBook();
             }
+
+        }
+
+        function postReviewOnLibriBook(){
+            model.currentUserReview.onBook = model.libriId;
             ReviewService
                 .createReview(model.currentUserReview)
                 .then(
@@ -171,14 +182,30 @@
                         }
                     );
             } else{
-                ReviewService
-                    .createRatingReview(model.currentUserReview.rating)
-                    .then(
-                        function (response){
-                            model.ratingMessage = "saved!"
-                        }
-                    )
+                if (model.libriId === '-1'){
+                    BookService
+                        .createBook(model.book)
+                        .then(
+                            function (response){
+                                model.libriId = response.data._id;
+                                createRatingReviewOnLibriBook();
+                            }
+                        );
+                } else{
+                    createRatingReviewOnLibriBook();
+                }
+
             }
+        }
+
+        function createRatingReviewOnLibriBook(){
+            ReviewService
+                .createRatingReview(model.libriId,model.currentUserReview.rating)
+                .then(
+                    function (response){
+                        model.ratingMessage = "saved!"
+                    }
+                );
         }
 
         function updateReview(){
@@ -194,36 +221,56 @@
 
         function claimThisBook(){
             if (model.libriId === '-1'){
-                importGoodreadsBook();
-                UserService
-                    .claimBook(model.libriId)
-                    .then();
+                BookService
+                    .createBook(model.book)
+                    .then(
+                        function (response){
+                            model.libriId = response.data._id;
+                            claimLibriBook();
+                        }
+                    );
             } else{
-                UserService
-                    .claimBook(model.libriId)
-                    .then();
+                claimLibriBook();
             }
+        }
+
+        function claimLibriBook(){
+            UserService
+                .claimBook(model.libriId)
+                .then();
         }
 
         function putBookOnBookshelf(bookshelfPart){
             if (model.libriId === '-1'){
-                importGoodreadsBook();
-                UserService
-                    .putBookOnBookshelf(model.libriId,bookshelfPart)
+                BookService
+                    .createBook(model.book)
                     .then(
                         function (response){
-                            if (bookshelfPart === 'WANTTOREAD'){
-                                model.bookshelfPart = 'Want to Read';
-                            } else if(bookshelfPart === 'READING'){
-                                model.bookshelfPart = 'Reading';
-                            } else if(bookshelfPart === 'HAVEREAD'){
-                                model.bookshelfPart = 'Have read';
-                            } else{
-                                model.bookshelfPart = '-1';
-                            }
+                            model.libriId = response.data._id;
+                            putLibriBookOnBookshelf(bookshelfPart);
                         }
                     );
+            } else{
+                putLibriBookOnBookshelf(bookshelfPart);
             }
+        }
+
+        function putLibriBookOnBookshelf(bookshelfPart){
+            UserService
+                .putBookOnBookshelf(model.libriId,bookshelfPart)
+                .then(
+                    function (response){
+                        if (bookshelfPart === 'WANTTOREAD'){
+                            model.bookshelfPart = 'Want to Read';
+                        } else if(bookshelfPart === 'READING'){
+                            model.bookshelfPart = 'Reading';
+                        } else if(bookshelfPart === 'HAVEREAD'){
+                            model.bookshelfPart = 'Have read';
+                        } else{
+                            model.bookshelfPart = '-1';
+                        }
+                    }
+                );
         }
 
         function trustThisContent(html){

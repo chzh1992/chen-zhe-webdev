@@ -12,7 +12,7 @@
             My works
             <ul>
                 <li ng-repeat="work in model.user.works"
-                    ng-click="model.focusOnWork(work)">
+                    ng-click="model.focusOnWork(work._id)">
                     {{work.title}}
                 </li>
             </ul>
@@ -67,7 +67,7 @@
                                     read-only="true"
                                     class="pr-ngrateit">
                         </ng-rate-it>
-                        <div ng-bind-html="model.trustContent(news.content)"></div>
+                        <div ng-bind-html="model.trustThisContent(news.content)"></div>
                     </div>
                 </div>
             </div>
