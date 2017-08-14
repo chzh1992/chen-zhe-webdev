@@ -12,7 +12,9 @@
             updateRating: updateRating,
             createRatingReview: createRatingReview,
             updateReview: updateReview,
-            getBookReviewNumber: getBookReviewNumber
+            getBookReviewNumber: getBookReviewNumber,
+            findReviewById: findReviewById,
+            deleteReview: deleteReview
         };
         return api;
 
@@ -55,5 +57,16 @@
             var url = '/api/project/number/review/' + libriId;
             return $http.get(url);
         }
+
+        function findReviewById(reviewId){
+            var url = "/api/project/review/" + reviewId;
+            return $http.get(url);
+        }
+
+        function deleteReview(reviewId){
+            var url = "/api/project/review/" + reviewId;
+            return $http.delete(url);
+        }
+
     }
 })();

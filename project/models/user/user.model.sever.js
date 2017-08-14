@@ -14,6 +14,7 @@ userModel.updateProfile = updateProfile;
 userModel.getHaveReadNumber = getHaveReadNumber;
 userModel.getReadingNumber = getReadingNumber;
 userModel.getWantToReadNumber = getWantToReadNumber;
+userModel.adminSearch = adminSearch;
 
 module.exports = userModel;
 
@@ -122,4 +123,12 @@ function getReadingNumber(libriId){
 function getWantToReadNumber(libriId){
     return userModel
         .count({'bookshelf.wantToRead':libriId});
+}
+
+function adminSearch(searchText){
+    return userModel.find({ $or :[
+        {_id: searchText},
+        {username: searchText},
+        {role: searchText}
+    ]});
 }

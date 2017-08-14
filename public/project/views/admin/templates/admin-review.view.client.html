@@ -1,10 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div ng-include="'views/admin/templates/common/admin-navbar.view.client.html'"></div>
 
-</body>
-</html>
+<div class="pr-admin-head">
+    <h1>Administer Review</h1>
+</div>
+
+<div class="pr-menubar pr-horizontal-center">
+    <div class="input-group">
+        <input class="form-control"
+               type="text"
+               ng-model="model.searchText"
+               placeholder="Search by id">
+        <span class="input-group-btn">
+                <a ng-click="model.search()"
+                   class="btn btn-default">
+                    <span class="glyphicon glyphicon-search"></span>
+                </a>
+            </span>
+    </div>
+</div>
+
+<div ng-show="model.review">
+    <div class="container">
+        <label for="reviewer">
+            Reviewer
+        </label>
+        <input id="reviewer"
+               class="form-control"
+               ng-model="model.review.reviewer.username"
+               readonly>
+
+        <label for="onBook">
+            On Book
+        </label>
+        <input id="onBook"
+               class="form-control"
+               ng-model="model.review.onBook"
+               readonly>
+
+        <label for="content">
+            Content
+        </label>
+        <textarea id="content"
+                  class="form-control"
+                  ng-model="model.review.content">
+        </textarea>
+
+        <label>
+            Rating
+        </label>
+
+        <ng-rate-it ng-model="model.review.rating"
+                    step="1"
+                    resetable="false">
+        </ng-rate-it>
+
+        <a class="btn btn-block btn-success"
+           ng-click="model.updateReview()">
+            update
+        </a>
+
+        <a class="btn btn-block btn-danger"
+           ng-click="model.deleteReview()">
+            Delete
+        </a>
+
+        <div ng-show="model.message"
+             class="alert alert-success">
+            {{model.message}}
+        </div>
+
+
+    </div>
+</div>

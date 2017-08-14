@@ -11,7 +11,8 @@
             createBook: createBook,
             getWorkInformation: getWorkInformation,
             importGoodreadsBook: importGoodreadsBook,
-            updateBook: updateBook
+            updateBook: updateBook,
+            deleteBook: deleteBook
         };
         return api;
 
@@ -48,6 +49,16 @@
         function updateBook(libriId,book){
             var url = "/api/project/book/" + libriId;
             return $http.put(url,book);
+        }
+
+        function adminSearch(searchText){
+            var url = "/api/project/admin/search/book/" + searchText;
+            return $http.get(url);
+        }
+
+        function deleteBook(libriId){
+            var url = "/api/project/book/" + libriId;
+            return $http.delete(url);
         }
     }
 })();

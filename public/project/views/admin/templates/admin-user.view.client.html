@@ -1,10 +1,98 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div ng-include="'views/admin/templates/common/admin-navbar.view.client.html'"></div>
 
-</body>
-</html>
+<div class="pr-admin-head">
+    <h1>Administer User</h1>
+</div>
+
+<div class="pr-menubar pr-horizontal-center">
+    <div class="input-group">
+        <input class="form-control"
+               type="text"
+               ng-model="model.searchText"
+               placeholder="Search by id">
+        <span class="input-group-btn">
+                <a ng-click="model.search()"
+                   class="btn btn-default">
+                    <span class="glyphicon glyphicon-search"></span>
+                </a>
+            </span>
+    </div>
+</div>
+
+<div ng-show="model.userFound" class="container">
+    <label for="userId">
+        id
+    </label>
+    <input class="form-control"
+           ng-model="model.userFound._id"
+           id="userId"
+           readonly>
+
+    <label for="username">
+        Username
+    </label>
+    <input class="form-control"
+           ng-model="model.userFound.username"
+           id="username">
+
+    <label for="role">
+        Role
+    </label>
+    <select class="form-control"
+           ng-model="model.userFound.role"
+           id="role">
+        <option>READER</option>
+        <option>AUTHOR</option>
+        <option>ADMIN</option>
+    </select>
+
+    <label for="email">
+        Email
+    </label>
+    <input class="form-control"
+           ng-model="model.userFound.email"
+           id="email">
+
+    <label for="country">
+        Country
+    </label>
+    <input class="form-control"
+           ng-model="model.userFound.country"
+           id="country">
+
+    <label for="nativeLanguage">
+        Native language
+    </label>
+    <input class="form-control"
+           ng-model="model.userFound.nativeLanguage"
+           id="nativeLanguage">
+
+    <div class="row">
+        <div class="col-sm-3">
+            following
+            <ul>
+                <li ng-repeat="following in model.userFound.following">following</li>
+                <span class="pull-right">
+                <span ng-click="model.removeFollowing(following)" class="glyphicon glyphicon-remove"></span>
+            </span>
+            </ul>
+        </div>
+    </div>
+
+    <a class="btn btn-block btn-success"
+       ng-click="model.updateUser()">
+        update
+    </a>
+
+    <a class="btn btn-block btn-danger"
+       ng-click="model.deleteUser()">
+        Delete
+    </a>
+
+    <div ng-show="model.message"
+         class="alert alert-success">
+        {{model.message}}
+    </div>
+
+</div>
+

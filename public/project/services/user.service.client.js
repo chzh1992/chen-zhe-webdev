@@ -23,7 +23,10 @@
             updateProfile: updateProfile,
             getWantToReadNumber: getWantToReadNumber,
             getReadingNumber: getReadingNumber,
-            getHaveReadNumber: getHaveReadNumber
+            getHaveReadNumber: getHaveReadNumber,
+            findUserById: findUserById,
+            updateUser: updateUser,
+            deleteuser: deleteUser
 
         };
         return api;
@@ -121,6 +124,21 @@
         function getHaveReadNumber(libriId){
             var url = '/api/project/number/haveRead/' + libriId;
             return $http.get(url);
+        }
+
+        function findUserById(userId){
+            var url = '/api/project/user/' + userId;
+            return $http.get(url);
+        }
+
+        function updateUser(userId,user){
+            var url = '/api/project/user/' + userId;
+            return $http.put(url,user);
+        }
+
+        function deleteUser(userId){
+            var url = '/api/project/user/' + userId;
+            return $http.delete(url);
         }
     }
 })();

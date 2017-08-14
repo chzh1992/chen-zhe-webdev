@@ -19,7 +19,13 @@
                 .then(loginUser,setErrorMessage);
 
             function loginUser(response){
-                $location.url("/personal-page");
+                var user = response.data;
+                if (user.role == 'ADMIN'){
+                    $location.url('/admin');
+                } else{
+                    $location.url("/personal-page");
+                }
+
             }
 
             function setErrorMessage(response){

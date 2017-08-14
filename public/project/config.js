@@ -81,6 +81,38 @@
                 templateUrl: "views/book/templates/book-edit.view.client.html",
                 controller: "BookNewController",
                 controllerAs: "model"
+            })
+            .when('/admin',{
+                templateUrl: "views/admin/templates/admin-home.view.client.html",
+                controller: "AdminHomeController",
+                controllerAs: "model",
+                resolve: {
+                    Admin: checkAdmin
+                }
+            })
+            .when('/admin/user',{
+                templateUrl: "views/admin/templates/admin-user.view.client.html",
+                controller: "AdminUserController",
+                controllerAs: "model",
+                resolve: {
+                    Admin: checkAdmin
+                }
+            })
+            .when('/admin/book',{
+                templateUrl: "views/admin/templates/admin-book.view.client.html",
+                controller: "AdminBookController",
+                controllerAs: "model",
+                resolve: {
+                    Admin: checkAdmin
+                }
+            })
+            .when('/admin/review',{
+                templateUrl: "views/admin/templates/admin-review.view.client.html",
+                controller: "AdminReviewController",
+                controllerAs: "model",
+                resolve: {
+                    Admin: checkAdmin
+                }
             });
     }
 
@@ -92,6 +124,28 @@
                 function (response){
                     var user = response.data;
                     deferred.resolve(user);
+                },function (err){
+                    deferred.reject();
+                    $location.url('/login');
+                }
+            );
+        return deferred.promise;
+    }
+
+    function checkAdmin($q,$location,UserService){
+        var deferred = $q.defer();
+        UserService
+            .checkLoggedIn()
+            .then(
+                function (response){
+                    var user = response.data;
+                    if (user.role == 'ADMIN'){
+                        deferred.resolve(user);
+                    } else{
+                        deferred.reject();
+                        $location.url('/login');
+                    }
+
                 },function (err){
                     deferred.reject();
                     $location.url('/login');

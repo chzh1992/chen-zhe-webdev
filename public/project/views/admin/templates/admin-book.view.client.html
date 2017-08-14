@@ -1,10 +1,106 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div ng-include="'views/admin/templates/common/admin-navbar.view.client.html'"></div>
 
-</body>
-</html>
+<div class="pr-admin-head">
+    <h1>Administer Book</h1>
+</div>
+
+<div class="pr-menubar pr-horizontal-center">
+    <div class="input-group">
+        <input class="form-control"
+               type="text"
+               ng-model="model.searchText"
+               placeholder="Search by id">
+        <span class="input-group-btn">
+                <a ng-click="model.search()"
+                   class="btn btn-default">
+                    <span class="glyphicon glyphicon-search"></span>
+                </a>
+            </span>
+    </div>
+</div>
+
+<div ng-show="model.book">
+    <div class="container">
+        <label for="title">
+            Title
+        </label>
+        <input class="form-control"
+               id="title"
+               ng-model="model.book.title">
+
+        <label for="author">
+            Author
+        </label>
+        <input class="form-control"
+               id="author"
+               ng-model="model.book.author">
+
+        <label for="publisher">
+            Publisher
+        </label>
+        <input class="form-control"
+               id="publisher"
+               ng-model="model.book.publisher">
+
+        <label for="description">
+            Description
+        </label>
+        <textarea class="form-control"
+                  id="description"
+                  ng-model="model.book.description">
+        </textarea>
+
+        <label for="publicationYear">
+            Publication year
+        </label>
+        <input class="form-control"
+               id="publicationYear"
+               ng-model="model.book.publication_year">
+
+        <label for="publicationMonth">
+            Publication month
+        </label>
+        <input class="form-control"
+               id="publicationMonth"
+               ng-model="model.book.publication_month">
+
+        <label for="publicationDay">
+            Publication day
+        </label>
+        <input class="form-control"
+               id="publicationDay"
+               ng-model="model.book.publication_day">
+
+        <label for="isbn">
+            ISBN
+        </label>
+        <input class="form-control"
+               id="isbn"
+               ng-model="model.book.isbn">
+
+        <label for="imageUrl">
+            Image url
+        </label>
+        <input class="form-control"
+               id="imageUrl"
+               ng-model="model.book.image_url">
+
+        <a class="btn btn-block btn-success"
+           ng-click="model.updateBook()">
+            update
+        </a>
+
+        <a class="btn btn-block btn-danger"
+           ng-click="model.deleteBook()">
+            Delete
+        </a>
+
+        <div ng-show="model.message"
+             class="alert alert-success">
+            {{model.message}}
+        </div>
+
+
+    </div>
+</div>
+

@@ -368,3 +368,7 @@ select.form-control,
     margin-right: 40px;
     color: whitesmoke;
 }
+
+.pr-admin-head{
+    text-align: center;
+}

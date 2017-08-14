@@ -8,6 +8,7 @@ bookModel.createBook = createBook;
 bookModel.findBooksByTerm = findBooksByTerm;
 bookModel.importGoodreadsBook = importGoodreadsBook;
 bookModel.updateBook = updateBook;
+bookModel.adminSearch = adminSearch;
 
 module.exports = bookModel;
 
@@ -36,6 +37,14 @@ function importGoodreadsBook(goodreadsBook){
 
 function updateBook(libriId,book){
     return bookModel.update({_id: libriId},book);
+}
+
+function adminSearch(searchText){
+    return bookModel.find({ $or :[
+        {_id: searchText},
+        {title: {'$regex' : searchText}},
+        {author: {'$regex' : searchText}}
+    ]});
 }
 
 

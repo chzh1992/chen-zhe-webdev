@@ -24,6 +24,13 @@
                 .findBookById(libriId)
                 .then(function (response) {
                     model.book = response.data;
+                    ReviewService
+                        .getAverageRating(libriId)
+                        .then(
+                            function (response){
+                                model.book.average_rating = response.data.rating;
+                            }
+                        );
                     getCurrentUserInformation();
                     getLibriReviews();
                 });

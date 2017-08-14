@@ -24,6 +24,9 @@ app.put("/api/project/user/:userId",updateProfile);
 app.get("/api/project/number/wantToRead/:libriId",getWantToReadNumber);
 app.get("/api/project/number/reading/:libriId",getReadingNumber);
 app.get("/api/project/number/haveRead/:libriId",getHaveReadNumber);
+app.get("/api/project/user/:userId",findUserById);
+app.put("/api/project/user/:userId",updateUser);
+app.delete("/api/project/user/:userId",deleteUser);
 
 function checkLoggedIn(req,res){
     if (req.isAuthenticated()){
@@ -34,7 +37,7 @@ function checkLoggedIn(req,res){
 }
 
 function login(req,res){
-    res.sendStatus(200);
+    res.json(req.user);
 }
 
 function register(req,res){
@@ -326,4 +329,23 @@ function getHaveReadNumber(req,res){
                 res.sendStatus(502);
             }
         );
+}
+
+function findUserById(req,res){
+    var userId = req.params['userId'];
+    if (req.isAuthenticated()){
+        if (req.user.role == 'ADMIN'){
+            userModel
+                .findUserById(userId)
+                .then(
+                    function (user){
+                        res.json(user);
+                    }
+                )
+        } else{
+            res.sendStatus(401);
+        }
+    } else{
+        res.sendStatus(401);
+    }
 }

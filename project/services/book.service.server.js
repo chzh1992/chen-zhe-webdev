@@ -9,6 +9,7 @@ app.post("/api/project/book",createBook);
 app.post("/api/project/book/goodreads",importGoodreadsBook);
 app.get("//api/project/work/:libriId",getWorkInformation);
 app.put("/api/project/book/:libriId",updateBook);
+app.delete("/api/project/book/:libriId",deleteBook);
 
 function findBooksByTerm(req,res){
     var searchTerm = req.params['searchTerm'];
@@ -97,5 +98,9 @@ function updateBook(req,res){
                 res.json(502);
             }
         )
+}
+
+function deleteBook(req,res){
+
 }
 

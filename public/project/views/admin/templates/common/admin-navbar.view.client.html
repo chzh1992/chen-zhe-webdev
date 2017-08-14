@@ -1,10 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<nav class="navbar navbar-default">
+    <div class="container">
+        <a href="#!/">
+            <img src="brand.png" height="52px" width="auto">
+        </a>
 
-</body>
-</html>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a class="dropdown-toggle"
+                   data-toggle="dropdown"
+                   id="adminLogInOptions"
+                   aria-haspopup="true"
+                   aria-expanded="false">
+                    <i class="fa fa-user-circle" aria-hidden="true"></i> <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="adminLogInOptions">
+                    <li><a href="#!/admin/user">User</a></li>
+                    <li><a href="#!/admin/book">Book</a></li>
+                    <li ><a href="#!/admin/review">Review</a></li>
+                    <li class="divider"></li>
+                    <li><a ng-click="model.logout()">Log out</a></li>
+                </ul>
+            </li>
+        </ul>
+
+    </div>
+</nav>

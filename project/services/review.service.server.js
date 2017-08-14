@@ -10,6 +10,8 @@ app.put("/api/project/review/:reviewId/rating",updateRating);
 app.post("/api/project/review/rating",createRatingReview);
 app.put("/api/project/review/:reviewId",updateReview);
 app.get("/api/project/number/review/:libriId",getBookReviewNumber);
+app.get("/api/project/review/:reviewId",findReviewById);
+app.delete("/api/project/review/:reviewId",deleteReview);
 
 function findReviewByBookAndUser(req,res){
     var libriId = req.params['libriId'];
@@ -127,5 +129,22 @@ function getBookReviewNumber(req,res){
                 res.sendStatus(502);
             }
         )
+
+}
+
+function findReviewById(req,res){
+    var reviewId = req.params['reviewId'];
+    reviewModel
+        .findReviewById(reviewId)
+        .then(
+            function (review){
+                res.json(review);
+            },function (err){
+                res.sendStatus(502);
+            }
+        )
+}
+
+function deleteReview(req,res){
 
 }

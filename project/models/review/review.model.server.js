@@ -10,6 +10,7 @@ reviewModel.updateRating = updateRating;
 reviewModel.createRatingReview = createRatingReview;
 reviewModel.updateReview = updateReview;
 reviewModel.getBookReviewNumber = getBookReviewNumber;
+reviewModel.findReviewById = findReviewById;
 
 module.exports = reviewModel;
 
@@ -62,4 +63,8 @@ function updateReview(reviewId,review){
 
 function getBookReviewNumber(libriId){
     return reviewModel.count({onBook: libriId});
+}
+
+function findReviewById(reviewId){
+    return reviewModel.findById(reviewId);
 }
