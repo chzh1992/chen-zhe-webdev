@@ -44,7 +44,7 @@ function deserializeUser(unit, done) {
 
 function deserializeUserAgainstModel(userModel,unit,done){
     userModel
-        .findById(unit._id)
+        .findUserById(unit._id)
         .then(
             function(user){
                 done(null,user);

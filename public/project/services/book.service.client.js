@@ -9,7 +9,9 @@
             findBookById : findBookById,
             findBookByGoodreadsId: findBookByGoodreadsId,
             createBook: createBook,
-            getWorkInformation: getWorkInformation
+            getWorkInformation: getWorkInformation,
+            importGoodreadsBook: importGoodreadsBook,
+            updateBook: updateBook
         };
         return api;
 
@@ -33,9 +35,19 @@
             return $http.post(url,book);
         }
 
+        function importGoodreadsBook(goodreadsBook){
+            var url = "/api/project/book/goodreads";
+            return $http.post(url,goodreadsBook);
+        }
+
         function getWorkInformation(libriId){
             var url = "/api/project/work/" + libriId;
             return $http.get(url);
+        }
+
+        function updateBook(libriId,book){
+            var url = "/api/project/book/" + libriId;
+            return $http.put(url,book);
         }
     }
 })();

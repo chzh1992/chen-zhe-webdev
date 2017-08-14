@@ -1,0 +1,173 @@
+<div class="pr-home-color-pattern" pr-full-screen>
+    <div class="row">
+        <div class="col-md-4 col-xs-2"></div>
+        <div class="col-md-4 col-xs-8">
+            <img src="logo.png" class="pr-head-logo pr-horizontal-center">
+        </div>
+        <div class="col-md-4 col-xs-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2 hidden-xs"></div>
+        <div class="col-sm-8 col-xs-12">
+            <div class="pr-book-edit-tab pr-anti-home-color-pattern">
+                <h3 ng-show="model.book._id">Edit a Libri Book</h3>
+                <h3 ng-show="!model.book._id">Create a Libri Book</h3>
+                <form class="pr-book-edit-form form-horizontal"
+                      novalidate
+                      name="model.form">
+
+                    <div class="form-group">
+                        <label for="title"
+                               class="col-sm-4 control-label">
+                            Title
+                        </label>
+
+                        <div class="col-sm-8">
+                            <input ng-model="model.book.title"
+                                   type="text"
+                                   name="title"
+                                   id="title"
+                                   class="form-control"
+                                   ng-class="{'invalid-input': model.form.title.$error.required && model.form.$submitted}"
+                                   placeholder="title"
+                                   required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="title"
+                               class="col-sm-4 control-label">
+                            Author
+                        </label>
+
+                        <div class="col-sm-8">
+                            <input ng-model="model.book.author"
+                                   type="text"
+                                   name="author"
+                                   id="author"
+                                   class="form-control"
+                                   ng-class="{'invalid-input': model.form.author.$error.required && model.form.$submitted}"
+                                   placeholder="author"
+                                   required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="publisher"
+                               class="col-sm-4 control-label">
+                            Publisher
+                        </label>
+
+                        <div class="col-sm-8">
+                            <input ng-model="model.book.publisher"
+                                   type="text"
+                                   name="publisher"
+                                   id="publisher"
+                                   class="form-control"
+                                   ng-class="{'invalid-input': model.form.publisher.$error.required && model.form.$submitted}"
+                                   placeholder="publisher"
+                                   required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="isbn"
+                               class="col-sm-4 control-label">
+                            ISBN
+                        </label>
+
+                        <div class="col-sm-8">
+                            <input ng-model="model.book.isbn"
+                                   type="text"
+                                   id="isbn"
+                                   class="form-control"
+                                   placeholder="isbn">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description"
+                               class="col-sm-4 control-label">
+                            Description
+                        </label>
+
+                        <div class="col-sm-8">
+                            <textarea ng-model="model.book.description"
+                                      type="text"
+                                      id="description"
+                                      class="form-control"
+                                      placeholder="description">
+                            </textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="publicationYear"
+                               class="col-sm-4 control-label">
+                            Publication Year
+                        </label>
+
+                        <div class="col-sm-8">
+                            <input ng-model="model.book.publication_year"
+                                   type="text"
+                                   id="publicationYear"
+                                   class="form-control"
+                                   placeholder="Publication Year">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="publicationMonth"
+                               class="col-sm-4 control-label">
+                            Publication Month
+                        </label>
+
+                        <div class="col-sm-8">
+                            <input ng-model="model.book.publication_month"
+                                   type="text"
+                                   id="publicationMonth"
+                                   class="form-control"
+                                   placeholder="Publication">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="publicationDay"
+                               class="col-sm-4 control-label">
+                            Publication Day
+                        </label>
+
+                        <div class="col-sm-8">
+                            <input ng-model="model.book.publication_day"
+                                   type="text"
+                                   id="publicationDay"
+                                   class="form-control"
+                                   placeholder="Publication Day">
+                        </div>
+                    </div>
+
+                    <input class="btn btn-block pr-home-color-pattern"
+                           ng-show="!model.book._id"
+                           value="Create"
+                           type="submit"
+                           ng-click="model.createBook()">
+
+                    <input class="btn btn-block pr-home-color-pattern"
+                           ng-show="model.book._id"
+                           value="Update"
+                           type="submit"
+                           ng-click="model.updateBook()">
+
+                </form>
+
+            </div>
+            <div class="pr-book-edit-outside-tab-message">
+                <a href="#!/">Home Page</a>
+            </div>
+
+
+        </div>
+        <div class="col-sm-2 hidden-xs"></div>
+
+    </div>
+</div>

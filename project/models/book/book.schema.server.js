@@ -10,6 +10,7 @@ var bookSchema = mongoose.Schema({
     publication_month: String,
     publication_day: String,
     isbn: String,
-    image_url: String
+    image_url: String,
+    average_rating: {type: Number, default: 0}
 },{collection: 'project_book'});
 module.exports = bookSchema;

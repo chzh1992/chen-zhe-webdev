@@ -1,0 +1,79 @@
+<div ng-include="'views/common/navbar-searchbar.view.client.html'"></div>
+
+<hr>
+
+<div class="pr-horizontal-center pr-book-detail" ng-show="model.book">
+
+    <div class="pr-edit-book-link">
+        <div ng-if="model.book.id && !(model.libriId === '-1')">
+            <a href="#!/book/libriId={{model.libriId}}">Imported Goodreads book</a>
+        </div>
+        <div ng-if="model.book.id && model.libriId === '-1'">
+            <a ng-click="model.importGoodreadsBook()">Goodreads book. Import it to Libri!</a>
+        </div>
+    </div>
+
+    <div class="row pr-book-detail-head">
+        <div class="col-sm-3">
+            <img class="pr-book-detail-image"
+                 ng-src="{{model.book.image_url}}">
+        </div>
+
+        <div class="col-sm-9">
+            <h2>
+                {{model.book.title}}
+            </h2>
+
+            <div>
+                <b>By</b> {{model.book.author}}
+            </div>
+
+            <div>
+                published on {{model.book.publication_year}}-{{model.book.publication_month}}-{{model.book.publication_day}}
+                by <b>{{model.book.publisher}}</b>
+            </div>
+
+            <div class="row"
+                 ng-show="model.book.id">
+                <div class="col-sm-4">
+                    <div>
+                        <b>Goodreads average rating</b>
+                    </div>
+                </div>
+                <div class="col-sm-8 pr-ngrateit">
+                    <ng-rate-it ng-model="model.book.average_rating"
+                                step="0.01"
+                                read-only="true">
+                    </ng-rate-it>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr>
+
+<div class="container">
+    <h3>Description</h3>
+    <div ng-bind-html="model.trustThisContent(model.book.description)"></div>
+
+    <hr>
+
+    <div ng-show="model.book.reviews_widget">
+        <div>
+            <h3>
+                <a ng-click="model.isCollapsed = !model.isCollapsed">
+                    Goodreads Reviews
+                </a>
+            </h3>
+        </div>
+
+        <div uib-collapse="model.isCollapsed">
+            <div ng-bind-html="model.trustThisContent(model.book.reviews_widget)"></div>
+        </div>
+        <hr>
+    </div>
+</div>
+
+
+

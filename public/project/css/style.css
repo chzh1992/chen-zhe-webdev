@@ -208,6 +208,8 @@ select.form-control,
 
 .pr-book-operation{
     padding-top: 20px;
+    text-align: center;
+    font-size: 25px;
 }
 
 .pr-review{
@@ -260,6 +262,8 @@ select.form-control,
     width: 15%;
     text-align: center;
     height: 400px;
+    border: 2px solid;
+    border-radius: 5px;
 }
 
 .pr-user-photo{
@@ -318,4 +322,49 @@ select.form-control,
 
 .pr-news-tab{
     width: 60%;
+}
+
+.pr-btn-unfollow{
+    background-color: #262525;
+    color: whitesmoke;
+}
+
+.pr-follow-button-container{
+    padding: 5px;
+}
+
+.pr-work-display{
+    text-align: center;
+}
+
+.pr-work-display img{
+    width: 100px;
+    margin-bottom: 10px;
+}
+
+.pr-head-logo{
+    margin-top: 50px;
+    width: 150px;
+    margin-bottom: 50px;
+}
+
+.pr-book-edit-form{
+    padding: 40px;
+    margin-bottom: 10px;
+}
+
+.pr-book-edit-tab{
+    border-radius: 10px;
+    margin: 10px;
+    padding-top: 10px;
+    text-align: center;
+}
+
+.pr-book-edit-outside-tab-message{
+    text-align: center;
+}
+.pr-book-edit-outside-tab-message a{
+    font-size: 20px;
+    margin-right: 40px;
+    color: whitesmoke;
 }

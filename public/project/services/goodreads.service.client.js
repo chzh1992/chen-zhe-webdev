@@ -16,7 +16,7 @@
         }
 
         function searchGoodreadsById(goodreadsId){
-            var url = "/api/project/book/goodreads/" + goodreadsId;
+            var url = "/api/project/goodreads/" + goodreadsId;
             return $http.get(url);
         }
     }

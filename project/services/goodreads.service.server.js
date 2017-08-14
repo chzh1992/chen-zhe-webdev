@@ -4,7 +4,7 @@ var https = require('https');
 var parseString = require('xml2js').parseString;
 
 app.get("/api/project/search/goodreads/:searchText/:pageNumber",searchGoodreads);
-app.get("/api/project/book/goodreads/:goodreadsId",searchGoodreadsById);
+app.get("/api/project/goodreads/:goodreadsId",searchGoodreadsById);
 
 var developerKey = process.env.GOODREADS_DEVELOPER_KEY;
 

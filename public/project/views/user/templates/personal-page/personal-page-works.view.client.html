@@ -6,73 +6,29 @@
 <hr>
 
 <div class="row">
-    <div class="col-sm-1 hidden-xs"></div>
-    <div class="col-sm-3 col-xs-4">
+    <div class="col-sm-4 col-xs-12 pr-work-display" ng-repeat="work in model.user.works">
+        <img ng-src="{{work.image_url}}">
         <div>
-            My works
-            <ul>
-                <li ng-repeat="work in model.user.works"
-                    ng-click="model.focusOnWork(work._id)">
-                    {{work.title}}
-                </li>
-            </ul>
+            <a href="#!/book/libriId={{work._id}}"><b>{{work.title}}</b> </a>
         </div>
-
-        <div class="pr-work-statitics-tab" ng-show="model.focusedWork">
-            <div>
-                {{model.focusedWork.wantToRead}} persons want to read
-            </div>
-            <div>
-                {{model.focusedWork.reading}} persons are reading
-            </div>
-            <div>
-                {{model.focusedWork.haveRead}} persons have read
-            </div>
-
-            <hr>
-            <div>
-                Average rating:
-            </div>
-            <ng-rate-it ng-model="model.focusedWork.average_rating"
+        <div>
+            {{model.user.workStatistics[model.user.works.indexOf(work)].wantToRead}} persons want to read
+        </div>
+        <div>
+            {{model.user.workStatistics[model.user.works.indexOf(work)].reading}} persons are reading
+        </div>
+        <div>
+            {{model.user.workStatistics[model.user.works.indexOf(work)].haveRead}} persons have read
+        </div>
+        <div>
+            {{model.user.workStatistics[model.user.works.indexOf(work)].reviewNumber}} reviews
+        </div>
+        <div>
+            <ng-rate-it ng-model="work.average_rating"
                         step="0.01"
                         read-only="true">
             </ng-rate-it>
         </div>
-
     </div>
-    <div class="col-sm-6 col-xs-8">
-        <div class="list-group">
-            <div class="list-group-item"
-                 ng-repeat="news in model.user.workRelatedNews">
-                <div ng-switch="news.type">
-                    <div ng-switch-when="FOLLOW">
-                        <img src="new.user.image_url"
-                             class="pr-user-small-photo">
-                        <a href="#!/profile/{{news.user._id}}">{{news.user.username}}</a> followed
-                        <a href="#!/profile/{{new.following._id}}">{{news.following.username}}</a>
-                    </div>
-                    <div ng-switch-when="READ">
-                        <img src="new.user.image_url"
-                             class="pr-user-small-photo">
-                        <a href="#!/profile/{{news.user._id}}">{{news.user.username}}</a> started reading
-                        <a href="#!/book/libriId={{news.book._id}}">{{news.book._id}}</a>
-                    </div>
-                    <div ng-switch-when="REVIEW">
-                        <img src="new.user.image_url"
-                             class="pr-user-small-photo">
-                        <a href="#!/profile/{{news.user._id}}">{{news.user.username}}</a> rated
-                        <a href="#!/book/libriId={{news.book._id}}">{{news.book._id}}</a>
-                        <ng-rate-it ng-model="news.rating"
-                                    step="1"
-                                    read-only="true"
-                                    class="pr-ngrateit">
-                        </ng-rate-it>
-                        <div ng-bind-html="model.trustThisContent(news.content)"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-2 hidden-xs"></div>
 </div>
 

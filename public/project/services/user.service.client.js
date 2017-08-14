@@ -18,7 +18,13 @@
             getUserPersonalProfile: getUserPersonalProfile,
             getUserBookshelf: getUserBookshelf,
             getUserNews: getUserNews,
-            getAuthorWorks: getAuthorWorks
+            getAuthorWorks: getAuthorWorks,
+            getUserFollowers: getUserFollowers,
+            updateProfile: updateProfile,
+            getWantToReadNumber: getWantToReadNumber,
+            getReadingNumber: getReadingNumber,
+            getHaveReadNumber: getHaveReadNumber
+
         };
         return api;
 
@@ -42,9 +48,9 @@
             return $http.get(url)
         }
 
-        function putBookOnBookshelf(book,bookshelfPart){
-            var url = '/api/project/bookshelf/'+bookshelfPart;
-            return $http.put(url,book);
+        function putBookOnBookshelf(libriId,bookshelfPart){
+            var url = '/api/project/bookshelf/'+ bookshelfPart + '/' + libriId;
+            return $http.put(url);
         }
 
         function logout(){
@@ -58,17 +64,17 @@
         }
 
         function claimBook(libriId){
-            var url = '/api/project/claim';
-            return $http.put(url,libriId);
+            var url = '/api/project/claim/' + libriId;
+            return $http.put(url);
         }
 
         function toggleFollowingStatus(userId){
-            var url= '/api/project/follow';
-            return $http.put(url,userId);
+            var url= '/api/project/follow/' + userId;
+            return $http.put(url);
         }
 
-        function isUserFollowed(userId) {
-            var url = '/api/project/isFollowing/'+userId;
+        function isUserFollowed(userId){
+            var url = '/api/project/isFollowing/' + userId;
             return $http.get(url);
         }
 
@@ -92,5 +98,29 @@
             return $http.get(url);
         }
 
+        function getUserFollowers(){
+            var url = '/api/project/followers';
+            return $http.get(url);
+        }
+
+        function updateProfile(userId,profile){
+            var url = '/api/project/user/' + userId;
+            return $http.put(url,profile);
+        }
+
+        function getWantToReadNumber(libriId){
+            var url = '/api/project/number/wantToRead/' + libriId;
+            return $http.get(url);
+        }
+
+        function getReadingNumber(libriId){
+            var url = '/api/project/number/reading/' + libriId;
+            return $http.get(url);
+        }
+
+        function getHaveReadNumber(libriId){
+            var url = '/api/project/number/haveRead/' + libriId;
+            return $http.get(url);
+        }
     }
 })();

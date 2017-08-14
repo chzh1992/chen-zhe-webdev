@@ -3,7 +3,7 @@
         .module('Libri')
         .controller('PersonalPageBookshelfController',PersonalPageBookshelfController);
 
-    function PersonalPageBookshelfController(UserService){
+    function PersonalPageBookshelfController(UserService,$location,CurrentUser){
         var model = this;
 
         model.getSearchText = getSearchText;
@@ -17,6 +17,7 @@
                 .then(
                     function (response){
                         model.user = response.data;
+                        model.user.role = CurrentUser.role;
                     }
                 )
         }

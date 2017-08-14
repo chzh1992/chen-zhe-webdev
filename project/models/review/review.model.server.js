@@ -5,13 +5,18 @@ var reviewModel = mongoose.model('ProjectReviewModel',reviewSchema);
 reviewModel.findReviewByBookAndUser = findReviewByBookAndUser;
 reviewModel.createReview = createReview;
 reviewModel.findReviewsByBook = findReviewsByBook;
+reviewModel.findReviewsByUser = findReviewsByUser;
+reviewModel.updateRating = updateRating;
+reviewModel.createRatingReview = createRatingReview;
+reviewModel.updateReview = updateReview;
+reviewModel.getBookReviewNumber = getBookReviewNumber;
 
 module.exports = reviewModel;
 
 function findReviewByBookAndUser(bookId,userId){
     return reviewModel
         .findOne({
-            reviewer: userId,
+            'reviewer._id': userId,
             onBook: bookId
         });
 }
@@ -21,10 +26,40 @@ function createReview(review){
         .create(review);
 }
 
-function findReviewsByBook(bookId){
+function findReviewsByBook(libriId){
+    return reviewModel.find({onBook: libriId});
+}
+
+function findReviewsByUser(userId){
+    return reviewModel.find({'reviewer._id': userId});
+}
+
+function updateRating(reviewId,rating){
     return reviewModel
-        .find({
-            onBook: bookId
+        .findById(reviewId)
+        .then(
+            function (review){
+                review.rating = rating;
+                return review.save()
+            }
+        );
+}
+
+function createRatingReview(ratingReview){
+    return reviewModel.create(ratingReview);
+}
+
+function updateReview(reviewId,review){
+    return reviewModel
+        .update({_id: reviewId},{
+        $set : {
+            rating: review.rating,
+            content: review.content,
+            dateUpdated: Date.now()
+        }
         });
 }
 
+function getBookReviewNumber(libriId){
+    return reviewModel.count({onBook: libriId});
+}

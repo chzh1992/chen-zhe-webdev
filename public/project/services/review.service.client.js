@@ -11,12 +11,13 @@
             getAverageRating: getAverageRating,
             updateRating: updateRating,
             createRatingReview: createRatingReview,
-            updateReview: updateReview
+            updateReview: updateReview,
+            getBookReviewNumber: getBookReviewNumber
         };
         return api;
 
         function findReviewByBookAndUser(libriId,userId){
-            var url = '/api/review/' + libriId+ '/' + userId;
+            var url = '/api/project/review/' + libriId+ '/' + userId;
             return $http.get(url);
         }
 
@@ -36,18 +37,23 @@
         }
 
         function updateRating(reviewId,rating){
-            var url = '/api/project/rating';
-            return $http.put(url,rating);
+            var url = '/api/project/review/' + reviewId +'/rating';
+            return $http.put(url,{rating: rating});
         }
 
-        function createRatingReview(libriId,rating){
-            var url = '/api/project/rating';
-            return $http.post(url,rating);
+        function createRatingReview(ratingReview){
+            var url = '/api/project/review/rating';
+            return $http.post(url,ratingReview);
         }
 
         function updateReview(reviewId,review){
             var url = '/api/project/review/' + reviewId;
             return $http.put(url,review);
+        }
+
+        function getBookReviewNumber(libriId){
+            var url = '/api/project/number/review/' + libriId;
+            return $http.get(url);
         }
     }
 })();

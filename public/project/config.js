@@ -16,13 +16,13 @@
                 controllerAs: "model"
             })
             .when('/book/goodreadsId=:goodreadsId',{
-                templateUrl: "views/book/templates/book-details.view.client.html",
-                controller: "BookDetailsController",
+                templateUrl: "views/book/templates/goodreads-book-details.view.client.html",
+                controller: "GoodreadsBookDetailsController",
                 controllerAs: "model"
             })
             .when('/book/libriId=:libriId',{
-                templateUrl: "views/book/templates/book-details.view.client.html",
-                controller: "BookDetailsController",
+                templateUrl: "views/book/templates/libri-book-details.view.client.html",
+                controller: "LibriBookDetailsController",
                 controllerAs: "model"
             })
             .when('/login',{
@@ -51,14 +51,14 @@
                     CurrentUser: getCurrentUser
                 }
             })
-            .when('/personal-page/news',{
-                templateUrl: "views/user/templates/personal-page/personal-page-news.view.client.html",
-                controller: "PersonalPageNewsController",
-                controllerAs: "model",
-                resolve: {
-                    CurrentUser: getCurrentUser
-                }
-            })
+            // .when('/personal-page/news',{
+            //     templateUrl: "views/user/templates/personal-page/personal-page-news.view.client.html",
+            //     controller: "PersonalPageNewsController",
+            //     controllerAs: "model",
+            //     resolve: {
+            //         CurrentUser: getCurrentUser
+            //     }
+            // })
             .when('/personal-page/works',{
                 templateUrl: "views/user/templates/personal-page/personal-page-works.view.client.html",
                 controller: "PersonalPageWorksController",
@@ -71,13 +71,23 @@
                 templateUrl: "views/user/templates/public-profile.view.client.html",
                 controller: "PublicProfileController",
                 controllerAs: "model"
+            })
+            .when('/book/edit/:libriId',{
+                templateUrl: "views/book/templates/book-edit.view.client.html",
+                controller: "BookEditController",
+                controllerAs: "model"
+            })
+            .when('/book/new',{
+                templateUrl: "views/book/templates/book-edit.view.client.html",
+                controller: "BookNewController",
+                controllerAs: "model"
             });
     }
 
     function getCurrentUser($q,$location,UserService){
         var deferred = $q.defer();
         UserService
-            .populateUserInformation()
+            .checkLoggedIn()
             .then(
                 function (response){
                     var user = response.data;

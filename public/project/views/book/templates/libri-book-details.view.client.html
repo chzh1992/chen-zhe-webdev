@@ -8,12 +8,6 @@
         <div ng-if="model.book._id">
             <a href="#!/book/edit/{{model.book._id}}">Edit this book</a>
         </div>
-        <div ng-if="model.book.id && !(model.libriId === '-1')">
-            <a href="#!/book/libriId={{model.libriId}}">Imported Goodreads book</a>
-        </div>
-        <div ng-if="model.book.id && model.libriId === '-1'">
-            <a ng-click="model.importGoodreadsBook()">Goodreads book. Import it to Libri!</a>
-        </div>
     </div>
 
     <div class="row pr-book-detail-head">
@@ -40,11 +34,10 @@
                 <a ng-click="model.goToReview()">Your review</a>
             </div>
 
-            <div class="row"
-                 ng-show="model.book.id">
+            <div class="row">
                 <div class="col-sm-4">
                     <div>
-                        <b>Goodreads average rating</b>
+                        <b>Libri average rating</b>
                     </div>
                 </div>
                 <div class="col-sm-8 pr-ngrateit">
@@ -55,29 +48,19 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-sm-4">
-                    <div>
-                        <b>Libri average rating</b>
-                    </div>
-                </div>
-                <div class="col-sm-8 pr-ngrateit">
-                    <ng-rate-it ng-model="model.getLibriRating()"
-                                step="0.01"
-                                read-only="true">
-                    </ng-rate-it>
-                </div>
-            </div>
 
             <div class="row pr-book-operation-options">
                 <div class="col-sm-4 pr-rate-book">
+
                     <div ng-show="model.user">
                         Rate it!
-                        <ng-rate-it ng-model="model.currentUserReview.rating"
-                                    step="1"
-                                    resetable="false"
-                                    rated="model.updateRating()">
+                        <span ng-click="model.updateRating()">
+                            <ng-rate-it ng-model="model.currentUserReview.rating"
+                                        step="1"
+                                        resetable="false">
                         </ng-rate-it>
+                        </span>
+
                         <div ng-show="model.ratingMessage">
                             {{model.ratingMessage}}
                         </div>
@@ -107,12 +90,18 @@
                     </div>
                 </div>
                 <div class="col-sm-4 pr-book-operation"
-                     ng-show="model.user.role == 'AUTHOR'">
+                     ng-show="model.user.role == 'AUTHOR' && !model.book.isClaimed">
                     <a class="btn btn-primary btn-block"
                        ng-click="model.claimThisBook()">
                         claim this book
                     </a>
                 </div>
+
+                <div class="col-sm-4 pr-book-operation"
+                     ng-show="model.user.role == 'AUTHOR' && model.book.isClaimed">
+                    This is your work
+                </div>
+
             </div>
         </div>
     </div>
@@ -123,21 +112,6 @@
     <div ng-bind-html="model.trustThisContent(model.book.description)"></div>
 
     <hr>
-
-    <div ng-show="model.book.reviews_widget">
-        <div>
-            <h3>
-                <a ng-click="model.isCollapsed = !model.isCollapsed">
-                    Goodreads Reviews
-                </a>
-            </h3>
-        </div>
-
-        <div uib-collapse="model.isCollapsed">
-            <div ng-bind-html="model.trustThisContent(model.book.reviews_widget)"></div>
-        </div>
-        <hr>
-    </div>
 
     <h3 id="userReview">Your review</h3>
 
@@ -156,10 +130,18 @@
 
     <div ng-show="model.user && model.currentUserHasReview">
         <div ng-show="!model.showReviewEditor">
-            <ng-rate-it ng-model="model.currentUserReview.rating"
-                        read-only="true"></ng-rate-it>
-            on {{model.currentUserReview.dateUpdated || date}}
-            <div ng-bind-html="model.currentUserReview.content"></div>
+            <div class="row">
+                <div class="col-xs-2">
+                    <ng-rate-it ng-model="model.currentUserReview.rating"
+                                read-only="true"></ng-rate-it>
+                </div>
+                <div class="col-xs-10">
+                    on {{model.currentUserReview.dateUpdated || date}}
+                </div>
+            </div>
+
+            <div ng-bind-html="model.trustThisContent(model.currentUserReview.content)"></div>
+
             <a class="btn btn-block btn-primary"
                ng-click="model.showReviewEditor = true">
                 Edit
@@ -171,6 +153,7 @@
         <ng-rate-it ng-model="model.currentUserReview.rating"
                     resetable="false"
                     step="1"></ng-rate-it>
+
         <span ng-show="model.currentUserHasReview">
             on {{model.currentUserReview.dateUpdated || date}}
         </span>
@@ -204,13 +187,20 @@
     <h3>Libri reviews</h3>
 
     <div ng-repeat="review in model.book.reviews" class="pr-review">
-        <ng-rate-it ng-model="review.rating"
-                    read-only="true"
-                    class="pr-ngrateit">
-        </ng-rate-it>
-        By <a href="#!/user/{{review.reviewer._id}}">{{review.reviewer.name}}</a> , on {{review.dateUpdated || date}}
-        <div ng-bind-html="{{review.content}}"></div>
+        <div class="row">
+            <div class="col-xs-2">
+                <ng-rate-it ng-model="review.rating"
+                            read-only="true"
+                            class="pr-ngrateit">
+                </ng-rate-it>
+            </div>
+            <div class="col-xs-10">
+                By <a href="#!/profile/{{review.reviewer._id}}">{{review.reviewer.name}}</a> , on {{review.dateUpdated || date}}
+            </div>
+        </div>
+        <div ng-bind-html="model.trustThisContent(review.content)"></div>
     </div>
 
 </div>
+
 

@@ -9,6 +9,8 @@ var userSchema = mongoose.Schema({
         id: String,
         token: String
     },
+    country: String,
+    nativeLanguage: String,
     group: {type: String, default:'PROJECT'},
     following: [
         {type: mongoose.Schema.Types.ObjectId, ref: "ProjectUserModel"}
@@ -27,6 +29,8 @@ var userSchema = mongoose.Schema({
             {type: mongoose.Schema.Types.ObjectId, ref: "ProjectBookModel"}
         ]
     },
-    photo_url: String
+    photo_url: String,
+    reviewNumber: {type: Number, default:0},
+    followerNumber: {type: Number, default:0}
 },{collection: 'project_user'});
 module.exports = userSchema;

@@ -3,7 +3,7 @@
         .module('Libri')
         .controller('PersonalPageNewsController',PersonalPageNewsController);
 
-    function PersonalPageNewsController(UserService,$sce){
+    function PersonalPageNewsController(UserService,$sce,$location){
         var model = this;
 
         model.getSearchText = getSearchText;
