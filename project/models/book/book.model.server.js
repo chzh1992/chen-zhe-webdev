@@ -9,6 +9,7 @@ bookModel.findBooksByTerm = findBooksByTerm;
 bookModel.importGoodreadsBook = importGoodreadsBook;
 bookModel.updateBook = updateBook;
 bookModel.adminSearch = adminSearch;
+bookModel.deleteBook = deleteBook;
 
 module.exports = bookModel;
 
@@ -45,6 +46,10 @@ function adminSearch(searchText){
         {title: {'$regex' : searchText}},
         {author: {'$regex' : searchText}}
     ]});
+}
+
+function deleteBook(libriId){
+    return bookModel.remove({_id: libriId});
 }
 
 

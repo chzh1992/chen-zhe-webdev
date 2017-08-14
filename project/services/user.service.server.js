@@ -20,7 +20,7 @@ app.get("/api/project/personal-page/news",getUserNews);
 app.get("/api/project/personal-page/works",getAuthorWorks);
 app.put("/api/project/claim/:libriId",claimBook);
 app.get("/api/project/followers",getUserFollowers);
-app.put("/api/project/user/:userId",updateProfile);
+app.put("/api/project/profile/:userId",updateProfile);
 app.get("/api/project/number/wantToRead/:libriId",getWantToReadNumber);
 app.get("/api/project/number/reading/:libriId",getReadingNumber);
 app.get("/api/project/number/haveRead/:libriId",getHaveReadNumber);
@@ -345,6 +345,37 @@ function findUserById(req,res){
         } else{
             res.sendStatus(401);
         }
+    } else{
+        res.sendStatus(401);
+    }
+}
+
+function deleteUser(req,res){
+    var userId = req.params['userId'];
+    if (req.isAuthenticated() && req.user.role == 'ADMIN'){
+        userModel
+            .deleteUser(userId)
+            .then(
+                function (doc){
+                    res.sendStatus(200);
+                }
+            )
+    } else{
+        res.sendStatus(401);
+    }
+}
+
+function updateUser(req,res){
+    var userId = req.params['userId'];
+    var user = req.body;
+    if (req.isAuthenticated() && req.user.role == 'ADMIN'){
+        userModel
+            .updateUser(userId,user)
+            .then(
+                function (doc){
+                    res.sendStatus(200);
+                }
+            )
     } else{
         res.sendStatus(401);
     }

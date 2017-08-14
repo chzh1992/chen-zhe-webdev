@@ -26,7 +26,7 @@
             getHaveReadNumber: getHaveReadNumber,
             findUserById: findUserById,
             updateUser: updateUser,
-            deleteuser: deleteUser
+            deleteUser: deleteUser
 
         };
         return api;
@@ -107,7 +107,7 @@
         }
 
         function updateProfile(userId,profile){
-            var url = '/api/project/user/' + userId;
+            var url = '/api/project/profile/' + userId;
             return $http.put(url,profile);
         }
 

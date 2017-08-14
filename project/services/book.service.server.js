@@ -101,6 +101,17 @@ function updateBook(req,res){
 }
 
 function deleteBook(req,res){
-
+    var libriId = req.params['libriId'];
+    if (req.isAuthenticated() && req.user.role == 'ADMIN'){
+        bookModel
+            .deleteBook(libriId)
+            .then(
+                function(doc){
+                    res.sendStatus(200);
+                }
+            )
+    }else{
+        res.sendStatus(401);
+    }
 }
 

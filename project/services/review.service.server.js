@@ -146,5 +146,17 @@ function findReviewById(req,res){
 }
 
 function deleteReview(req,res){
+    var reviewId = req.params['reviewId'];
+    if (req.isAuthenticated() && req.user.role == 'ADMIN'){
+        reviewModel
+            .deleteReview(reviewId)
+            .then(
+                function (doc){
+                    res.sendStatus(200);
+                }
+            );
+    } else{
+        res.sendStatus(401);
+    }
 
 }

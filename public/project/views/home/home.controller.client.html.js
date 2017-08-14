@@ -3,10 +3,21 @@
         .module('Libri')
         .controller('HomeController',HomeController);
 
-    function HomeController(){
+    function HomeController(UserService){
         var model = this;
         model.getSearchText = getSearchText;
         model.logout = logout;
+
+        function init(){
+            UserService
+                .checkLoggedIn()
+                .then(
+                    function (response){
+                        model.user = response.data;
+                    }
+                )
+        }
+        init();
 
         function getSearchText(){
             if (model.searchText){

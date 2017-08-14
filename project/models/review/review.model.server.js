@@ -11,6 +11,7 @@ reviewModel.createRatingReview = createRatingReview;
 reviewModel.updateReview = updateReview;
 reviewModel.getBookReviewNumber = getBookReviewNumber;
 reviewModel.findReviewById = findReviewById;
+reviewModel.deleteReview = deleteReview;
 
 module.exports = reviewModel;
 
@@ -67,4 +68,8 @@ function getBookReviewNumber(libriId){
 
 function findReviewById(reviewId){
     return reviewModel.findById(reviewId);
+}
+
+function deleteReview(reviewId){
+    return reviewModel.remove({_id: reviewId});
 }

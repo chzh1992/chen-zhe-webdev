@@ -39,8 +39,8 @@
         Role
     </label>
     <select class="form-control"
-           ng-model="model.userFound.role"
-           id="role">
+            ng-model="model.userFound.role"
+            id="role">
         <option>READER</option>
         <option>AUTHOR</option>
         <option>ADMIN</option>
@@ -71,10 +71,29 @@
         <div class="col-sm-3">
             following
             <ul>
-                <li ng-repeat="following in model.userFound.following">following</li>
-                <span class="pull-right">
-                <span ng-click="model.removeFollowing(following)" class="glyphicon glyphicon-remove"></span>
-            </span>
+                <li ng-repeat="following in model.userFound.following">{{following}}
+                    <span class="pull-right">
+                        <span ng-click="model.removeFollowing(following)" class="glyphicon glyphicon-remove"></span>
+                    </span>
+                </li>
+            </ul>
+        </div>
+        <div class="col-sm-3">
+            want to read
+            <ul>
+                <li ng-repeat="book in model.userFound.bookshelf.wantToRead">{{book}}</li>
+            </ul>
+        </div>
+        <div class="col-sm-3">
+            reading
+            <ul>
+                <li ng-repeat="book in model.userFound.bookshelf.wantToRead">{{book}}</li>
+            </ul>
+        </div>
+        <div class="col-sm-3">
+            have read
+            <ul>
+                <li ng-repeat="book in model.userFound.bookshelf.haveRead">{{book}}</li>
             </ul>
         </div>
     </div>

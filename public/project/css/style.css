@@ -127,6 +127,7 @@ select.form-control,
     text-align: center;
 }
 
+
 .pr-menubar{
     width: 60%;
     margin-top: 50px;
@@ -182,6 +183,9 @@ select.form-control,
         height: 300px;
         margin-left: 50%;
         transform: translate(-50%,0);
+    }
+    .pr-home-searchbar{
+        width: 90%;
     }
 }
 
@@ -372,3 +376,5 @@ select.form-control,
 .pr-admin-head{
     text-align: center;
 }
+
+@media

@@ -14,7 +14,8 @@ userModel.updateProfile = updateProfile;
 userModel.getHaveReadNumber = getHaveReadNumber;
 userModel.getReadingNumber = getReadingNumber;
 userModel.getWantToReadNumber = getWantToReadNumber;
-userModel.adminSearch = adminSearch;
+userModel.deleteUser = deleteUser;
+userModel.updateUser = updateUser;
 
 module.exports = userModel;
 
@@ -125,10 +126,10 @@ function getWantToReadNumber(libriId){
         .count({'bookshelf.wantToRead':libriId});
 }
 
-function adminSearch(searchText){
-    return userModel.find({ $or :[
-        {_id: searchText},
-        {username: searchText},
-        {role: searchText}
-    ]});
+function deleteUser(userId){
+    return userModel.remove({_id: userId});
+}
+
+function updateUser(userId,user){
+    return userModel.update({_id: userId},user);
 }
