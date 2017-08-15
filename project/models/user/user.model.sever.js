@@ -2,9 +2,8 @@ var mongoose = require('mongoose');
 var userSchema = require('./user.schema.server');
 var userModel = mongoose.model('ProjectUserModel',userSchema);
 
-userModel.createUser = createUser;
+
 userModel.findUserByUsername = findUserByUsername;
-userModel.findUserById = findUserById;
 userModel.putBookOnBookshelf = putBookOnBookshelf;
 userModel.toggleFollowingStatus = toggleFollowingStatus;
 userModel.populateUserInformation = populateUserInformation;
@@ -14,8 +13,12 @@ userModel.updateProfile = updateProfile;
 userModel.getHaveReadNumber = getHaveReadNumber;
 userModel.getReadingNumber = getReadingNumber;
 userModel.getWantToReadNumber = getWantToReadNumber;
+
+userModel.createUser = createUser;
+userModel.findUserById = findUserById;
 userModel.deleteUser = deleteUser;
 userModel.updateUser = updateUser;
+userModel.findAllUser = findAllUser;
 
 module.exports = userModel;
 
@@ -132,4 +135,8 @@ function deleteUser(userId){
 
 function updateUser(userId,user){
     return userModel.update({_id: userId},user);
+}
+
+function findAllUser(){
+    return userModel.find();
 }

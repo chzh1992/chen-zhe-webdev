@@ -1,6 +1,5 @@
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-var FacebookStrategy = require('passport-facebook').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var bcrypt = require('bcrypt-nodejs');
 var assignmentUserModel = require('./assignment/models/user/user.model.server');
@@ -11,13 +10,6 @@ passport.deserializeUser(deserializeUser);
 
 passport.use('assignment',new LocalStrategy(assignmentLocalStrategy));
 passport.use('project',new LocalStrategy(projectLocalStrategy));
-
-var facebookConfig = {
-    clientID     : process.env.FACEBOOK_CLIENT_ID,
-    clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
-    callbackURL  : process.env.FACEBOOK_CALLBACK_URL
-};
-passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
 
 var googleConfig = {
     clientID     : process.env.GOOGLE_CLIENT_ID,
@@ -98,41 +90,6 @@ function googleStrategy(token,refreshToken,profile,done){
         );
 }
 
-function facebookStrategy(token, refreshToken, profile, done){
-    console.log(profile);
-    return done(null,false);
-    // userModel
-    //     .findUserByFacebookId(profile.id)
-    //     .then(
-    //         function (user){
-    //             if (user){
-    //                 return done(null,user);
-    //             } else {
-    //                 var newFacebookUser = {
-    //                     facebook: {
-    //                         id: profile.id,
-    //                         token: token
-    //                     }
-    //                 }
-    //             };
-    //             return userModel
-    //                 .createUser(newFacebookUser);
-    //         },
-    //         function (err){
-    //             if (err) {
-    //                 return done(err);
-    //             }
-    //         }
-    //     )
-    //     .then(
-    //         function(user){
-    //             return done(null, user);
-    //         },
-    //         function(err){
-    //             if (err) { return done(err); }
-    //         }
-    //     );
-}
 
 // userModel must've implemented findUserByUsername
 function localStrategyAgainstModel(userModel,username,password,done){

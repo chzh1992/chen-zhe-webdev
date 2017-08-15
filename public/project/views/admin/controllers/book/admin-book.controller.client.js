@@ -10,15 +10,15 @@
 
         model.logout = logout;
         model.search = search;
-        model.updateBook = updateBook;
-        model.deleteBook = deleteBook;
+        model.findAllBooks = findAllBooks;
+
 
         function search(){
             BookService
                 .findBookById(model.searchText)
                 .then(
                     function (response){
-                        model.book = response.data;
+                        model.books = [response.data];
                     }
                 );
         }
@@ -33,24 +33,15 @@
                 )
         }
 
-        function updateBook(){
+        function findAllBooks(){
             BookService
-                .updateBook(model.book._id,model.book)
+                .findAllBooks()
                 .then(
                     function (response){
-                        model.message = "Successfully updated!";
+                        model.books = response.data;
                     }
                 );
         }
 
-        function deleteBook(){
-            BookService
-                .deleteBook(model.book._id)
-                .then(
-                    function (response){
-                        $location.url('/admin');
-                    }
-                )
-        }
     }
 })();

@@ -3,13 +3,14 @@ var bookModel = require('../models/book/book.model.server');
 var userModel = require('../models/user/user.model.sever');
 
 app.get("/api/search/:searchTerm",findBooksByTerm);
-app.get("/api/project/book/:libriId",findBookById);
 app.get("/api/project/book/goodreads/:goodreadsId",findBookByGoodreadsId);
-app.post("/api/project/book",createBook);
 app.post("/api/project/book/goodreads",importGoodreadsBook);
-app.get("//api/project/work/:libriId",getWorkInformation);
+
+app.get("/api/project/book/:libriId",findBookById);
+app.post("/api/project/book",createBook);
 app.put("/api/project/book/:libriId",updateBook);
-app.delete("/api/project/book/:libriId",deleteBook);
+app.delete("/api/project/book/:libriId",isAdmin,deleteBook);
+app.get("/api/project/book",isAdmin,findAllBooks);
 
 function findBooksByTerm(req,res){
     var searchTerm = req.params['searchTerm'];
@@ -64,17 +65,6 @@ function createBook(req,res){
         );
 }
 
-function getWorkInformation(req,res){
-    var libriId = req.params['libriId'];
-    bookModel
-        .findBookById(libriId)
-        .then(
-            function (book){
-
-            }
-        )
-}
-
 function importGoodreadsBook(req,res){
     var goodreadsBook = req.body;
     bookModel
@@ -86,9 +76,18 @@ function importGoodreadsBook(req,res){
         )
 }
 
+function isAdmin(req,res,next){
+    if (req.isAuthenticated() && req.user.role == 'ADMIN'){
+        next()
+    } else{
+        res.sendStatus(401);
+    }
+}
+
 function updateBook(req,res){
     var libriId = req.params['libriId'];
-    var book = req.book;
+    var book = req.body;
+    delete book._id;
     bookModel
         .updateBook(libriId,book)
         .then(
@@ -115,3 +114,12 @@ function deleteBook(req,res){
     }
 }
 
+function findAllBooks(req,res){
+    bookModel
+        .findAllBooks()
+        .then(
+            function (books){
+                res.json(books);
+            }
+        )
+}

@@ -6,15 +6,17 @@
     function ReviewService($http){
         var api = {
             findReviewByBookAndUser: findReviewByBookAndUser,
-            createReview: createReview,
             findReviewsByBook: findReviewsByBook,
             getAverageRating: getAverageRating,
             updateRating: updateRating,
             createRatingReview: createRatingReview,
-            updateReview: updateReview,
             getBookReviewNumber: getBookReviewNumber,
+
+            createReview: createReview,
+            updateReview: updateReview,
             findReviewById: findReviewById,
-            deleteReview: deleteReview
+            deleteReview: deleteReview,
+            findAllReviews: findAllReviews
         };
         return api;
 
@@ -68,5 +70,9 @@
             return $http.delete(url);
         }
 
+        function findAllReviews(){
+            var url = "/api/project/review";
+            return $http.get(url);
+        }
     }
 })();

@@ -2,6 +2,7 @@ var app = require('../../express');
 var bcrypt = require('bcrypt-nodejs');
 var passport = require('passport');
 var userModel = require('../models/user/user.model.sever');
+var projectBaseUrl = process.env.PROJECT_BASE_URL;
 
 app.post("/api/project/login",passport.authenticate('project'),login);
 app.post("/api/project/register",register);
@@ -24,9 +25,20 @@ app.put("/api/project/profile/:userId",updateProfile);
 app.get("/api/project/number/wantToRead/:libriId",getWantToReadNumber);
 app.get("/api/project/number/reading/:libriId",getReadingNumber);
 app.get("/api/project/number/haveRead/:libriId",getHaveReadNumber);
-app.get("/api/project/user/:userId",findUserById);
-app.put("/api/project/user/:userId",updateUser);
-app.delete("/api/project/user/:userId",deleteUser);
+
+app.get("/api/project/user/:userId",isAdmin,findUserById);
+app.put("/api/project/user/:userId",isAdmin,updateUser);
+app.delete("/api/project/user/:userId",isAdmin,deleteUser);
+app.get("/api/project/user",isAdmin,findAllUser);
+app.post("/api/project/user",isAdmin,createUser);
+
+app.get('/auth/facebook', passport.authenticate('facebook', { scope : ['profile', 'email'] }));
+app.get('/auth/facebook/callback',
+    passport.authenticate('facebook', {
+        successRedirect: projectBaseUrl + '#!/',
+        failureRedirect: projectBaseUrl + '#!/'
+    }));
+
 
 function checkLoggedIn(req,res){
     if (req.isAuthenticated()){
@@ -331,52 +343,70 @@ function getHaveReadNumber(req,res){
         );
 }
 
-function findUserById(req,res){
-    var userId = req.params['userId'];
-    if (req.isAuthenticated()){
-        if (req.user.role == 'ADMIN'){
-            userModel
-                .findUserById(userId)
-                .then(
-                    function (user){
-                        res.json(user);
-                    }
-                )
-        } else{
-            res.sendStatus(401);
-        }
+function isAdmin(req,res,next){
+    if (req.isAuthenticated() && req.user.role == 'ADMIN'){
+        next()
     } else{
         res.sendStatus(401);
     }
 }
 
+function findUserById(req,res){
+    var userId = req.params['userId'];
+    userModel
+        .findUserById(userId)
+        .then(
+            function (user){
+
+                res.json(user);
+            }
+        )
+}
+
 function deleteUser(req,res){
     var userId = req.params['userId'];
-    if (req.isAuthenticated() && req.user.role == 'ADMIN'){
-        userModel
-            .deleteUser(userId)
-            .then(
-                function (doc){
-                    res.sendStatus(200);
-                }
-            )
-    } else{
-        res.sendStatus(401);
-    }
+    userModel
+        .deleteUser(userId)
+        .then(
+            function (doc){
+                res.sendStatus(200);
+            }
+        )
 }
 
 function updateUser(req,res){
     var userId = req.params['userId'];
     var user = req.body;
-    if (req.isAuthenticated() && req.user.role == 'ADMIN'){
-        userModel
-            .updateUser(userId,user)
-            .then(
-                function (doc){
-                    res.sendStatus(200);
-                }
-            )
-    } else{
-        res.sendStatus(401);
-    }
+    delete user._id;
+    delete user.username;
+    delete user.password;
+    userModel
+        .updateUser(userId,user)
+        .then(
+            function (doc){
+                res.sendStatus(200);
+            }
+        )
+}
+
+function findAllUser(req,res){
+    userModel
+        .findAllUser()
+        .then(
+            function (users){
+                res.json(users);
+            }
+        )
+}
+
+function createUser(req,res){
+    var user = req.body;
+    user.password = bcrypt.hashSync(user.password);
+    userModel
+        .createUser(user)
+        .then(
+            function (user){
+                res.json(user);
+            }
+        )
 }

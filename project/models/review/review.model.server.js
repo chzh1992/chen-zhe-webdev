@@ -3,15 +3,17 @@ var reviewSchema = require('./review.schema.server');
 var reviewModel = mongoose.model('ProjectReviewModel',reviewSchema);
 
 reviewModel.findReviewByBookAndUser = findReviewByBookAndUser;
-reviewModel.createReview = createReview;
 reviewModel.findReviewsByBook = findReviewsByBook;
 reviewModel.findReviewsByUser = findReviewsByUser;
 reviewModel.updateRating = updateRating;
 reviewModel.createRatingReview = createRatingReview;
-reviewModel.updateReview = updateReview;
 reviewModel.getBookReviewNumber = getBookReviewNumber;
+
+reviewModel.createReview = createReview;
+reviewModel.updateReview = updateReview;
 reviewModel.findReviewById = findReviewById;
 reviewModel.deleteReview = deleteReview;
+reviewModel.findAllReviews = findAllReviews;
 
 module.exports = reviewModel;
 
@@ -72,4 +74,8 @@ function findReviewById(reviewId){
 
 function deleteReview(reviewId){
     return reviewModel.remove({_id: reviewId});
+}
+
+function findAllReviews() {
+    return reviewModel.find();
 }

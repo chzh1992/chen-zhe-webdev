@@ -131,11 +131,11 @@
     <div ng-show="model.user && model.currentUserHasReview">
         <div ng-show="!model.showReviewEditor">
             <div class="row">
-                <div class="col-xs-2">
+                <div class="col-sm-2">
                     <ng-rate-it ng-model="model.currentUserReview.rating"
                                 read-only="true"></ng-rate-it>
                 </div>
-                <div class="col-xs-10">
+                <div class="col-sm-10">
                     on {{model.currentUserReview.dateUpdated || date}}
                 </div>
             </div>
@@ -188,13 +188,13 @@
 
     <div ng-repeat="review in model.book.reviews" class="pr-review">
         <div class="row">
-            <div class="col-xs-2">
+            <div class="col-sm-2">
                 <ng-rate-it ng-model="review.rating"
                             read-only="true"
                             class="pr-ngrateit">
                 </ng-rate-it>
             </div>
-            <div class="col-xs-10">
+            <div class="col-sm-10">
                 By <a href="#!/profile/{{review.reviewer._id}}">{{review.reviewer.name}}</a> , on {{review.dateUpdated || date}}
             </div>
         </div>

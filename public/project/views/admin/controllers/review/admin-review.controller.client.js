@@ -10,15 +10,14 @@
 
         model.logout = logout;
         model.search = search;
-        model.updateReview = updateReview;
-        model.deleteReview = deleteReview;
+        model.findAllReviews = findAllReviews;
 
         function search(){
             ReviewService
                 .findReviewById(model.searchText)
                 .then(
                     function (response){
-                        model.review = response.data;
+                        model.reviews = [response.data];
                     }
                 );
         }
@@ -33,24 +32,15 @@
                 )
         }
 
-        function updateReview(){
+        function findAllReviews(){
             ReviewService
-                .updateReview(model.review._id,model.review)
+                .findAllReviews()
                 .then(
                     function (response){
-                        model.message = "Successfully updated!";
+                        model.reviews = response.data;
                     }
                 )
         }
 
-        function deleteReview(){
-            ReviewService
-                .deleteReview(model.review._id)
-                .then(
-                    function (response) {
-                        $location.url('/admin');
-                    }
-                )
-        }
     }
 })();

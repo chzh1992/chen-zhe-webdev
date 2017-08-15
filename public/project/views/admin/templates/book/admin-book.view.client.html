@@ -1,0 +1,46 @@
+<div ng-include="'views/admin/templates/common/admin-navbar.view.client.html'"></div>
+
+<div class="pr-admin-head">
+    <h1>Administer Book</h1>
+    <a class="btn btn-default" ng-click="model.findAllBooks()">Display all books</a>
+    <a class="btn btn-default" href="#!/admin/book/new">Create a new book</a>
+</div>
+
+<div ng-include="'views/admin/templates/common/admin-searchbar.view.client.html'"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-2 hidden-xs"></div>
+        <div class="col-sm-8 col-xs-12">
+            <div class="list-group">
+                <div class="list-group-item">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            Libri ID
+                        </div>
+                        <div class="col-xs-6">
+                            Title
+                        </div>
+                    </div>
+                </div>
+
+                <div class="list-group-item"
+                     ng-repeat="book in model.books"
+                     ng-show="model.books">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <a href="#!/admin/book/{{book._id}}">{{book._id}}</a>
+                        </div>
+                        <div class="col-xs-6">
+                            {{book.title}}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-sm-2 hidden-xs"></div>
+    </div>
+</div>
+
+

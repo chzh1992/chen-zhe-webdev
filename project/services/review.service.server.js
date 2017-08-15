@@ -2,16 +2,18 @@ var app = require('../../express');
 var reviewModel = require('../models/review/review.model.server');
 
 app.get("/api/project/review/:libriId/:userId",findReviewByBookAndUser);
-app.post("/api/project/review",createReview);
 app.get("/api/project/book/:libriId/review",findReviewsByBook);
 app.get("/api/project/review/:ibriId/:userId",findReviewByBookAndUser);
 app.get("/api/project/book/:libriId/rating",getAverageRating);
 app.put("/api/project/review/:reviewId/rating",updateRating);
 app.post("/api/project/review/rating",createRatingReview);
-app.put("/api/project/review/:reviewId",updateReview);
 app.get("/api/project/number/review/:libriId",getBookReviewNumber);
+
+app.post("/api/project/review",createReview);
+app.put("/api/project/review/:reviewId",updateReview);
 app.get("/api/project/review/:reviewId",findReviewById);
-app.delete("/api/project/review/:reviewId",deleteReview);
+app.delete("/api/project/review/:reviewId",isAdmin,deleteReview);
+app.get("/api/project/review",isAdmin,findAllReviews);
 
 function findReviewByBookAndUser(req,res){
     var libriId = req.params['libriId'];
@@ -145,18 +147,32 @@ function findReviewById(req,res){
         )
 }
 
-function deleteReview(req,res){
-    var reviewId = req.params['reviewId'];
-    if (req.isAuthenticated() && req.user.role == 'ADMIN'){
-        reviewModel
-            .deleteReview(reviewId)
-            .then(
-                function (doc){
-                    res.sendStatus(200);
-                }
-            );
-    } else{
+function isAdmin(req,res,next) {
+    if (req.isAuthenticated() && req.user.role == 'ADMIN') {
+        next()
+    } else {
         res.sendStatus(401);
     }
+}
 
+
+function deleteReview(req,res){
+    var reviewId = req.params['reviewId'];
+    reviewModel
+        .deleteReview(reviewId)
+        .then(
+            function (doc){
+                res.sendStatus(200);
+            }
+        );
+}
+
+function findAllReviews(req,res){
+    reviewModel
+        .findAllReviews()
+        .then(
+            function (reviews){
+                res.json(reviews);
+            }
+        );
 }

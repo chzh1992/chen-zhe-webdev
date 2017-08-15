@@ -24,10 +24,12 @@
             getWantToReadNumber: getWantToReadNumber,
             getReadingNumber: getReadingNumber,
             getHaveReadNumber: getHaveReadNumber,
+
+            createUser: createUser,
             findUserById: findUserById,
+            findAllUser: findAllUser,
             updateUser: updateUser,
             deleteUser: deleteUser
-
         };
         return api;
 
@@ -139,6 +141,16 @@
         function deleteUser(userId){
             var url = '/api/project/user/' + userId;
             return $http.delete(url);
+        }
+
+        function findAllUser(){
+            var url = '/api/project/user';
+            return $http.get(url);
+        }
+
+        function createUser(user){
+            var url ='/api/project/user';
+            return $http.post(url,user);
         }
     }
 })();

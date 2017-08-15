@@ -10,19 +10,18 @@
 
         model.logout = logout;
         model.search = search;
-        model.updateUser = updateUser;
-        model.deleteUser = deleteUser;
+        model.getAllUser = getAllUser;
+
 
         function search(){
             UserService
                 .findUserById(model.searchText)
                 .then(
                     function (response){
-                        model.userFound = response.data;
+                        model.userFound = [response.data];
                     }
                 );
         }
-
 
         function logout(){
             UserService
@@ -34,22 +33,12 @@
                 )
         }
 
-        function updateUser(){
+        function getAllUser(){
             UserService
-                .updateUser(model.userFound._id,model.userFound)
+                .findAllUser()
                 .then(
-                    function(response){
-                        model.message = "Successfully updated!";
-                    }
-                )
-        }
-
-        function deleteUser(){
-            UserService
-                .deleteUser(model.userFound._id)
-                .then(
-                    function(response){
-                        $location.url('/admin');
+                    function (response){
+                        model.userFound = response.data;
                     }
                 )
         }

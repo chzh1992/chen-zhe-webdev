@@ -1,67 +1,80 @@
 <div class="pr-home-color-pattern" pr-full-screen>
 
-    <div class="pr-center pr-login-window">
-        <div class=" pr-login-tab pr-anti-home-color-pattern">
-            <div class="pr-login-head">
-                <h3>
-                    Log in to your account
-                </h3>
+    <div class="row">
+        <div class="col-md-4 col-xs-2"></div>
+        <div class="col-md-4 col-xs-8">
+            <img src="logo.png" class="pr-head-logo pr-horizontal-center">
+        </div>
+        <div class="col-md-4 col-xs-2"></div>
+    </div>
 
-                <div ng-show="model.error"
-                     class="alert pr-login-error">
-                    {{model.error}}
-                </div>
-            </div>
+    <div class="row">
+        <div class="col-sm-4 col-xs-hidden"></div>
+        <div class="col-sm-4 col-xs-12">
+            <div class="pr-login-window">
+                <div class=" pr-login-tab pr-anti-home-color-pattern">
+                    <div class="pr-login-head">
+                        <h3>
+                            Log in to your account
+                        </h3>
 
-            <form ng-submit="model.login()"
-                  name="model.form"
-                  class="pr-login-form"
-                  novalidate>
+                        <div ng-show="model.error"
+                             class="alert pr-login-error">
+                            {{model.error}}
+                        </div>
+                    </div>
 
-                <div class="input-group">
+                    <form ng-submit="model.login()"
+                          name="model.form"
+                          class="pr-login-form"
+                          novalidate>
+
+                        <div class="input-group">
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-user"></span>
                 </span>
-                    <input ng-model="model.user.username"
-                           type="text"
-                           class="form-control"
-                           ng-class="{'invalid-input': model.form.$submitted && model.form.username.$error.required}"
-                           name="username"
-                           placeholder="username"
-                           required>
-                </div>
+                            <input ng-model="model.user.username"
+                                   type="text"
+                                   class="form-control"
+                                   ng-class="{'invalid-input': model.form.$submitted && model.form.username.$error.required}"
+                                   name="username"
+                                   placeholder="username"
+                                   required>
+                        </div>
 
-                <div class="input-group">
+                        <div class="input-group">
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-lock"></span>
                 </span>
-                    <input ng-model="model.user.password"
-                           type="password"
-                           class="form-control"
-                           ng-class="{'invalid-input': model.form.$submitted && model.form.password.$error.required}"
-                           name="password"
-                           placeholder="password"
-                           required>
+                            <input ng-model="model.user.password"
+                                   type="password"
+                                   class="form-control"
+                                   ng-class="{'invalid-input': model.form.$submitted && model.form.password.$error.required}"
+                                   name="password"
+                                   placeholder="password"
+                                   required>
+                        </div>
+
+                        <input type="submit"
+                               value="Login"
+                               class="btn btn-block pr-home-color-pattern">
+                    </form>
+
+                    <hr>
+
+                    <div class="pr-login-bottom">
+                        <h4 class="">
+                            New to Libri? <a href="#!/register">Sign up</a>
+                        </h4>
+                    </div>
                 </div>
 
-                <input type="submit"
-                       value="Login"
-                       class="btn btn-block pr-home-color-pattern">
-            </form>
-
-            <hr>
-
-            <div class="pr-login-bottom">
-                <h4 class="">
-                    New to Libri? <a href="#!/register">Sign up</a>
-                </h4>
+                <div class="pr-login-outside-tab-message">
+                    <a href="#!/">Libri home page</a>
+                </div>
             </div>
         </div>
-
-        <div class="pr-login-outside-tab-message">
-            <a href="/auth/faceboook">Log in with Facebook</a>
-            <a href="#!/">Libri home page</a>
-        </div>
-
+        <div class="col-sm-4 col-xs-hidden"></div>
     </div>
+
 </div>

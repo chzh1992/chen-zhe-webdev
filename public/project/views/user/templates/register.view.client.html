@@ -1,104 +1,123 @@
 <div class="pr-home-color-pattern" pr-full-screen>
-    <div class="pr-center pr-register-window">
-        <div class="pr-login-tab pr-anti-home-color-pattern">
-            <div class="pr-login-head">
-                <h3>Create your account</h3>
-                <div ng-show="model.error"
-                     class="alert pr-login-error">
-                    {{model.error}}
+
+    <div class="row">
+        <div class="col-md-4 col-xs-2"></div>
+        <div class="col-md-4 col-xs-8">
+            <img src="logo.png" class="pr-head-logo pr-horizontal-center">
+        </div>
+        <div class="col-md-4 col-xs-2"></div>
+    </div>
+    
+    <div class="row">
+
+        <div class="col-sm-3 hidden-xs"></div>
+        <div class="col-sm-6 col-xs-12">
+            <div class="pr-register-window">
+                <div class="pr-login-tab pr-anti-home-color-pattern">
+                    <div class="pr-login-head">
+                        <h3>Create your account</h3>
+                        <div ng-show="model.error"
+                             class="alert pr-login-error">
+                            {{model.error}}
+                        </div>
+                    </div>
+
+                    <form name="model.form"
+                          class="form-horizontal pr-login-form"
+                          novalidate
+                          ng-submit="model.register()">
+
+                        <div class="form-group">
+                            <label for="username"
+                                   class="col-sm-4 control-label">
+                                Username
+                            </label>
+
+                            <div class="col-sm-8">
+                                <input ng-model="model.user.username"
+                                       type="text"
+                                       name="username"
+                                       id="username"
+                                       class="form-control"
+                                       ng-class="{'invalid-input': model.form.username.$error.required && model.form.$submitted}"
+                                       placeholder="username"
+                                       required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password" class="col-sm-4 control-label">
+                                Password
+                            </label>
+
+                            <div class="col-sm-8">
+                                <input ng-model="model.user.password"
+                                       type="password"
+                                       name="password"
+                                       id="password"
+                                       class="form-control"
+                                       ng-class="{'invalid-input': (model.form.password.$error.required || model.passwordsMismatch)
+                        && model.form.$submitted}"
+                                       placeholder="password"
+                                       required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="verifyPassword"
+                                   class="col-sm-4 control-label">
+                                Verify password
+                            </label>
+
+                            <div class="col-sm-8">
+                                <input ng-model="model.user.verifyPassword"
+                                       type="password"
+                                       id="verifyPassword"
+                                       name="verifyPassword"
+                                       class="form-control"
+                                       ng-class="{'invalid-input': (model.form.verifyPassword.$error.required || model.passwordsMismatch)
+                        && model.form.$submitted}"
+                                       placeholder="verify password"
+                                       required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="role" class="col-sm-4 control-label">
+                                You are a(n)
+                            </label>
+                            <div class="col-sm-8">
+                                <select id="role"
+                                        class="form-control"
+                                        name="role"
+                                        ng-class="{'invalid-input': model.form.role.$error.required && model.form.$submitted}"
+                                        ng-model="model.user.role"
+                                        required>
+                                    <option>reader</option>
+                                    <option>author</option>
+                                    <option>admin</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <input class="btn btn-block pr-home-color-pattern"
+                               type="submit"
+                               value="Register">
+                    </form>
                 </div>
+
+                <div class="pr-login-outside-tab-message">
+                    <a href="#!/login">Log in page </a>
+                    <a href="#!/">Libri home page</a>
+                </div>
+
             </div>
-
-            <form name="model.form"
-                  class="form-horizontal pr-login-form"
-                  novalidate
-                  ng-submit="model.register()">
-
-                <div class="form-group">
-                    <label for="username"
-                           class="col-sm-4 control-label">
-                        Username
-                    </label>
-
-                    <div class="col-sm-8">
-                    <input ng-model="model.user.username"
-                           type="text"
-                           name="username"
-                           id="username"
-                           class="form-control"
-                           ng-class="{'invalid-input': model.form.username.$error.required && model.form.$submitted}"
-                           placeholder="username"
-                           required>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="password" class="col-sm-4 control-label">
-                        Password
-                    </label>
-
-                    <div class="col-sm-8">
-                        <input ng-model="model.user.password"
-                               type="password"
-                               name="password"
-                               id="password"
-                               class="form-control"
-                               ng-class="{'invalid-input': (model.form.password.$error.required || model.passwordsMismatch)
-                        && model.form.$submitted}"
-                               placeholder="password"
-                               required>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="verifyPassword"
-                           class="col-sm-4 control-label">
-                        Verify password
-                    </label>
-
-                    <div class="col-sm-8">
-                        <input ng-model="model.user.verifyPassword"
-                               type="password"
-                               id="verifyPassword"
-                               name="verifyPassword"
-                               class="form-control"
-                               ng-class="{'invalid-input': (model.form.verifyPassword.$error.required || model.passwordsMismatch)
-                        && model.form.$submitted}"
-                               placeholder="verify password"
-                               required>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="role" class="col-sm-4 control-label">
-                        You are a(n)
-                    </label>
-                    <div class="col-sm-8">
-                        <select id="role"
-                                class="form-control"
-                                name="role"
-                                ng-class="{'invalid-input': model.form.role.$error.required && model.form.$submitted}"
-                                ng-model="model.user.role"
-                                required>
-                            <option>reader</option>
-                            <option>author</option>
-                            <option>admin</option>
-                        </select>
-                    </div>
-
-                </div>
-
-                <input class="btn btn-block pr-home-color-pattern"
-                       type="submit"
-                       value="Register">
-            </form>
         </div>
-
-        <div class="pr-login-outside-tab-message">
-            <a href="#!/login">Log in page </a>
-            <a href="#!/">Libri home page</a>
-        </div>
+        <div class="col-sm-3 hidden-xs"></div>
 
     </div>
+
+
 
 </div>

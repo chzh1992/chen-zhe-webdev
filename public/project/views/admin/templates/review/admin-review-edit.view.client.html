@@ -1,0 +1,92 @@
+<div ng-include="'views/admin/templates/common/admin-navbar.view.client.html'"></div>
+
+<div class="pr-admin-head">
+    <h1>Administer Review</h1>
+</div>
+
+<div class="container">
+    <form novalidate
+          name="model.form">
+        <label for="reviewer">
+            Reviewer
+        </label>
+
+        <input id="reviewer"
+               class="form-control"
+               name="reviewerId"
+               ng-class="{'invalid-input': model.form.reviewerId.$error.required && model.form.$submitted}"
+               ng-model="model.review.reviewer._id"
+               required>
+
+        <label for="reviewerName">
+            Reviewer name
+        </label>
+
+        <input id="reviewerName"
+               class="form-control"
+               name="reviewerName"
+               ng-class="{'invalid-input': model.form.reviewerName.$error.required && model.form.$submitted}"
+               ng-model="model.review.reviewer.name"
+               required>
+
+        <label for="onBook">
+            On Book
+        </label>
+        <input id="onBook"
+               class="form-control"
+               name="onBook"
+               ng-class="{'invalid-input': model.form.onBook.$error.required && model.form.$submitted}"
+               ng-model="model.review.onBook"
+               required>
+
+        <label for="content">
+            Content
+        </label>
+        <textarea id="content"
+                  class="form-control"
+                  ng-model="model.review.content"
+                  rows="5">
+            </textarea>
+
+        <label>
+            Rating
+        </label>
+
+        <ng-rate-it ng-model="model.review.rating"
+                    step="1"
+                    resetable="false">
+        </ng-rate-it>
+
+        <div ng-show="model.message"
+             class="alert alert-success">
+            {{model.message}}
+        </div>
+
+        <div ng-show="model.error"
+             class="alert alert-danger">
+            {{model.error}}
+        </div>
+
+        <div ng-show="model.review._id">
+            <input class="btn btn-block btn-success"
+                   ng-click="model.updateReview()"
+                   value="Update"
+                   type="submit">
+
+            <input class="btn btn-block btn-danger"
+                   ng-click="model.deleteReview()"
+                   type="submit"
+                   value="Delete">
+        </div>
+
+        <div ng-show="!model.review._id">
+            <input class="btn btn-block btn-success"
+                   ng-click="model.createReview()"
+                   value="Create"
+                   type="submit">
+        </div>
+
+    </form>
+
+
+</div>

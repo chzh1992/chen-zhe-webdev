@@ -1,0 +1,391 @@
+<div ng-include="'views/admin/templates/common/admin-navbar.view.client.html'"></div>
+
+<div class="pr-admin-head">
+    <h1>Administer User</h1>
+</div>
+
+<div ng-show="model.userEditing" class="container">
+
+    <form novalidate
+          name="model.form">
+        <div ng-show="model.userEditing._id">
+            <label for="userId">
+                id
+            </label>
+            <input class="form-control"
+                   ng-model="model.userEditing._id"
+                   id="userId"
+                   readonly>
+        </div>
+
+        <div ng-show="!model.userEditing._id">
+            <label for="username">
+                Username
+            </label>
+            <input class="form-control"
+                   ng-model="model.userEditing.username"
+                   ng-class="{'invalid-input': model.form.username.$error.required && model.form.$submitted}"
+                   id="username"
+                   name="username"
+                   required>
+
+            <label for="password">
+                Password
+            </label>
+            <input class="form-control"
+                   ng-model="model.userEditing.password"
+                   ng-class="{'invalid-input': model.form.password.$error.required && model.form.$submitted}"
+                   name="password"
+                   id="password"
+                   required>
+        </div>
+
+        <div ng-show="model.userEditing._id">
+            <label for="usernameNotEditable">
+                Username
+            </label>
+            <input class="form-control"
+                   ng-model="model.userEditing.username"
+                   id="usernameNotEditable"
+                   readonly>
+
+            <label for="passwordNotEditable">
+                Password
+            </label>
+            <input class="form-control"
+                   ng-model="model.userEditing.password"
+                   id="passwordNotEditable"
+                   readonly>
+        </div>
+
+
+        <label for="role">
+            Role
+        </label>
+        <select class="form-control"
+                ng-class="{'invalid-input': model.form.role.$error.required && model.form.$submitted}"
+                name="role"
+                ng-model="model.userEditing.role"
+                id="role"
+                required>
+            <option>READER</option>
+            <option>AUTHOR</option>
+            <option>ADMIN</option>
+        </select>
+
+        <label for="email">
+            Email
+        </label>
+        <input class="form-control"
+               ng-model="model.userEditing.email"
+               id="email">
+
+        <label for="country">
+            Country
+        </label>
+        <input class="form-control"
+               ng-model="model.userEditing.country"
+               id="country">
+
+        <label for="nativeLanguage">
+            Native language
+        </label>
+        <input class="form-control"
+               ng-model="model.userEditing.nativeLanguage"
+               id="nativeLanguage">
+
+        <div ng-show="model.userEditing.role == 'AUTHOR'">
+            <label>
+                Claimed works
+            </label>
+
+            <span data-toggle="collapse"
+                  data-target="#addClaimedWork">
+                <span class="glyphicon glyphicon-plus"></span>
+            </span>
+
+            <div class="pr-admin-relationship-input">
+                <div class="collapse" id="addClaimedWork">
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default"
+                                    type="button"
+                                    data-toggle="collapse"
+                                    data-target="#addClaimedWork"
+                                    ng-click="model.addNewClaimedWork()">
+                                <span class="glyphicon glyphicon-ok"></span>
+                            </button>
+                        </span>
+                        <input class="form-control"
+                               placeholder="Input libri ID..."
+                               ng-model="model.newClaimedWork">
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-sm-3"
+                     ng-repeat="book in model.userEditing.authoredBooks">
+                    {{book}}
+                    <span class="pull-right">
+                        <span ng-click="model.removeAuthoredBook(book)" class="glyphicon glyphicon-remove"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row pr-admin-user-relationship">
+            <div class="col-sm-3">
+                <div>
+                    following
+                    <span data-toggle="collapse"
+                          data-target="#addFollowing"
+                          class="pull-right">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </span>
+                </div>
+
+                <div class="pr-admin-relationship-input">
+                    <div class="collapse" id="addFollowing">
+                        <div class="input-group">
+                            <input class="form-control"
+                                   placeholder="Input user ID..."
+                                   ng-model="model.newFollowing">
+                            <span class="input-group-btn">
+                            <button class="btn btn-default"
+                                    type="button"
+                                    data-toggle="collapse"
+                                    data-target="#addFollowing"
+                                    ng-click="model.addNewFollowing()">
+                                <span class="glyphicon glyphicon-ok"></span>
+                            </button>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+
+                <ul>
+                    <li ng-repeat="following in model.userEditing.following">
+                        <a href="#!/admin/user/{{following}}"> {{following}}</a>
+                        <span class="pull-right">
+                            <span ng-click="model.removeFollowing(following)" class="glyphicon glyphicon-remove"></span>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-sm-3">
+                <div>
+                    want to read
+                    <span data-target="#addWantToRead"
+                          data-toggle="collapse"
+                          class=" pull-right">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </span>
+                </div>
+
+                <div class="pr-admin-relationship-input">
+                    <div class="collapse" id="addWantToRead">
+                        <div class="input-group">
+                            <input class="form-control"
+                                   placeholder="Input libri ID..."
+                                   ng-model="model.newWantToRead">
+                            <span class="input-group-btn">
+                            <button class="btn btn-default"
+                                    type="button"
+                                    data-toggle="collapse"
+                                    data-target="#addWantToRead"
+                                    ng-click="model.addNewWantToRead()">
+                                <span class="glyphicon glyphicon-ok"></span>
+                            </button>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+
+                <ul>
+                    <li ng-repeat="book in model.userEditing.bookshelf.wantToRead">
+                        <a href="#!/admin/book/{{book}}">{{book}}</a>
+                        <div class="btn-group pull-right">
+                            <span class="dropdown-toggle"
+                                  data-toggle="dropdown">
+                                <span class="glyphicon glyphicon-collapse-down"></span>
+                            </span>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li>
+                                    <a ng-click="model.moveBook(book,'READING')">
+                                        Move to Reading
+                                    </a>
+                                </li>
+                                <li>
+                                    <a ng-click="model.moveBook(book,'HAVEREAD')">
+                                        Move to Have Read
+                                    </a>
+                                </li>
+                                <li>
+                                    <a ng-click="model.removeFromBookshelf(book)">
+                                        Remove
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-sm-3">
+                <div>
+                    reading
+                    <span data-target="#addReading"
+                          data-toggle="collapse"
+                          class=" pull-right">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </span>
+                </div>
+
+                <div class="pr-admin-relationship-input">
+                    <div class="collapse" id="addReading">
+                        <div class="input-group">
+                            <input class="form-control"
+                                   placeholder="Input libri ID..."
+                                   ng-model="model.newReading">
+                            <span class="input-group-btn">
+                            <button class="btn btn-default"
+                                    type="button"
+                                    data-toggle="collapse"
+                                    data-target="#addReading"
+                                    ng-click="model.addNewReading()">
+                                <span class="glyphicon glyphicon-ok"></span>
+                            </button>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+
+                <ul>
+                    <li ng-repeat="book in model.userEditing.bookshelf.reading">
+                        <a href="#!/admin/book/{{book}}">{{book}}</a>
+                        <div class="btn-group pull-right">
+                            <span class="dropdown-toggle"
+                                  data-toggle="dropdown">
+                                <span class="glyphicon glyphicon-collapse-down"></span>
+                            </span>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li>
+                                    <a ng-click="model.moveBook(book,'WANTTOREAD')">
+                                        Move to Want To Read
+                                    </a>
+                                </li>
+                                <li>
+                                    <a ng-click="model.moveBook(book,'HAVEREAD')">
+                                        Move to Have Read
+                                    </a>
+                                </li>
+                                <li>
+                                    <a ng-click="model.removeFromBookshelf(book)">
+                                        Remove
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-sm-3">
+                <div>
+                    have read
+                    <span data-target="#addHaveRead"
+                          data-toggle="collapse"
+                          class=" pull-right">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </span>
+                </div>
+
+                <div class="pr-admin-relationship-input">
+                    <div class="collapse" id="addHaveRead">
+                        <div class="input-group">
+                            <input class="form-control"
+                                   placeholder="Input libri ID..."
+                                   ng-model="model.newHaveRead">
+                            <span class="input-group-btn">
+                            <button class="btn btn-default"
+                                    type="button"
+                                    data-toggle="collapse"
+                                    data-target="#addHaveRead"
+                                    ng-click="model.addNewHaveRead()">
+                                <span class="glyphicon glyphicon-ok"></span>
+                            </button>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+
+                <ul>
+                    <li ng-repeat="book in model.userEditing.bookshelf.haveRead">
+                        <a href="#!/admin/book/{{book}}">{{book}}</a>
+                        <div class="btn-group pull-right">
+                            <span class="dropdown-toggle"
+                                  data-toggle="dropdown">
+                                <span class="glyphicon glyphicon-collapse-down"></span>
+                            </span>
+                            <ul class="dropdown-menu dropdown-menu-left">
+                                <li>
+                                    <a ng-click="model.moveBook(book,'WANTTOREAD')">
+                                        Move to Want To Read
+                                    </a>
+                                </li>
+                                <li>
+                                    <a ng-click="model.moveBook(book,'READING')">
+                                        Move to Reading
+                                    </a>
+                                </li>
+                                <li>
+                                    <a ng-click="model.removeFromBookshelf(book)">
+                                        Remove
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div ng-show="model.message"
+             class="alert alert-success">
+            {{model.message}}
+        </div>
+
+        <div ng-show="model.error"
+             class="alert alert-danger">
+            {{model.error}}
+        </div>
+
+
+        <div ng-show="model.userEditing._id">
+
+            <input class="btn btn-block btn-success"
+                   ng-click="model.updateUser()"
+                   value="Update"
+                   type="submit">
+
+            <a class="btn btn-block btn-danger"
+               ng-click="model.deleteUser()">
+                Delete
+            </a>
+        </div>
+
+        <div ng-show="!model.userEditing._id">
+            <input class="btn btn-block btn-success"
+                   ng-click="model.createUser()"
+                   type="submit"
+                   value="Create">
+        </div>
+    </form>
+
+
+</div>

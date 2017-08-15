@@ -1,0 +1,50 @@
+<div ng-include="'views/admin/templates/common/admin-navbar.view.client.html'"></div>
+
+<div class="pr-admin-head">
+    <h1>Administer Review</h1>
+    <a class="btn btn-default" ng-click="model.findAllReviews()">Display all reviews</a>
+    <a class="btn btn-default" href="#!/admin/review/new">Create a new review</a>
+</div>
+
+<div ng-include="'views/admin/templates/common/admin-searchbar.view.client.html'"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-2 hidden-xs"></div>
+        <div class="col-sm-8 col-xs-12">
+            <div class="list-group">
+                <div class="list-group-item">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            Review ID
+                        </div>
+                        <div class="col-xs-4">
+                            Reviewer
+                        </div>
+                        <div class="col-xs-4">
+                            On Book
+                        </div>
+                    </div>
+                </div>
+
+                <div class="list-group-item"
+                     ng-repeat="review in model.reviews"
+                     ng-show="model.reviews">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <a href="#!/admin/review/{{review._id}}">{{review._id}}</a>
+                        </div>
+                        <div class="col-xs-4">
+                            {{review.reviewer._id}}
+                        </div>
+                        <div class="col-xs-4">
+                            {{review.onBook}}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-sm-2 hidden-xs"></div>
+    </div>
+</div>

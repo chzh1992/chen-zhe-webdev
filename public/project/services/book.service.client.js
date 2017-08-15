@@ -6,13 +6,15 @@
     function BookService($http){
         var api = {
             findBooksByTerm: findBooksByTerm,
-            findBookById : findBookById,
             findBookByGoodreadsId: findBookByGoodreadsId,
-            createBook: createBook,
             getWorkInformation: getWorkInformation,
             importGoodreadsBook: importGoodreadsBook,
+
+            findBookById : findBookById,
+            createBook: createBook,
             updateBook: updateBook,
-            deleteBook: deleteBook
+            deleteBook: deleteBook,
+            findAllBooks: findAllBooks
         };
         return api;
 
@@ -51,14 +53,14 @@
             return $http.put(url,book);
         }
 
-        function adminSearch(searchText){
-            var url = "/api/project/admin/search/book/" + searchText;
-            return $http.get(url);
-        }
-
         function deleteBook(libriId){
             var url = "/api/project/book/" + libriId;
             return $http.delete(url);
+        }
+
+        function findAllBooks(libriId){
+            var url = '/api/project/book';
+            return $http.get(url);
         }
     }
 })();

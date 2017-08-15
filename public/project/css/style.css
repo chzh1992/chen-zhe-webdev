@@ -85,7 +85,6 @@ select.form-control,
 }
 
 .pr-login-window{
-    width: 35%;
     text-align: center;
 }
 
@@ -123,7 +122,6 @@ select.form-control,
 }
 
 .pr-register-window{
-    width: 45%;
     text-align: center;
 }
 
@@ -169,24 +167,6 @@ select.form-control,
 
 .pr-book-detail-image{
     height: 300px;
-}
-
-@media (max-width: 992px) and (min-width: 768px){
-    .pr-book-detail-image{
-        width:100%;
-        height: auto;
-    }
-}
-
-@media (max-width: 768px){
-    .pr-book-detail-image{
-        height: 300px;
-        margin-left: 50%;
-        transform: translate(-50%,0);
-    }
-    .pr-home-searchbar{
-        width: 90%;
-    }
 }
 
 .pr-book-detail{
@@ -310,8 +290,7 @@ select.form-control,
 }
 
 .pr-personal-page-title{
-    width: 40%;
-    height: 100px;
+    text-align: center;
     margin-bottom: 50px;
 }
 
@@ -377,4 +356,35 @@ select.form-control,
     text-align: center;
 }
 
-@media
+.pr-admin-head a{
+    margin: 20px;
+    margin-top: 5px;
+}
+
+.pr-admin-user-relationship{
+    min-height: 200px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.pr-admin-relationship-input{
+    margin: 5px;
+}
+
+@media (max-width: 992px) and (min-width: 768px){
+    .pr-book-detail-image{
+        width:100%;
+        height: auto;
+    }
+}
+
+@media (max-width: 768px){
+    .pr-book-detail-image{
+        height: 300px;
+        margin-left: 50%;
+        transform: translate(-50%,0);
+    }
+    .pr-home-searchbar{
+        width: 90%;
+    }
+}

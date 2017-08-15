@@ -2,14 +2,15 @@ var mongoose = require('mongoose');
 var bookSchema = require('./book.schema.server');
 var bookModel = mongoose.model('ProjectBookModel',bookSchema);
 
-bookModel.findBookById = findBookById;
 bookModel.findBookByGoodreadsId = findBookByGoodreadsId;
-bookModel.createBook = createBook;
 bookModel.findBooksByTerm = findBooksByTerm;
 bookModel.importGoodreadsBook = importGoodreadsBook;
+
+bookModel.findBookById = findBookById;
+bookModel.createBook = createBook;
 bookModel.updateBook = updateBook;
-bookModel.adminSearch = adminSearch;
 bookModel.deleteBook = deleteBook;
+bookModel.findAllBooks = findAllBooks;
 
 module.exports = bookModel;
 
@@ -40,16 +41,13 @@ function updateBook(libriId,book){
     return bookModel.update({_id: libriId},book);
 }
 
-function adminSearch(searchText){
-    return bookModel.find({ $or :[
-        {_id: searchText},
-        {title: {'$regex' : searchText}},
-        {author: {'$regex' : searchText}}
-    ]});
-}
 
 function deleteBook(libriId){
     return bookModel.remove({_id: libriId});
+}
+
+function findAllBooks(){
+    return bookModel.find();
 }
 
 

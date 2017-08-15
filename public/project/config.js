@@ -91,24 +91,72 @@
                 }
             })
             .when('/admin/user',{
-                templateUrl: "views/admin/templates/admin-user.view.client.html",
+                templateUrl: "views/admin/templates/user/admin-user.view.client.html",
                 controller: "AdminUserController",
                 controllerAs: "model",
                 resolve: {
                     Admin: checkAdmin
                 }
             })
+            .when('/admin/user/new',{
+                templateUrl: "views/admin/templates/user/admin-user-edit.view.client.html",
+                controller: "AdminUserNewController",
+                controllerAs: "model",
+                resolve: {
+                    Admin: checkAdmin
+                }
+            })
+            .when('/admin/user/:userId',{
+                templateUrl: "views/admin/templates/user/admin-user-edit.view.client.html",
+                controller: "AdminUserEditController",
+                controllerAs: "model",
+                resolve: {
+                    Admin: checkAdmin
+                }
+            })
             .when('/admin/book',{
-                templateUrl: "views/admin/templates/admin-book.view.client.html",
+                templateUrl: "views/admin/templates/book/admin-book.view.client.html",
                 controller: "AdminBookController",
                 controllerAs: "model",
                 resolve: {
                     Admin: checkAdmin
                 }
             })
+            .when('/admin/book/new',{
+                templateUrl: "views/admin/templates/book/admin-book-edit.view.client.html",
+                controller: "AdminBookNewController",
+                controllerAs: "model",
+                resolve: {
+                    Admin: checkAdmin
+                }
+            })
+            .when('/admin/book/:libriId',{
+                templateUrl: "views/admin/templates/book/admin-book-edit.view.client.html",
+                controller: "AdminBookEditController",
+                controllerAs: "model",
+                resolve: {
+                    Admin: checkAdmin
+                }
+            })
             .when('/admin/review',{
-                templateUrl: "views/admin/templates/admin-review.view.client.html",
+                templateUrl: "views/admin/templates/review/admin-review.view.client.html",
                 controller: "AdminReviewController",
+                controllerAs: "model",
+                resolve: {
+                    Admin: checkAdmin
+                }
+            })
+            .when('/admin/review/new',{
+                templateUrl: "views/admin/templates/review/admin-review-edit.view.client.html",
+                controller: "AdminReviewNewController",
+                controllerAs: "model",
+                resolve: {
+                    Admin: checkAdmin
+                }
+            })
+            .when('/admin/review/:reviewId',{
+                templateUrl: "views/admin/templates/review/admin-review-edit.view.client.html",
+                controller: "AdminReviewEditController",
                 controllerAs: "model",
                 resolve: {
                     Admin: checkAdmin

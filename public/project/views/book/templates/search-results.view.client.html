@@ -17,11 +17,11 @@
                 <div class="list-group-item"
                      ng-repeat="book in model.libriBooks">
                     <div class="row">
-                        <div class="col-xs-2">
+                        <div class="col-sm-2">
                             <img ng-src="{{book.image_url}}">
                         </div>
-                        <div class="col-xs-1"></div>
-                        <div class="col-xs-9">
+                        <div class="col-sm-1 hidden-xs"></div>
+                        <div class="col-sm-9">
                             <h3><a href="#!/book/libriId={{book._id}}">{{book.title}}</a></h3>
                             <h4>
                                 <b>by</b> {{book.author}}
@@ -50,11 +50,11 @@
                 <div class="list-group-item"
                    ng-repeat="book in model.goodreadsBooks">
                     <div class="row">
-                        <div class="col-xs-2">
+                        <div class="col-sm-2">
                             <img ng-src="{{book.image_url}}">
                         </div>
-                        <div class="col-xs-1"></div>
-                        <div class="col-xs-9">
+                        <div class="col-sm-1 hidden-xs"></div>
+                        <div class="col-sm-9">
                             <h3><a href="#!/book/goodreadsId={{book.id}}">{{book.title}}</a></h3>
                             <h4>
                                 <b>by</b> {{book.author}}

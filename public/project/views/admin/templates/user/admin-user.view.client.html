@@ -1,0 +1,54 @@
+<div ng-include="'views/admin/templates/common/admin-navbar.view.client.html'"></div>
+
+<div class="pr-admin-head">
+    <h1>Administer User</h1>
+
+    <a class="btn btn-default"
+       ng-click="model.getAllUser()">
+        Display all users
+    </a>
+
+    <a class="btn btn-default"
+       href="#!/admin/user/new">
+        Create a new user
+    </a>
+</div>
+
+<div ng-include="'views/admin/templates/common/admin-searchbar.view.client.html'"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-2 hidden-xs"></div>
+        <div class="col-sm-8 col-xs-12">
+            <div class="list-group">
+                <div class="list-group-item">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            User ID
+                        </div>
+                        <div class="col-xs-6">
+                            Username
+                        </div>
+                    </div>
+                </div>
+
+                <div class="list-group-item"
+                     ng-repeat="user in model.userFound"
+                     ng-show="model.userFound">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <a href="#!/admin/user/{{user._id}}">{{user._id}}</a>
+                        </div>
+                        <div class="col-xs-6">
+                            {{user.username}}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-sm-2 hidden-xs"></div>
+    </div>
+</div>
+
+

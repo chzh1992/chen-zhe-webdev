@@ -2,52 +2,53 @@
 
 <div class="pr-admin-head">
     <h1>Administer Book</h1>
+
 </div>
 
-<div class="pr-menubar pr-horizontal-center">
-    <div class="input-group">
-        <input class="form-control"
-               type="text"
-               ng-model="model.searchText"
-               placeholder="Search by id">
-        <span class="input-group-btn">
-                <a ng-click="model.search()"
-                   class="btn btn-default">
-                    <span class="glyphicon glyphicon-search"></span>
-                </a>
-            </span>
-    </div>
-</div>
+<div class="container">
 
-<div ng-show="model.book">
-    <div class="container">
+    <form novalidate
+          name="model.form">
+
         <label for="title">
             Title
         </label>
+
         <input class="form-control"
+               name="title"
+               ng-class="{'invalid-input': model.form.title.$error.required && model.form.$submitted}"
                id="title"
-               ng-model="model.book.title">
+               ng-model="model.book.title"
+               required>
 
         <label for="author">
             Author
         </label>
+
         <input class="form-control"
                id="author"
-               ng-model="model.book.author">
+               name="author"
+               ng-class="{'invalid-input': model.form.author.$error.required && model.form.$submitted}"
+               ng-model="model.book.author"
+               required>
 
         <label for="publisher">
             Publisher
         </label>
         <input class="form-control"
+               name="publisher"
                id="publisher"
-               ng-model="model.book.publisher">
+               ng-class="{'invalid-input': model.form.publisher.$error.required && model.form.$submitted}"
+               ng-model="model.book.publisher"
+               required>
 
         <label for="description">
             Description
         </label>
         <textarea class="form-control"
                   id="description"
-                  ng-model="model.book.description">
+                  ng-model="model.book.description"
+                  rows="5">
         </textarea>
 
         <label for="publicationYear">
@@ -81,26 +82,39 @@
         <label for="imageUrl">
             Image url
         </label>
+
         <input class="form-control"
                id="imageUrl"
                ng-model="model.book.image_url">
-
-        <a class="btn btn-block btn-success"
-           ng-click="model.updateBook()">
-            update
-        </a>
-
-        <a class="btn btn-block btn-danger"
-           ng-click="model.deleteBook()">
-            Delete
-        </a>
 
         <div ng-show="model.message"
              class="alert alert-success">
             {{model.message}}
         </div>
 
+        <div ng-show="model.error"
+             class="alert alert-danger">
+            {{model.error}}
+        </div>
 
-    </div>
+        <div ng-show="model.book._id">
+            <input class="btn btn-block btn-success"
+                   value="Update"
+                   type="submit"
+                   ng-click="model.updateBook()">
+
+            <input class="btn btn-block btn-danger"
+                   value="Delete"
+                   type="submit"
+                   ng-click="model.deleteBook()">
+        </div>
+
+        <div ng-show="!model.book._id">
+            <input class="btn btn-block btn-success"
+                   value="Create"
+                   type="submit"
+                   ng-click="model.createBook()">
+        </div>
+    </form>
+
 </div>
-
