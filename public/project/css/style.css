@@ -73,6 +73,10 @@ select.form-control,
     margin-bottom: 20px;
 }
 
+.pr-info-box .list-group-item{
+    border: none;
+}
+
 #secondSearchBar{
     visibility: hidden;
     width: 40%;
