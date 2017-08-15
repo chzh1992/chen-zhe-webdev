@@ -29,6 +29,6 @@ var userSchema = mongoose.Schema({
             {type: mongoose.Schema.Types.ObjectId, ref: "ProjectBookModel"}
         ]
     },
-    photo_url: {type: String}
+    photo_url: {type: String, default: 'avatar.png'}
 },{collection: 'project_user'});
 module.exports = userSchema;
