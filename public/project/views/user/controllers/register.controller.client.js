@@ -31,7 +31,11 @@
                 UserService
                     .register(model.user)
                     .then(function (response) {
-                        $location.url("/personal-page");
+                        if (model.user.role == 'ADMIN'){
+                            $location.url('/admin');
+                        } else{
+                            $location.url("/personal-page");
+                        }
                     });
             }
             function setErrorMessage(response){
