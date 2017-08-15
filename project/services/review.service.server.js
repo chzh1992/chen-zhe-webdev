@@ -8,6 +8,7 @@ app.get("/api/project/book/:libriId/rating",getAverageRating);
 app.put("/api/project/review/:reviewId/rating",updateRating);
 app.post("/api/project/review/rating",createRatingReview);
 app.get("/api/project/number/review/:libriId",getBookReviewNumber);
+app.get("/api/project/review/:userId",findReviewByUser);
 
 app.post("/api/project/review",createReview);
 app.put("/api/project/review/:reviewId",updateReview);
@@ -175,4 +176,15 @@ function findAllReviews(req,res){
                 res.json(reviews);
             }
         );
+}
+
+function findReviewByUser(req,res){
+    var userId = req.params['userId'];
+    reviewModel
+        .findReviewsByUser(userId)
+        .then(
+            function (reviews){
+                res.json(reviews);
+            }
+        )
 }

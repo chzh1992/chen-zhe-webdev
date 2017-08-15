@@ -3,7 +3,7 @@
         .module('Libri')
         .controller('PublicProfileController',PublicProfileController);
 
-    function PublicProfileController(UserService,$routeParams,$location){
+    function PublicProfileController(UserService,$routeParams,$location,ReviewService){
         var model = this;
 
         model.getSearchText = getSearchText;
@@ -17,11 +17,11 @@
                 .then(
                     function (response){
                         model.user = response.data;
-                        model.user.bookNumber = getUserBookNumber(model.user);
+                        getUserBookNumber();
+                        getUserReviews();
+                        getUserFollowerNumber();
                         if (model.user.role == 'AUTHOR'){
                             model.user.workNumber = model.user.authoredBooks.length;
-                            model.user.mostAdmiredWork = getMostAdmiredWork(model.user.authoredBooks);
-                            model.user.averageRating = getAverageRating(model.user.authoredBooks);
                         }
                     }
                 );
@@ -42,30 +42,32 @@
         }
         init();
 
-        function getUserBookNumber(user){
-            return user.bookshelf.wantToRead.length +
-                user.bookshelf.reading.length +
-                user.bookshelf.haveRead.length;
+        function getUserBookNumber(){
+            model.user.bookNumber = model.user.bookshelf.wantToRead.length +
+                model.user.bookshelf.reading.length +
+                model.user.bookshelf.haveRead.length;
         }
 
-        function getMostAdmiredWork(works){
-            var mostAdmiredWork = {average_rating: 0};
-            for (var work in works){
-                if (works[work].average_rating > mostAdmiredWork.average_rating){
-                    mostAdmiredWork = works[work];
-                }
-            }
-            return mostAdmiredWork;
+        function getUserFollowerNumber(){
+            UserService
+                .getUserFollowers(model.user._id)
+                .then(
+                    function (response){
+                        model.user.followerNumber = response.data.length;
+                    }
+                );
         }
 
-        function getAverageRating(works){
-            var totalScore = 0;
-            for (var work in works){
-                totalScore += Number(works[work].average_rating);
-            }
-            return works.length === 0? 0 : totalScore/works.length;
+        function getUserReviews(){
+            ReviewService
+                .findReviewsByUser(model.user._id)
+                .then(
+                    function (response){
+                        model.user.reviews = response.data;
+                        model.user.reviewNumber = response.data.length;
+                    }
+                )
         }
-
 
         function toggleFollowingStatus(){
             if (!model.viewer){

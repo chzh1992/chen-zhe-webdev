@@ -13,6 +13,7 @@ userModel.updateProfile = updateProfile;
 userModel.getHaveReadNumber = getHaveReadNumber;
 userModel.getReadingNumber = getReadingNumber;
 userModel.getWantToReadNumber = getWantToReadNumber;
+userModel.updatePhotoUrl = updatePhotoUrl;
 
 userModel.createUser = createUser;
 userModel.findUserById = findUserById;
@@ -127,6 +128,14 @@ function getReadingNumber(libriId){
 function getWantToReadNumber(libriId){
     return userModel
         .count({'bookshelf.wantToRead':libriId});
+}
+
+function updatePhotoUrl(userId,url){
+    return userModel
+        .update({_id:userId}, {
+        $set :{
+            photo_url: url
+        }});
 }
 
 function deleteUser(userId){

@@ -3,7 +3,7 @@
         .module('Libri')
         .controller('PersonalPageProfileController',PersonalPageProfileController);
 
-    function PersonalPageProfileController(UserService,$location){
+    function PersonalPageProfileController(UserService,$location,ReviewService){
         var model = this;
 
         model.getSearchText = getSearchText;
@@ -18,7 +18,9 @@
                     function (response){
                         model.user = response.data;
                         for (var following in model.user.following){
-                            model.user.following[following].bookNumber = getUserBookNumber(model.user.following[following]);
+                            getUserBookNumber(model.user.following[following]);
+                            getUserFollowerNumber(model.user.following[following]);
+                            getuserReviewNumber(model.user.following[following]);
                         }
                         getUserFollowers();
                     }
@@ -33,14 +35,36 @@
                     function (response) {
                         model.user.followers = response.data;
                         for (var follower in model.user.followers) {
-                            model.user.followers[follower].bookNumber = getUserBookNumber(model.user.followers[follower]);
+                            getUserBookNumber(model.user.followers[follower]);
+                            getUserFollowerNumber(model.user.followers[follower]);
+                            getUserReviewNumber(model.user.followers[follower]);
                         }
                     }
                 );
         }
 
         function getUserBookNumber(user){
-            return user.bookshelf.wantToRead.length + user.bookshelf.reading.length + user.bookshelf.haveRead.length;
+            user.bookNumber = user.bookshelf.wantToRead.length + user.bookshelf.reading.length + user.bookshelf.haveRead.length;
+        }
+
+        function getUserFollowerNumber(user){
+            UserService
+                .getUserFollowers(user._id)
+                .then(
+                    function (response){
+                        user.followerNumber = response.data.length;
+                    }
+                )
+        }
+
+        function getUserReviewNumber(user){
+            ReviewService
+                .findReviewsByUser(user._id)
+                .then(
+                    function(response){
+                        user.reviewNumber = response.data.length;
+                    }
+                )
         }
 
         function logout(){

@@ -29,6 +29,6 @@ var userSchema = mongoose.Schema({
             {type: mongoose.Schema.Types.ObjectId, ref: "ProjectBookModel"}
         ]
     },
-    photo_url: String
+    photo_url: {type: String}
 },{collection: 'project_user'});
 module.exports = userSchema;

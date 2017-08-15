@@ -251,7 +251,8 @@ select.form-control,
 }
 
 .pr-user-photo{
-    width: 150px;
+    width: 100px;
+    height: 125px;
 }
 
 .pr-user-statistics{
@@ -281,7 +282,8 @@ select.form-control,
 }
 
 .pr-user-small-photo{
-    height: 15px;
+    height: 30px;
+    width: 30px; 
     margin-right: 5px;
 }
 
@@ -295,7 +297,8 @@ select.form-control,
 }
 
 .pr-user-photo-personal{
-    width: 95%;
+    width: 200px;
+    height: 150px;
     margin-bottom: 15px;
 }
 
@@ -386,5 +389,13 @@ select.form-control,
     }
     .pr-home-searchbar{
         width: 90%;
+    }
+    .pr-user-basic-information{
+        position: static;
+        width: 100%;
+        border: none;
+    }
+    .pr-user-further-information{
+        margin-left: 0px;
     }
 }

@@ -3,7 +3,7 @@
         .module('Libri')
         .controller('PersonalPageBookshelfController',PersonalPageBookshelfController);
 
-    function PersonalPageBookshelfController(UserService,$location,CurrentUser){
+    function PersonalPageBookshelfController(UserService,$location,CurrentUser,ReviewService){
         var model = this;
 
         model.getSearchText = getSearchText;
@@ -18,10 +18,29 @@
                     function (response){
                         model.user = response.data;
                         model.user.role = CurrentUser.role;
+                        for (var book in model.user.wantToRead){
+                            getLibriRating(model.user.wantToRead[book]);
+                        }
+                        for (var book in model.user.reading){
+                            getLibriRating(model.user.reading[book]);
+                        }
+                        for (var book in model.user.haveRead){
+                            getLibriRating(model.user.haveRead[book]);
+                        }
                     }
                 )
         }
         init();
+
+        function getLibriRating(book){
+            ReviewService
+                .getAverageRating(book._id)
+                .then(
+                    function (response){
+                        book.average_rating = response.data.rating;
+                    }
+                )
+        }
 
         function logout(){
             UserService

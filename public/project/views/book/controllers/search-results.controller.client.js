@@ -3,7 +3,7 @@
         .module('Libri')
         .controller('SearchResultController',SearchResultController);
 
-    function SearchResultController(BookService,$routeParams,GoodreadsService,UserService,$location){
+    function SearchResultController(BookService,$routeParams,GoodreadsService,UserService,$location,ReviewService){
         var model = this;
         var initSearchText = $routeParams['searchText'];
 
@@ -26,6 +26,9 @@
                 .then(
                     function (response){
                         model.libriBooks = response.data;
+                        for (var book in model.libriBooks){
+                            getLibriRating(model.libriBooks[book]);
+                        }
                     },function (error){}
                 );
             UserService
@@ -38,9 +41,19 @@
         }
         init();
 
+        function getLibriRating(book){
+            ReviewService
+                .getAverageRating(book._id)
+                .then(
+                    function (response){
+                        book.average_rating = response.data.rating;
+                    }
+                )
+        }
+
         function goodreadsPageChanged(){
             GoodreadsService
-                .searchGoodreads(getSearchText(),model.currentGoodreadsPage)
+                .searchGoodreads(initSearchText,model.currentGoodreadsPage)
                 .then(
                     function (response){
                         model.goodreadsBooks = response.data.work;

@@ -11,6 +11,7 @@
             updateRating: updateRating,
             createRatingReview: createRatingReview,
             getBookReviewNumber: getBookReviewNumber,
+            findReviewsByUser: findReviewsByUser,
 
             createReview: createReview,
             updateReview: updateReview,
@@ -72,6 +73,11 @@
 
         function findAllReviews(){
             var url = "/api/project/review";
+            return $http.get(url);
+        }
+
+        function findReviewsByUser(userId){
+            var url ="/api/project/review/" + userId;
             return $http.get(url);
         }
     }

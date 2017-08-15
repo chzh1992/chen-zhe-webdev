@@ -50,11 +50,12 @@
 <hr>
 
 <div class="pr-user-basic-information">
-    <img src="{{model.user.photo_url}}" class="pr-user-photo pr-horizontal-center">
+    <img src="{{model.user.photo_url}}" class="pr-user-photo">
     <div class="pr-user-statistics">
         <h4>{{model.user.username}}</h4>
         <div ng-show="model.user.role == 'AUTHOR'">
-            Libri Author
+            <div>Libri Author</div>
+            <div>{{model.user.workNumber}} works</div>
         </div>
         <div>
             {{model.user.followerNumber}} followers
@@ -82,20 +83,6 @@
         </a>
     </div>
 
-
-    <div ng-show="model.user.role == 'AUTHOR'"
-         class="pr-author-statistics">
-        <hr>
-        <div>
-            {{model.user.workNumber}} works
-        </div>
-        <div>
-            most admired work: {{model.user.mostAdmiredWork.title}}
-        </div>
-        <div>
-            average rating: {{model.user.averageRating}}
-        </div>
-    </div>
 </div>
 
 <div class="pr-user-further-information">
@@ -105,11 +92,11 @@
         <div class="list-group">
             <div class="list-group-item" ng-repeat="book in model.user.bookshelf.reading">
                 <div class="row">
-                    <div class="col-xs-2">
+                    <div class="col-sm-2">
                         <img ng-src="{{book.image_url}}">
                     </div>
-                    <div class="col-xs-1"></div>
-                    <div class="col-xs-9">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-9">
                         <h4><a href="#!/book/libriId={{book._id}}">{{book.title}}</a></h4>
                         <h5>
                             <b>by</b> {{book.author}}
@@ -136,7 +123,6 @@
     <div class="pr-user-info-box">
         <h2>This user is following</h2>
         <hr>
-        <div ng-show="!model.user.following">None</div>
         <div class="list-group">
             <div class="list-group-item" ng-repeat="user in model.user.following">
                 <img src="{{user.photo_url}}" class="pr-user-small-photo">
@@ -148,7 +134,7 @@
     <div class="pr-user-info-box">
         <h2>This user's reviews</h2>
         <hr>
-        <div ng-repeat="review in model.book.reviews" class="pr-review">
+        <div ng-repeat="review in model.user.reviews" class="pr-review">
             <div class="row">
                 <div class="col-xs-2">
                     <ng-rate-it ng-model="review.rating"

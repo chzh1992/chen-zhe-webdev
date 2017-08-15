@@ -20,7 +20,7 @@
             <div class="row">
                 <div class="col-sm-1 hidden-xs"></div>
                 <div class="col-sm-3">
-                    <img src="http://lorempixel.com/400/200"
+                    <img src="{{model.user.photo_url}}"
                          class="pr-user-photo-personal pr-horizontal-center">
 
                     <form action="/api/project/upload"
@@ -31,6 +31,9 @@
                                 id="upload"
                                 required
                                 class="form-control">
+                        <input  name="userId"
+                                value="{{model.user._id}}"
+                                style="display: none"/>
                         <button type="submit"
                                 class="btn btn-block btn-primary">
                             Upload your photo
@@ -117,7 +120,7 @@
                      ng-repeat="user in model.user.following">
                     <div class="row">
                         <div class="col-sm-3 col-xs-6">
-                            <img ng-src="user.photo_url"
+                            <img ng-src="{{user.photo_url}}"
                                  class="pr-user-small-photo">
                             <a href="#!/profile/{{user._id}}">{{user.username}}</a>
                         </div>
@@ -162,7 +165,7 @@
                          ng-repeat="user in model.user.followers">
                         <div class="row">
                             <div class="col-sm-3 col-xs-6">
-                                <img ng-src="user.photo_url"
+                                <img ng-src="{{user.photo_url}}"
                                      class="pr-user-small-photo">
                                 <a href="#!/profile/{{user._id}}">{{user.username}}</a>
                             </div>

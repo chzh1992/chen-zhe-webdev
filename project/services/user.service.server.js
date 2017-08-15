@@ -2,7 +2,8 @@ var app = require('../../express');
 var bcrypt = require('bcrypt-nodejs');
 var passport = require('passport');
 var userModel = require('../models/user/user.model.sever');
-var projectBaseUrl = process.env.PROJECT_BASE_URL;
+var multer = require('multer');
+var upload = multer({ dest: __dirname+'/../../public/uploads' });
 
 app.post("/api/project/login",passport.authenticate('project'),login);
 app.post("/api/project/register",register);
@@ -32,12 +33,31 @@ app.delete("/api/project/user/:userId",isAdmin,deleteUser);
 app.get("/api/project/user",isAdmin,findAllUser);
 app.post("/api/project/user",isAdmin,createUser);
 
-app.get('/auth/facebook', passport.authenticate('facebook', { scope : ['profile', 'email'] }));
-app.get('/auth/facebook/callback',
-    passport.authenticate('facebook', {
-        successRedirect: projectBaseUrl + '#!/',
-        failureRedirect: projectBaseUrl + '#!/'
-    }));
+app.post("/api/project/upload", upload.single('myFile'), uploadImage);
+
+function uploadImage(req, res) {
+    var myFile        = req.file;
+    var userId = req.body.userId;
+
+    var originalname  = myFile.originalname; // file name on user's computer
+    var filename      = myFile.filename;     // new file name in upload folder
+    var path          = myFile.path;         // full path of uploaded file
+    var destination   = myFile.destination;  // folder where file is saved to
+    var size          = myFile.size;
+    var mimetype      = myFile.mimetype;
+
+    userModel
+        .updatePhotoUrl(userId,'/uploads/'+filename)
+        .then(
+            function (doc){
+                var host = req.url.split('/')[0];
+                res.writeHead(301,
+                    {Location: host+"/project/index.html#!/personal-page"}
+                );
+                res.end();
+            }
+        )
+}
 
 
 function checkLoggedIn(req,res){
