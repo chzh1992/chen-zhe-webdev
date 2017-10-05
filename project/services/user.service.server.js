@@ -4,10 +4,17 @@ var passport = require('passport');
 var userModel = require('../models/user/user.model.sever');
 var multer = require('multer');
 var upload = multer({ dest: __dirname+'/../../public/uploads' });
+var projectBaseUrl = process.env.PROJECT_BASE_URL;
 
 app.post("/api/project/login",passport.authenticate('project'),login);
 app.post("/api/project/register",register);
 app.post("/api/project/logout",logout);
+
+app.get("/auth/twitter",passport.authenticate('twitter'));
+app.get("/auth/twitter/callback",
+    passport.authenticate('twitter', {
+        successRedirect: projectBaseUrl + '#!/personal-page',
+        failureRedirect: projectBaseUrl+ '#!/login' }));
 
 app.get("/api/project/isAvailable/:username",isUsernameAvailable);
 app.get("/api/project/checkLoggedIn",checkLoggedIn);

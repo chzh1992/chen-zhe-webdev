@@ -1,6 +1,7 @@
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var TwitterStrategy = require('passport-twitter').Strategy;
 var bcrypt = require('bcrypt-nodejs');
 var assignmentUserModel = require('./assignment/models/user/user.model.server');
 var projectUserModel = require('./project/models/user/user.model.sever');
@@ -17,6 +18,13 @@ var googleConfig = {
     callbackURL  : process.env.GOOGLE_CALLBACK_URL
 };
 passport.use(new GoogleStrategy(googleConfig,googleStrategy));
+
+var twitterConfig = {
+    consumerKey: process.env.TWITTER_CONSUMER_KEY,
+    consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
+    callbackURL: process.env.TWITTER_CALLBACK_URL
+};
+passport.use(new TwitterStrategy(twitterConfig,twitterStrategy));
 
 function serializeUser(user, done) {
     var serializationUnit = {
@@ -90,6 +98,39 @@ function googleStrategy(token,refreshToken,profile,done){
         );
 }
 
+// for project
+function twitterStrategy(token,tokenSecret,profile,done){
+    projectUserModel
+        .findUserByTwitterId(profile.id)
+        .then(
+            function(user) {
+                if(user) {
+                    return done(null, user);
+                } else {
+                    var newTwitterUser = {
+                        username: profile.username,
+                        twitter: {
+                            id:    profile.id,
+                            token: token
+                        },
+                        photo_url: profile.photos[0].value,
+                        group: 'PROJECT'
+                    };
+                    return projectUserModel.createUser(newTwitterUser);
+                }
+            },
+            function(err) {
+                if (err) { return done(err); }
+            })
+        .then(
+            function(user){
+                return done(null, user);
+            },
+            function(err){
+                if (err) { return done(err); }
+            }
+        );
+}
 
 // userModel must've implemented findUserByUsername
 function localStrategyAgainstModel(userModel,username,password,done){

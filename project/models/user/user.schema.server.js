@@ -5,7 +5,7 @@ var userSchema = mongoose.Schema({
     role: {type: String, enum: ['READER','AUTHOR','ADMIN']},
     dateCreated: {type: Date, default: Date.now},
     email: String,
-    facebook: {
+    twitter: {
         id: String,
         token: String
     },

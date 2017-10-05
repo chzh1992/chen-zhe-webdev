@@ -88,13 +88,10 @@ select.form-control,
     box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(234, 10, 10, 0.6);
 }
 
-.pr-login-window{
-    text-align: center;
-}
-
 .pr-login-tab{
     border-radius: 10px;
     margin-bottom: 10px;
+    text-align: center;
 }
 
 .pr-login-form{
@@ -119,14 +116,13 @@ select.form-control,
     padding-bottom: 10px;
 }
 
-.pr-login-outside-tab-message a{
-    font-size: 20px;
-    margin-right: 40px;
-    color: whitesmoke;
+.pr-login-outside-tab-message div{
+    text-align: center;
 }
 
-.pr-register-window{
-    text-align: center;
+.pr-login-outside-tab-message a{
+    font-size: 16px;
+    color: whitesmoke;
 }
 
 

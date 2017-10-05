@@ -2,7 +2,6 @@ var mongoose = require('mongoose');
 var userSchema = require('./user.schema.server');
 var userModel = mongoose.model('ProjectUserModel',userSchema);
 
-
 userModel.findUserByUsername = findUserByUsername;
 userModel.putBookOnBookshelf = putBookOnBookshelf;
 userModel.toggleFollowingStatus = toggleFollowingStatus;
@@ -20,6 +19,7 @@ userModel.findUserById = findUserById;
 userModel.deleteUser = deleteUser;
 userModel.updateUser = updateUser;
 userModel.findAllUser = findAllUser;
+userModel.findUserByTwitterId = findUserByTwitterId;
 
 module.exports = userModel;
 
@@ -148,4 +148,8 @@ function updateUser(userId,user){
 
 function findAllUser(){
     return userModel.find();
+}
+
+function findUserByTwitterId(twitterId){
+    return userModel.findOne({'twitter.id' : twitterId});
 }
