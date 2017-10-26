@@ -33,6 +33,7 @@ app.put("/api/project/profile/:userId",updateProfile);
 app.get("/api/project/number/wantToRead/:libriId",getWantToReadNumber);
 app.get("/api/project/number/reading/:libriId",getReadingNumber);
 app.get("/api/project/number/haveRead/:libriId",getHaveReadNumber);
+app.get("/api/project/popUsers",getPopUsers);
 
 app.get("/api/project/user/:userId",isAdmin,findUserById);
 app.put("/api/project/user/:userId",isAdmin,updateUser);
@@ -436,4 +437,26 @@ function createUser(req,res){
                 res.json(user);
             }
         )
+}
+
+function getPopUsers(req,res){
+    var dummyPopUsers = ["Alice","Bob","Charlie","Dan","Eve","Frank","Grace","Heidi","Judy","Oscar"];
+    res.json(randomPicker(dummyPopUsers,5));
+
+}
+
+// That num is less than the length of the array is presumed
+function randomPicker(array,num){
+    return shuffleArray(array).slice(0,num);
+}
+
+function shuffleArray(array){
+    var l = array.length;
+    if (l <= 1){
+        return array;
+    }
+    var a = shuffleArray(array.slice(0,l-1));
+    var pos = Math.floor(Math.random()*a.length);
+    a.splice(pos,0,array[l-1]);
+    return a;
 }

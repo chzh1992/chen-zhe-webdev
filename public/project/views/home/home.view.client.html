@@ -66,17 +66,9 @@
                     <hr class="pr-hr">
                     <span class="pr-divider"></span>
                     <div class="row">
-                        <div class="col-sm-3">
-                            <img src="book.jpg">
-                        </div>
-                        <div class="col-sm-3">
-                            <img src="book.jpg">
-                        </div>
-                        <div class="col-sm-3">
-                            <img src="book.jpg">
-                        </div>
-                        <div class="col-sm-3">
-                            <img src="book.jpg">
+                        <div ng-repeat="book in model.popBooks" class="col-sm-3 pr-home-book-display">
+                            <img src="{{book.img_url}}">
+                            {{book.title}}
                         </div>
                     </div>
                 </div>
@@ -89,17 +81,9 @@
                     <hr>
                     <span class="pr-divider"></span>
                     <div class="row">
-                        <div class="col-sm-3">
-                            <img src="book.jpg">
-                        </div>
-                        <div class="col-sm-3">
-                            <img src="book.jpg">
-                        </div>
-                        <div class="col-sm-3">
-                            <img src="book.jpg">
-                        </div>
-                        <div class="col-sm-3">
-                            <img src="book.jpg">
+                        <div ng-repeat="book in model.newBooks" class="col-sm-3 pr-home-book-display">
+                            <img src="{{book.img_url}}">
+                            {{book.title}}
                         </div>
                     </div>
                 </div>
@@ -113,7 +97,8 @@
                     </span>
                     <hr>
                     <span class="pr-divider"></span>
-                    Dummy text
+                    <img src="{{model.quote.img_url}}" class="pr-quote-img"> <b>{{model.quote.content}}</b> <br>
+                    - {{model.quote.author}}
                 </div>
 
                 <div class="pr-info-box"
@@ -125,25 +110,9 @@
                     <span class="pr-divider"></span>
 
                     <div class="list-group">
-                        <div class="list-group-item">
+                        <div class="list-group-item" ng-repeat="user in model.popUsers">
                             <img src="avatar.png" class="pr-user-small-photo">
-                            Dummy User
-                        </div>
-                        <div class="list-group-item">
-                            <img src="avatar.png" class="pr-user-small-photo">
-                            Dummy User
-                        </div>
-                        <div class="list-group-item">
-                            <img src="avatar.png" class="pr-user-small-photo">
-                            Dummy User
-                        </div>
-                        <div class="list-group-item">
-                            <img src="avatar.png" class="pr-user-small-photo">
-                            Dummy User
-                        </div>
-                        <div class="list-group-item">
-                            <img src="avatar.png" class="pr-user-small-photo">
-                            Dummy User
+                            {{user}}
                         </div>
                     </div>
                 </div>

@@ -9,6 +9,9 @@
             findBookByGoodreadsId: findBookByGoodreadsId,
             getWorkInformation: getWorkInformation,
             importGoodreadsBook: importGoodreadsBook,
+            getPopBooks: getPopBooks,
+            getNewBooks: getNewBooks,
+            getQuote: getQuote,
 
             findBookById : findBookById,
             createBook: createBook,
@@ -60,6 +63,21 @@
 
         function findAllBooks(libriId){
             var url = '/api/project/book';
+            return $http.get(url);
+        }
+
+        function getNewBooks(){
+            var url = '/api/project/newBooks';
+            return $http.get(url);
+        }
+
+        function getPopBooks(){
+            var url = "/api/project/popBooks";
+            return $http.get(url);
+        }
+
+        function getQuote(){
+            var url = "/api/project/quote";
             return $http.get(url);
         }
     }

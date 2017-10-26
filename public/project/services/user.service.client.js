@@ -24,6 +24,7 @@
             getWantToReadNumber: getWantToReadNumber,
             getReadingNumber: getReadingNumber,
             getHaveReadNumber: getHaveReadNumber,
+            getPopUsers: getPopUsers,
 
             createUser: createUser,
             findUserById: findUserById,
@@ -125,6 +126,11 @@
 
         function getHaveReadNumber(libriId){
             var url = '/api/project/number/haveRead/' + libriId;
+            return $http.get(url);
+        }
+
+        function getPopUsers(){
+            var url = '/api/project/popUsers';
             return $http.get(url);
         }
 

@@ -399,3 +399,16 @@ select.form-control,
         margin-left: 0px;
     }
 }
+
+.pr-home-book-display{
+    text-align: center;
+}
+
+.pr-home-book-display img{
+    width: 100%;
+}
+
+.pr-quote-img{
+    float: left;
+    margin-right: 10px;
+}
